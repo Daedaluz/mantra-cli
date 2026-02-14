@@ -16,10 +16,10 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// signCmd represents the sign command
-var signCmd = &cobra.Command{
-	Use:   "sign",
-	Short: "Create a signature challenge",
+// clientAuthenticateCmd represents the client authenticate command
+var clientAuthenticateCmd = &cobra.Command{
+	Use:   "authenticate",
+	Short: "Create an authentication (signature) challenge",
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx, api := internal.GetClientApiClient(cmd)
 		challenge, err := api.Sign(ctx, &client.SignRequest{
@@ -84,7 +84,7 @@ var signCmd = &cobra.Command{
 				return
 			}
 			clearScreen()
-			fmt.Printf("To sign, scan or follow the link below:\n\n")
+			fmt.Printf("To authenticate, scan or follow the link below:\n\n")
 			qrterminal.GenerateHalfBlock(animatedLink, qrterminal.L, os.Stdout)
 			fmt.Printf("Status: %s\n", status.Status.String())
 			fmt.Println("Animated link:", animatedLink)
@@ -95,10 +95,10 @@ var signCmd = &cobra.Command{
 }
 
 func init() {
-	clientCmd.AddCommand(signCmd)
-	signCmd.Flags().StringP("user-id", "u", "", "User ID to authenticate as (Optional)")
-	signCmd.Flags().StringP("user-verification", "v", "preferred", "User verification requirement (required, discouraged, preferred, required)")
-	signCmd.Flags().StringP("mediation", "m", "optional", "Mediation requirement (silent, optional, required)")
-	signCmd.Flags().StringP("message", "M", "Please sign this challenge", "Message to display on the authenticator")
-	signCmd.Flags().Int64P("timeout", "o", 300, "Timeout in seconds")
+	clientCmd.AddCommand(clientAuthenticateCmd)
+	clientAuthenticateCmd.Flags().StringP("user-id", "u", "", "User ID to authenticate as (Optional)")
+	clientAuthenticateCmd.Flags().StringP("user-verification", "v", "preferred", "User verification requirement (required, discouraged, preferred, required)")
+	clientAuthenticateCmd.Flags().StringP("mediation", "m", "optional", "Mediation requirement (silent, optional, required)")
+	clientAuthenticateCmd.Flags().StringP("message", "M", "Please authenticate", "Message to display on the authenticator")
+	clientAuthenticateCmd.Flags().Int64P("timeout", "o", 300, "Timeout in seconds")
 }
