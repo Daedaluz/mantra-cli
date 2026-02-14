@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package se.mantra.api.public;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/public";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+message AllowedCredential {
+  bytes id = 1;
+  repeated string transports = 3; // e.g. "usb", "nfc", "ble", "internal"
+}
+
+message GetChallengeRequest {
+  string token = 1;
+}
+
+message ChallengeResponse {
+  common.ClientMeta client = 1;
+  string title = 2;
+  string icon = 3;
+  string message = 4;
+  bytes data = 5;
+
+  string challenge_id = 12;
+  bytes challenge = 6;
+  string rp_id = 7;
+  repeated AllowedCredential allowed_credentials = 8;
+  string user_verification = 9;
+  string mediation = 10;
+  google.protobuf.Timestamp expires_at = 11;
+  // Location where the signature request was initiated.
+  // Frontend can use this to warn user about potential malicious activity.
+  common.Location location = 13;
+}
+
+message SignRequest {
+  string challenge_id = 1;
+
+  string authenticator_attachment = 2;
+  string id = 3;
+  bytes rawId = 4;
+  bytes authenticator_data = 5;
+  bytes client_data_json = 6;
+  bytes signature = 7;
+  bytes user_handle = 8;
+  common.Location location = 9;
+}
+
+message SignResponse {
+}
+
+service AuthService {
+  rpc Get(GetChallengeRequest) returns (ChallengeResponse);
+  rpc Sign(SignRequest) returns (SignResponse);
+  rpc Reject(SignRequest) returns (SignResponse);
+}
+

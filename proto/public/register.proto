@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package se.mantra.api.public;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/public";
+
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+
+
+message RegistrationChallenge {
+  string rp_id = 1;
+  string rp_name = 2;
+  bytes user_id = 3;
+  string display_name = 4;
+  bytes challenge = 5;
+  repeated int64 algorithms = 6;
+  string attestation = 7;
+  string resident_key = 8;
+  bool require_resident = 9;
+  string user_verification = 10;
+}
+
+
+message GetChallenge {
+  string token = 1;
+}
+
+message GetResponse {
+  string challenge_id = 1;
+  google.protobuf.Timestamp expires_at = 2;
+  google.protobuf.Timestamp created_at = 3;
+  common.ClientMeta client = 4;
+  RegistrationChallenge challenge = 5;
+  // Location where the registration request was initiated.
+  // Frontend can use this to request location from the user if required.
+  common.Location location = 6;
+}
+
+message RegisterRequest {
+  string challenge_id = 1;
+
+  string id = 2;
+  bytes rawId = 3;
+
+  string type = 5;
+  bytes client_data_json = 6;
+  bytes attestation_object = 7;
+  string attachment = 8;
+  int64 public_key_algorithm = 10;
+  repeated string transports = 9;
+  common.Location location = 11;
+}
+
+message RegisterResponse {
+}
+
+service RegisterService {
+  rpc Get(GetChallenge) returns (GetResponse);
+  rpc Register(RegisterRequest) returns (RegisterResponse);
+}

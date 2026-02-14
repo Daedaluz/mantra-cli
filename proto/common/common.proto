@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package se.mantra.api.common;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/common";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+
+message ChallengeResponse {
+  string challenge_id = 1;
+  string challenge_data = 2;
+  string challenge_secret = 3;
+  google.protobuf.Timestamp expires_at = 4;
+  // If location is set, frontend should request location from user-agent and include it with the signature.
+  Location location = 5;
+}
+
+enum Status {
+  Unspecified = 0;
+  Pending = 1;
+  Seen = 2;
+  Completed = 3;
+  Collected = 4;
+  Cancelled = 5;
+  Rejected = 6;
+  Expired = 7;
+}
+
+message Key {
+  google.protobuf.Timestamp created_at = 1;
+  google.protobuf.Timestamp last_used = 2;
+  bool disabled = 3;
+  string name = 4;
+  bytes key_id = 5;
+  int64 algorithm = 6;
+  string attachment = 7;
+  bytes public_key = 8;
+  string attestation_type = 9;
+  bytes aaguid = 10;
+  int64 sign_count = 11;
+  bool clone_warning = 12;
+  bool user_verified = 13;
+  bool user_present = 14;
+  bool backup_eligible = 15;
+  bool backed_up = 16;
+  repeated string transports = 17;
+}
+
+message ClientMeta {
+  string client_id = 1;
+  string client_secret = 2;
+  string name = 3;
+  string icon = 4;
+  string description = 5;
+  bool admin = 6;
+  google.protobuf.Timestamp created_at = 7;
+}
+
+message LongLatitude {
+  double latitude = 1;
+  double longitude = 2;
+  double accuracy = 3;
+}
+
+message Location {
+  string ip = 1;
+  string geohash = 2;
+  LongLatitude position = 3;
+  // If required is true, backend will verify the signature location matches before accepting.
+  // If required is false, backend will only store the location without verification.
+  bool required = 4;
+}

@@ -1,8 +1,8 @@
 package public
 
 import (
-	"github.com/daedaluz/mantra/internal/location"
-	"github.com/daedaluz/mantra/lib/grpc/common"
+	"github.com/daedaluz/mantra-cli/lib/grpc/common"
+	"github.com/daedaluz/mantra-cli/lib/location"
 	"github.com/go-webauthn/webauthn/protocol"
 	"google.golang.org/grpc"
 )

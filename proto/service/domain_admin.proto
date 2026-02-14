@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+package se.mantra.api.admin;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/admin";
+
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+message GetUserRequest {
+  string user_id = 2;
+}
+
+message GetUserResponse {
+  string domain = 1;
+  string user_id = 2;
+  google.protobuf.Timestamp created_at = 3;
+  repeated common.Key keys = 4;
+}
+
+message CreateUserRequest {
+  string user_id = 2;
+  string name = 3;
+  int64 timeout = 4;
+  string return_url = 5;
+  common.Location location = 6;
+}
+
+message AddKeyRequest {
+  string user_id = 2;
+  string name = 3;
+  int64  timeout = 4;
+  string return_url = 5;
+  common.Location location = 6;
+}
+
+message DisableKeyRequest {
+  string user_id = 2;
+  string key_id = 3;
+}
+
+message DisableKeyResponse {
+  bool success = 1;
+}
+
+message DeleteUserRequest {
+  string user_id = 2;
+}
+
+message CreateClientRequest {
+  string name = 1;
+  string description = 2;
+  string icon = 3;
+  bool admin = 4;
+}
+
+message CreateClientResponse {
+  string client_id = 1;
+  string client_secret = 2;
+  string name = 3;
+  string description = 4;
+  string icon = 5;
+  bool admin = 6;
+}
+
+message DeleteClientRequest {
+  string client_id = 1;
+}
+
+message CollectRequest {
+  string challenge_id = 1;
+  string challenge_secret = 2;
+}
+
+message CollectResponse {
+  common.Status status = 1;
+  string user_id = 2;
+  bytes challenge = 3;
+  bytes key_id = 4;
+  int64 algorithm = 5;
+  bytes public_key = 6;
+  bytes aaguid = 7;
+  string attestation_type = 8;
+  bytes client_data_json = 9;
+  bytes attestation_object = 10;
+  google.protobuf.Timestamp created_at = 11;
+  common.Location location = 12;
+}
+
+message ListUsersResponse {
+  repeated string users = 1;
+}
+
+
+message ListClientsRequest {
+  bool admin_only = 1;
+}
+
+message ListClientsResponse {
+  repeated common.ClientMeta clients = 1;
+}
+
+message UpdateDomainDetailsRequest {
+  string name = 1;
+  string description = 2;
+  repeated int64 algorithms = 3;
+  string registration_path = 4;
+  string sign_path = 5;
+}
+
+message DomainDetails {
+  string domain = 1;
+  string name = 2;
+  string description = 3;
+  repeated int64 algorithms = 4;
+  google.protobuf.Timestamp created_at = 5;
+  string registration_path = 6;
+  string sign_path = 7;
+}
+
+service DomainAdminService {
+  rpc CreateUser(CreateUserRequest) returns (common.ChallengeResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  rpc ListUsers(google.protobuf.Empty) returns (ListUsersResponse);
+  rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+
+  rpc AddKey(AddKeyRequest) returns (common.ChallengeResponse);
+  rpc DisableKey(DisableKeyRequest) returns (DisableKeyResponse);
+
+  rpc CollectChallenge(CollectRequest) returns (CollectResponse);
+
+  rpc CreateClient(CreateClientRequest) returns (CreateClientResponse);
+  rpc DeleteClient(DeleteClientRequest) returns (google.protobuf.Empty);
+  rpc ListClients(ListClientsRequest) returns (ListClientsResponse);
+
+  rpc UpdateDomain(UpdateDomainDetailsRequest) returns (DomainDetails);
+  rpc GetDomain(google.protobuf.Empty) returns (DomainDetails);
+}

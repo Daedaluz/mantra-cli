@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/daedaluz/mantra-cli/cmd/mantra-cli/internal"
+	"github.com/daedaluz/mantra-cli/internal"
 	"github.com/daedaluz/mantra-cli/lib/grpc/common"
 	admin "github.com/daedaluz/mantra-cli/lib/grpc/service"
 	"github.com/mdp/qrterminal"

@@ -6,7 +6,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/daedaluz/mantra-cli/cmd/mantra-cli/internal"
+	"github.com/daedaluz/mantra-cli/internal"
 	"github.com/daedaluz/mantra-cli/lib/grpc/client"
 	"github.com/daedaluz/mantra-cli/lib/grpc/common"
 	"github.com/mdp/qrterminal"

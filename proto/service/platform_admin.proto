@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package se.mantra.api.admin;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/admin";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "common/common.proto";
+
+
+message CreateDomainRequest {
+  string domain = 1;
+  string name = 2;
+  string description = 3;
+  repeated int64 algorithms = 4;
+  string registration_path = 5;
+  string sign_path = 6;
+}
+
+message CreateDomainResponse {
+  string client_id = 5;
+  string secret = 6;
+}
+
+message DeleteDomainRequest {
+  string domain = 1;
+}
+
+message Domain {
+  string domain = 1;
+  string name = 2;
+  string description = 3;
+  repeated int64 algorithms = 4;
+  google.protobuf.Timestamp created_at = 5;
+  string registration_path = 6;
+  string sign_path = 7;
+}
+
+message ListDomainsRequest {
+  // Optional filter: if provided, only return domains matching these names
+  repeated string domains = 1;
+}
+
+message ListDomainsResponse {
+  repeated Domain domains = 1;
+}
+
+message GetDomainRequest {
+  string domain = 1;
+}
+
+message UpdateDomainRequest {
+  string domain = 1;
+  string name = 2;
+  string description = 3;
+  repeated int64 algorithms = 4;
+  string registration_path = 5;
+  string sign_path = 6;
+}
+
+message ListAdminClientsRequest {
+  string domain = 1;
+}
+
+message ListAdminClientsResponse {
+  repeated common.ClientMeta clients = 1;
+}
+
+service PlatformAdminService {
+  rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse);
+  rpc DeleteDomain(DeleteDomainRequest) returns (google.protobuf.Empty);
+  rpc ListDomains(ListDomainsRequest) returns (ListDomainsResponse);
+  rpc GetDomain(GetDomainRequest) returns (Domain);
+  rpc UpdateDomain(UpdateDomainRequest) returns (Domain);
+  rpc ListAdminClients(ListAdminClientsRequest) returns (ListAdminClientsResponse);
+}

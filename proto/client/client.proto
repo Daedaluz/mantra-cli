@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package se.mantra.api.client;
+option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/client";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+import "common/common.proto";
+
+
+message SignRequest {
+  string user = 2;
+  int64 timeout = 3;
+  string user_verification = 4;
+  string mediation = 5;
+  string message = 6;
+  bytes data = 7;
+  string return_url = 8;
+  common.Location location = 9;
+}
+
+message CancelRequest {
+  string challenge_id = 1;
+}
+
+message CollectRequest {
+  string challenge_id = 1;
+  string challenge_secret = 2;
+}
+
+message CollectResponse {
+  common.Status status = 1;
+  google.protobuf.Timestamp signed_at = 2;
+  string user_id = 3;
+
+  string message = 4;
+  bytes data = 5;
+
+  bytes challenge = 6;
+
+  bytes key_id = 8;
+  string authenticatorAttachment = 7;
+  bytes authenticatorData = 9;
+  bytes clientDataJson = 10;
+  bytes signature = 11;
+  common.Location location = 12;
+}
+
+service ClientService {
+  rpc Sign(SignRequest) returns (common.ChallengeResponse);
+  rpc Cancel(CancelRequest) returns (google.protobuf.Empty);
+  rpc Collect(CollectRequest) returns (CollectResponse);
+}

@@ -9,7 +9,7 @@ import (
 
 	"text/tabwriter"
 
-	"github.com/daedaluz/mantra-cli/cmd/mantra-cli/internal"
+	"github.com/daedaluz/mantra-cli/internal"
 	admin "github.com/daedaluz/mantra-cli/lib/grpc/service"
 	"github.com/spf13/cobra"
 	"google.golang.org/grpc/status"
