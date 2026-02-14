@@ -33,11 +33,19 @@ Server returns the signed assertion
 
 ## Installation
 
-Download a prebuilt binary from the [Releases](../../releases) page, or build from source:
+Install the latest release (Linux and macOS):
+
+```sh
+curl -sL https://raw.githubusercontent.com/daedaluz/mantra-cli/master/install.sh | bash
+```
+
+Or install with Go:
 
 ```sh
 go install github.com/daedaluz/mantra-cli@latest
 ```
+
+Prebuilt binaries are also available on the [Releases](../../releases) page.
 
 ## Usage
 
