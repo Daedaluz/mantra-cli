@@ -80,8 +80,12 @@ var createUserCmd = &cobra.Command{
 				fmt.Printf("Error calculating token: %v\n", err)
 				return
 			}
-			animatedLink := fmt.Sprintf("https://%s/reg?t=%s", cmd.Flag("domain").Value.String(), animated)
-			staticLink := fmt.Sprintf("https://%s/reg?t=%s", cmd.Flag("domain").Value.String(), static)
+			regPath := "/reg"
+			if activeCtx != nil && activeCtx.RegisterPath != "" {
+				regPath = activeCtx.RegisterPath
+			}
+			animatedLink := fmt.Sprintf("https://%s%s?t=%s", cmd.Flag("domain").Value.String(), regPath, animated)
+			staticLink := fmt.Sprintf("https://%s%s?t=%s", cmd.Flag("domain").Value.String(), regPath, static)
 			status, err := api.CollectChallenge(ctx, &admin.CollectRequest{
 				ChallengeId:     challenge.ChallengeId,
 				ChallengeSecret: challenge.ChallengeSecret,

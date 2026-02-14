@@ -47,8 +47,12 @@ var signCmd = &cobra.Command{
 				fmt.Printf("Error calculating token: %v\n", err)
 				return
 			}
-			animatedLink := fmt.Sprintf("https://%s/sign?t=%s", cmd.Flag("domain").Value.String(), animated)
-			staticLink := fmt.Sprintf("https://%s/sign?t=%s", cmd.Flag("domain").Value.String(), static)
+			authPath := "/auth"
+			if activeCtx != nil && activeCtx.AuthPath != "" {
+				authPath = activeCtx.AuthPath
+			}
+			animatedLink := fmt.Sprintf("https://%s%s?t=%s", cmd.Flag("domain").Value.String(), authPath, animated)
+			staticLink := fmt.Sprintf("https://%s%s?t=%s", cmd.Flag("domain").Value.String(), authPath, static)
 			status, err := api.Collect(ctx, &client.CollectRequest{
 				ChallengeId:     challenge.ChallengeId,
 				ChallengeSecret: challenge.ChallengeSecret,

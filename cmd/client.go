@@ -12,7 +12,17 @@ var clientCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(clientCmd)
-	clientCmd.PersistentFlags().StringP("domain", "d", envStr("DOMAIN", ""), "domain to manage [$DOMAIN]")
-	clientCmd.PersistentFlags().StringP("client-id", "t", envStr("CLIENT_ID", ""), "client id [$CLIENT_ID]")
-	clientCmd.PersistentFlags().StringP("client-secret", "p", envStr("CLIENT_SECRET", ""), "client secret [$CLIENT_SECRET]")
+
+	domainDefault := ""
+	clientIDDefault := ""
+	clientSecretDefault := ""
+	if activeCtx != nil {
+		domainDefault = ctxStr(activeCtx.Domain, domainDefault)
+		clientIDDefault = ctxStr(activeCtx.ClientID, clientIDDefault)
+		clientSecretDefault = ctxStr(activeCtx.ClientSecret, clientSecretDefault)
+	}
+
+	clientCmd.PersistentFlags().StringP("domain", "d", envStr("DOMAIN", domainDefault), "domain to manage [$DOMAIN]")
+	clientCmd.PersistentFlags().StringP("client-id", "t", envStr("CLIENT_ID", clientIDDefault), "client id [$CLIENT_ID]")
+	clientCmd.PersistentFlags().StringP("client-secret", "p", envStr("CLIENT_SECRET", clientSecretDefault), "client secret [$CLIENT_SECRET]")
 }

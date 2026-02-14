@@ -12,5 +12,11 @@ var adminCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(adminCmd)
-	adminCmd.PersistentFlags().StringP("api-key", "t", envStr("API_KEY", "1234567890"), "api key for authentication [$API_KEY]")
+
+	apiKeyDefault := "1234567890"
+	if activeAPI != nil {
+		apiKeyDefault = ctxStr(activeAPI.APIKey, apiKeyDefault)
+	}
+
+	adminCmd.PersistentFlags().StringP("api-key", "t", envStr("API_KEY", apiKeyDefault), "api key for authentication [$API_KEY]")
 }

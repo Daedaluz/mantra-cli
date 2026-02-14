@@ -20,12 +20,23 @@ var createDomainCmd = &cobra.Command{
 		if len(args) == 2 {
 			args = append(args, args[1])
 		}
+		regPath := "/reg"
+		signPath := "/auth"
+		if activeCtx != nil {
+			if activeCtx.RegisterPath != "" {
+				regPath = activeCtx.RegisterPath
+			}
+			if activeCtx.AuthPath != "" {
+				signPath = activeCtx.AuthPath
+			}
+		}
+
 		resp, err := api.CreateDomain(ctx, &admin.CreateDomainRequest{
 			Domain:           args[0],
 			Name:             args[1],
 			Description:      args[2],
-			RegistrationPath: "/reg",
-			SignPath:         "/auth",
+			RegistrationPath: regPath,
+			SignPath:         signPath,
 		})
 		if err != nil {
 			// Print detailed error message

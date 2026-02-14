@@ -53,6 +53,52 @@ mantra-cli [command] [flags]
 | `--plaintext` | Use unencrypted gRPC | `false` |
 | `--skip-verify` | Skip TLS certificate verification | `false` |
 
+Flag values are resolved in this order: **CLI flags > environment variables > active context > hardcoded defaults**.
+
+### Context Management
+
+mantra-cli supports kubectl-style context management. Connection parameters and client credentials are stored in `~/.mantra/config.json` so you don't have to pass them on every invocation.
+
+The config file has two concepts:
+
+- **APIs** — Define Mantra server connections (address, optional API key, TLS settings).
+- **Contexts** — Reference an API and add domain/client credentials plus URL paths.
+
+#### Setting up a context
+
+```sh
+# Add an API server
+mantra-cli api add prod --server mantra-api.inits.se:443 --api-key <key>
+
+# Or a local dev server using h2c (plaintext gRPC)
+mantra-cli api add local --server localhost:8080 --plaintext
+
+# Add a context that references the API
+mantra-cli context add myctx --api prod \
+  --domain example.com \
+  --client-id <id> --client-secret <secret>
+
+# Switch to a context (the first context is auto-selected)
+mantra-cli context use myctx
+```
+
+Once a context is active, commands pick up server, plaintext, skip-verify, domain, client-id, client-secret, api-key, auth-path, and register-path automatically. You can still override any value with flags or environment variables.
+
+#### `api` commands
+
+| Command | Description |
+|---------|-------------|
+| `api list` | List all configured APIs |
+| `api add <name>` | Add an API (`--server`, `--api-key`, `--plaintext`, `--skip-verify`) |
+
+#### `context` commands
+
+| Command | Description |
+|---------|-------------|
+| `context list` | List all contexts (`*` marks the active one) |
+| `context add <name>` | Add a context (`--api` required, `--domain`, `--client-id`, `--client-secret`, `--register-path`, `--auth-path`) |
+| `context use <name>` | Switch the active context |
+
 ### Commands
 
 #### `admin` — Platform Administration
@@ -84,6 +130,13 @@ mantra-cli domainAdmin createUser --domain example.com \
 mantra-cli domainAdmin authenticate --domain example.com \
   --client-id <id> --client-secret <secret> \
   -u user123
+```
+
+With an active context, the above simplifies to:
+
+```sh
+mantra-cli domainAdmin createUser -u user123 -n "Alice"
+mantra-cli domainAdmin authenticate -u user123
 ```
 
 #### `client` — Client API
