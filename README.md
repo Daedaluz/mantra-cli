@@ -138,6 +138,9 @@ mantra-cli domainAdmin createUser --domain example.com \
 mantra-cli domainAdmin authenticate --domain example.com \
   --client-id <id> --client-secret <secret> \
   -u user123
+
+# List domain clients (client ID and client secret)
+mantra-cli domainAdmin listClients
 ```
 
 With an active context, the above simplifies to:
