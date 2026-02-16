@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package se.mantra.api.common;
+
 option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/common";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
@@ -29,7 +30,8 @@ enum Status {
 message Key {
   google.protobuf.Timestamp created_at = 1;
   google.protobuf.Timestamp last_used = 2;
-  bool disabled = 3;
+  bool revoked = 3;
+  bool pending = 18;
   string name = 4;
   bytes key_id = 5;
   int64 algorithm = 6;

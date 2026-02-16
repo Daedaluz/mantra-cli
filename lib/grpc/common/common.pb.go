@@ -168,7 +168,8 @@ type Key struct {
 	state           protoimpl.MessageState `protogen:"open.v1"`
 	CreatedAt       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	LastUsed        *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=last_used,json=lastUsed,proto3" json:"last_used,omitempty"`
-	Disabled        bool                   `protobuf:"varint,3,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Revoked         bool                   `protobuf:"varint,3,opt,name=revoked,proto3" json:"revoked,omitempty"`
+	Pending         bool                   `protobuf:"varint,18,opt,name=pending,proto3" json:"pending,omitempty"`
 	Name            string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	KeyId           []byte                 `protobuf:"bytes,5,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
 	Algorithm       int64                  `protobuf:"varint,6,opt,name=algorithm,proto3" json:"algorithm,omitempty"`
@@ -231,9 +232,16 @@ func (x *Key) GetLastUsed() *timestamppb.Timestamp {
 	return nil
 }
 
-func (x *Key) GetDisabled() bool {
+func (x *Key) GetRevoked() bool {
 	if x != nil {
-		return x.Disabled
+		return x.Revoked
+	}
+	return false
+}
+
+func (x *Key) GetPending() bool {
+	if x != nil {
+		return x.Pending
 	}
 	return false
 }
@@ -569,12 +577,13 @@ const file_common_common_proto_rawDesc = "" +
 	"\x10challenge_secret\x18\x03 \x01(\tR\x0fchallengeSecret\x129\n" +
 	"\n" +
 	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12:\n" +
-	"\blocation\x18\x05 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xd2\x04\n" +
+	"\blocation\x18\x05 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xea\x04\n" +
 	"\x03Key\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
-	"\tlast_used\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\blastUsed\x12\x1a\n" +
-	"\bdisabled\x18\x03 \x01(\bR\bdisabled\x12\x12\n" +
+	"\tlast_used\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\blastUsed\x12\x18\n" +
+	"\arevoked\x18\x03 \x01(\bR\arevoked\x12\x18\n" +
+	"\apending\x18\x12 \x01(\bR\apending\x12\x12\n" +
 	"\x04name\x18\x04 \x01(\tR\x04name\x12\x15\n" +
 	"\x06key_id\x18\x05 \x01(\fR\x05keyId\x12\x1c\n" +
 	"\talgorithm\x18\x06 \x01(\x03R\talgorithm\x12\x1e\n" +

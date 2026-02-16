@@ -26,7 +26,8 @@ const (
 	DomainAdminService_ListUsers_FullMethodName        = "/se.mantra.api.admin.DomainAdminService/ListUsers"
 	DomainAdminService_DeleteUser_FullMethodName       = "/se.mantra.api.admin.DomainAdminService/DeleteUser"
 	DomainAdminService_AddKey_FullMethodName           = "/se.mantra.api.admin.DomainAdminService/AddKey"
-	DomainAdminService_DisableKey_FullMethodName       = "/se.mantra.api.admin.DomainAdminService/DisableKey"
+	DomainAdminService_RevokeKey_FullMethodName        = "/se.mantra.api.admin.DomainAdminService/RevokeKey"
+	DomainAdminService_ActivateKey_FullMethodName      = "/se.mantra.api.admin.DomainAdminService/ActivateKey"
 	DomainAdminService_CollectChallenge_FullMethodName = "/se.mantra.api.admin.DomainAdminService/CollectChallenge"
 	DomainAdminService_CreateClient_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/CreateClient"
 	DomainAdminService_DeleteClient_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/DeleteClient"
@@ -44,7 +45,8 @@ type DomainAdminServiceClient interface {
 	ListUsers(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AddKey(ctx context.Context, in *AddKeyRequest, opts ...grpc.CallOption) (*common.ChallengeResponse, error)
-	DisableKey(ctx context.Context, in *DisableKeyRequest, opts ...grpc.CallOption) (*DisableKeyResponse, error)
+	RevokeKey(ctx context.Context, in *RevokeKeyRequest, opts ...grpc.CallOption) (*RevokeKeyResponse, error)
+	ActivateKey(ctx context.Context, in *ActivateKeyRequest, opts ...grpc.CallOption) (*ActivateKeyResponse, error)
 	CollectChallenge(ctx context.Context, in *CollectRequest, opts ...grpc.CallOption) (*CollectResponse, error)
 	CreateClient(ctx context.Context, in *CreateClientRequest, opts ...grpc.CallOption) (*CreateClientResponse, error)
 	DeleteClient(ctx context.Context, in *DeleteClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -111,10 +113,20 @@ func (c *domainAdminServiceClient) AddKey(ctx context.Context, in *AddKeyRequest
 	return out, nil
 }
 
-func (c *domainAdminServiceClient) DisableKey(ctx context.Context, in *DisableKeyRequest, opts ...grpc.CallOption) (*DisableKeyResponse, error) {
+func (c *domainAdminServiceClient) RevokeKey(ctx context.Context, in *RevokeKeyRequest, opts ...grpc.CallOption) (*RevokeKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DisableKeyResponse)
-	err := c.cc.Invoke(ctx, DomainAdminService_DisableKey_FullMethodName, in, out, cOpts...)
+	out := new(RevokeKeyResponse)
+	err := c.cc.Invoke(ctx, DomainAdminService_RevokeKey_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) ActivateKey(ctx context.Context, in *ActivateKeyRequest, opts ...grpc.CallOption) (*ActivateKeyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ActivateKeyResponse)
+	err := c.cc.Invoke(ctx, DomainAdminService_ActivateKey_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -190,7 +202,8 @@ type DomainAdminServiceServer interface {
 	ListUsers(context.Context, *emptypb.Empty) (*ListUsersResponse, error)
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	AddKey(context.Context, *AddKeyRequest) (*common.ChallengeResponse, error)
-	DisableKey(context.Context, *DisableKeyRequest) (*DisableKeyResponse, error)
+	RevokeKey(context.Context, *RevokeKeyRequest) (*RevokeKeyResponse, error)
+	ActivateKey(context.Context, *ActivateKeyRequest) (*ActivateKeyResponse, error)
 	CollectChallenge(context.Context, *CollectRequest) (*CollectResponse, error)
 	CreateClient(context.Context, *CreateClientRequest) (*CreateClientResponse, error)
 	DeleteClient(context.Context, *DeleteClientRequest) (*emptypb.Empty, error)
@@ -221,8 +234,11 @@ func (UnimplementedDomainAdminServiceServer) DeleteUser(context.Context, *Delete
 func (UnimplementedDomainAdminServiceServer) AddKey(context.Context, *AddKeyRequest) (*common.ChallengeResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method AddKey not implemented")
 }
-func (UnimplementedDomainAdminServiceServer) DisableKey(context.Context, *DisableKeyRequest) (*DisableKeyResponse, error) {
-	return nil, status.Error(codes.Unimplemented, "method DisableKey not implemented")
+func (UnimplementedDomainAdminServiceServer) RevokeKey(context.Context, *RevokeKeyRequest) (*RevokeKeyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method RevokeKey not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) ActivateKey(context.Context, *ActivateKeyRequest) (*ActivateKeyResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ActivateKey not implemented")
 }
 func (UnimplementedDomainAdminServiceServer) CollectChallenge(context.Context, *CollectRequest) (*CollectResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method CollectChallenge not implemented")
@@ -352,20 +368,38 @@ func _DomainAdminService_AddKey_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _DomainAdminService_DisableKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DisableKeyRequest)
+func _DomainAdminService_RevokeKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RevokeKeyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DomainAdminServiceServer).DisableKey(ctx, in)
+		return srv.(DomainAdminServiceServer).RevokeKey(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DomainAdminService_DisableKey_FullMethodName,
+		FullMethod: DomainAdminService_RevokeKey_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DomainAdminServiceServer).DisableKey(ctx, req.(*DisableKeyRequest))
+		return srv.(DomainAdminServiceServer).RevokeKey(ctx, req.(*RevokeKeyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_ActivateKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ActivateKeyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).ActivateKey(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_ActivateKey_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).ActivateKey(ctx, req.(*ActivateKeyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -506,8 +540,12 @@ var DomainAdminService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _DomainAdminService_AddKey_Handler,
 		},
 		{
-			MethodName: "DisableKey",
-			Handler:    _DomainAdminService_DisableKey_Handler,
+			MethodName: "RevokeKey",
+			Handler:    _DomainAdminService_RevokeKey_Handler,
+		},
+		{
+			MethodName: "ActivateKey",
+			Handler:    _DomainAdminService_ActivateKey_Handler,
 		},
 		{
 			MethodName: "CollectChallenge",

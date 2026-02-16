@@ -33,14 +33,24 @@ message AddKeyRequest {
   int64  timeout = 4;
   string return_url = 5;
   common.Location location = 6;
+  bool pending = 7;
 }
 
-message DisableKeyRequest {
+message RevokeKeyRequest {
   string user_id = 2;
-  string key_id = 3;
+  bytes key_id = 3;
 }
 
-message DisableKeyResponse {
+message RevokeKeyResponse {
+  bool success = 1;
+}
+
+message ActivateKeyRequest {
+  string user_id = 1;
+  bytes key_id = 2;
+}
+
+message ActivateKeyResponse {
   bool success = 1;
 }
 
@@ -126,7 +136,8 @@ service DomainAdminService {
   rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
 
   rpc AddKey(AddKeyRequest) returns (common.ChallengeResponse);
-  rpc DisableKey(DisableKeyRequest) returns (DisableKeyResponse);
+  rpc RevokeKey(RevokeKeyRequest) returns (RevokeKeyResponse);
+  rpc ActivateKey(ActivateKeyRequest) returns (ActivateKeyResponse);
 
   rpc CollectChallenge(CollectRequest) returns (CollectResponse);
 

@@ -219,6 +219,7 @@ type AddKeyRequest struct {
 	Timeout       int64                  `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
 	ReturnUrl     string                 `protobuf:"bytes,5,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
 	Location      *common.Location       `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
+	Pending       bool                   `protobuf:"varint,7,opt,name=pending,proto3" json:"pending,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -288,28 +289,35 @@ func (x *AddKeyRequest) GetLocation() *common.Location {
 	return nil
 }
 
-type DisableKeyRequest struct {
+func (x *AddKeyRequest) GetPending() bool {
+	if x != nil {
+		return x.Pending
+	}
+	return false
+}
+
+type RevokeKeyRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	KeyId         string                 `protobuf:"bytes,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	KeyId         []byte                 `protobuf:"bytes,3,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DisableKeyRequest) Reset() {
-	*x = DisableKeyRequest{}
+func (x *RevokeKeyRequest) Reset() {
+	*x = RevokeKeyRequest{}
 	mi := &file_service_domain_admin_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisableKeyRequest) String() string {
+func (x *RevokeKeyRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisableKeyRequest) ProtoMessage() {}
+func (*RevokeKeyRequest) ProtoMessage() {}
 
-func (x *DisableKeyRequest) ProtoReflect() protoreflect.Message {
+func (x *RevokeKeyRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_service_domain_admin_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -321,46 +329,46 @@ func (x *DisableKeyRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisableKeyRequest.ProtoReflect.Descriptor instead.
-func (*DisableKeyRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use RevokeKeyRequest.ProtoReflect.Descriptor instead.
+func (*RevokeKeyRequest) Descriptor() ([]byte, []int) {
 	return file_service_domain_admin_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DisableKeyRequest) GetUserId() string {
+func (x *RevokeKeyRequest) GetUserId() string {
 	if x != nil {
 		return x.UserId
 	}
 	return ""
 }
 
-func (x *DisableKeyRequest) GetKeyId() string {
+func (x *RevokeKeyRequest) GetKeyId() []byte {
 	if x != nil {
 		return x.KeyId
 	}
-	return ""
+	return nil
 }
 
-type DisableKeyResponse struct {
+type RevokeKeyResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *DisableKeyResponse) Reset() {
-	*x = DisableKeyResponse{}
+func (x *RevokeKeyResponse) Reset() {
+	*x = RevokeKeyResponse{}
 	mi := &file_service_domain_admin_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *DisableKeyResponse) String() string {
+func (x *RevokeKeyResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*DisableKeyResponse) ProtoMessage() {}
+func (*RevokeKeyResponse) ProtoMessage() {}
 
-func (x *DisableKeyResponse) ProtoReflect() protoreflect.Message {
+func (x *RevokeKeyResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_service_domain_admin_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -372,12 +380,108 @@ func (x *DisableKeyResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use DisableKeyResponse.ProtoReflect.Descriptor instead.
-func (*DisableKeyResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use RevokeKeyResponse.ProtoReflect.Descriptor instead.
+func (*RevokeKeyResponse) Descriptor() ([]byte, []int) {
 	return file_service_domain_admin_proto_rawDescGZIP(), []int{5}
 }
 
-func (x *DisableKeyResponse) GetSuccess() bool {
+func (x *RevokeKeyResponse) GetSuccess() bool {
+	if x != nil {
+		return x.Success
+	}
+	return false
+}
+
+type ActivateKeyRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	KeyId         []byte                 `protobuf:"bytes,2,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ActivateKeyRequest) Reset() {
+	*x = ActivateKeyRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActivateKeyRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivateKeyRequest) ProtoMessage() {}
+
+func (x *ActivateKeyRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivateKeyRequest.ProtoReflect.Descriptor instead.
+func (*ActivateKeyRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ActivateKeyRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *ActivateKeyRequest) GetKeyId() []byte {
+	if x != nil {
+		return x.KeyId
+	}
+	return nil
+}
+
+type ActivateKeyResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Success       bool                   `protobuf:"varint,1,opt,name=success,proto3" json:"success,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ActivateKeyResponse) Reset() {
+	*x = ActivateKeyResponse{}
+	mi := &file_service_domain_admin_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ActivateKeyResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ActivateKeyResponse) ProtoMessage() {}
+
+func (x *ActivateKeyResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ActivateKeyResponse.ProtoReflect.Descriptor instead.
+func (*ActivateKeyResponse) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ActivateKeyResponse) GetSuccess() bool {
 	if x != nil {
 		return x.Success
 	}
@@ -393,7 +497,7 @@ type DeleteUserRequest struct {
 
 func (x *DeleteUserRequest) Reset() {
 	*x = DeleteUserRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[6]
+	mi := &file_service_domain_admin_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -405,7 +509,7 @@ func (x *DeleteUserRequest) String() string {
 func (*DeleteUserRequest) ProtoMessage() {}
 
 func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[6]
+	mi := &file_service_domain_admin_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -418,7 +522,7 @@ func (x *DeleteUserRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteUserRequest.ProtoReflect.Descriptor instead.
 func (*DeleteUserRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{6}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteUserRequest) GetUserId() string {
@@ -440,7 +544,7 @@ type CreateClientRequest struct {
 
 func (x *CreateClientRequest) Reset() {
 	*x = CreateClientRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[7]
+	mi := &file_service_domain_admin_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -452,7 +556,7 @@ func (x *CreateClientRequest) String() string {
 func (*CreateClientRequest) ProtoMessage() {}
 
 func (x *CreateClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[7]
+	mi := &file_service_domain_admin_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -465,7 +569,7 @@ func (x *CreateClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClientRequest.ProtoReflect.Descriptor instead.
 func (*CreateClientRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{7}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CreateClientRequest) GetName() string {
@@ -510,7 +614,7 @@ type CreateClientResponse struct {
 
 func (x *CreateClientResponse) Reset() {
 	*x = CreateClientResponse{}
-	mi := &file_service_domain_admin_proto_msgTypes[8]
+	mi := &file_service_domain_admin_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -522,7 +626,7 @@ func (x *CreateClientResponse) String() string {
 func (*CreateClientResponse) ProtoMessage() {}
 
 func (x *CreateClientResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[8]
+	mi := &file_service_domain_admin_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -535,7 +639,7 @@ func (x *CreateClientResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateClientResponse.ProtoReflect.Descriptor instead.
 func (*CreateClientResponse) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{8}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *CreateClientResponse) GetClientId() string {
@@ -589,7 +693,7 @@ type DeleteClientRequest struct {
 
 func (x *DeleteClientRequest) Reset() {
 	*x = DeleteClientRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[9]
+	mi := &file_service_domain_admin_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -601,7 +705,7 @@ func (x *DeleteClientRequest) String() string {
 func (*DeleteClientRequest) ProtoMessage() {}
 
 func (x *DeleteClientRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[9]
+	mi := &file_service_domain_admin_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -614,7 +718,7 @@ func (x *DeleteClientRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteClientRequest.ProtoReflect.Descriptor instead.
 func (*DeleteClientRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{9}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *DeleteClientRequest) GetClientId() string {
@@ -634,7 +738,7 @@ type CollectRequest struct {
 
 func (x *CollectRequest) Reset() {
 	*x = CollectRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[10]
+	mi := &file_service_domain_admin_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -646,7 +750,7 @@ func (x *CollectRequest) String() string {
 func (*CollectRequest) ProtoMessage() {}
 
 func (x *CollectRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[10]
+	mi := &file_service_domain_admin_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -659,7 +763,7 @@ func (x *CollectRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectRequest.ProtoReflect.Descriptor instead.
 func (*CollectRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{10}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *CollectRequest) GetChallengeId() string {
@@ -696,7 +800,7 @@ type CollectResponse struct {
 
 func (x *CollectResponse) Reset() {
 	*x = CollectResponse{}
-	mi := &file_service_domain_admin_proto_msgTypes[11]
+	mi := &file_service_domain_admin_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -708,7 +812,7 @@ func (x *CollectResponse) String() string {
 func (*CollectResponse) ProtoMessage() {}
 
 func (x *CollectResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[11]
+	mi := &file_service_domain_admin_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -721,7 +825,7 @@ func (x *CollectResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CollectResponse.ProtoReflect.Descriptor instead.
 func (*CollectResponse) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{11}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *CollectResponse) GetStatus() common.Status {
@@ -817,7 +921,7 @@ type ListUsersResponse struct {
 
 func (x *ListUsersResponse) Reset() {
 	*x = ListUsersResponse{}
-	mi := &file_service_domain_admin_proto_msgTypes[12]
+	mi := &file_service_domain_admin_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -829,7 +933,7 @@ func (x *ListUsersResponse) String() string {
 func (*ListUsersResponse) ProtoMessage() {}
 
 func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[12]
+	mi := &file_service_domain_admin_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -842,7 +946,7 @@ func (x *ListUsersResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListUsersResponse.ProtoReflect.Descriptor instead.
 func (*ListUsersResponse) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{12}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListUsersResponse) GetUsers() []string {
@@ -861,7 +965,7 @@ type ListClientsRequest struct {
 
 func (x *ListClientsRequest) Reset() {
 	*x = ListClientsRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[13]
+	mi := &file_service_domain_admin_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -873,7 +977,7 @@ func (x *ListClientsRequest) String() string {
 func (*ListClientsRequest) ProtoMessage() {}
 
 func (x *ListClientsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[13]
+	mi := &file_service_domain_admin_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -886,7 +990,7 @@ func (x *ListClientsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClientsRequest.ProtoReflect.Descriptor instead.
 func (*ListClientsRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{13}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListClientsRequest) GetAdminOnly() bool {
@@ -905,7 +1009,7 @@ type ListClientsResponse struct {
 
 func (x *ListClientsResponse) Reset() {
 	*x = ListClientsResponse{}
-	mi := &file_service_domain_admin_proto_msgTypes[14]
+	mi := &file_service_domain_admin_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -917,7 +1021,7 @@ func (x *ListClientsResponse) String() string {
 func (*ListClientsResponse) ProtoMessage() {}
 
 func (x *ListClientsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[14]
+	mi := &file_service_domain_admin_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -930,7 +1034,7 @@ func (x *ListClientsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClientsResponse.ProtoReflect.Descriptor instead.
 func (*ListClientsResponse) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{14}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *ListClientsResponse) GetClients() []*common.ClientMeta {
@@ -953,7 +1057,7 @@ type UpdateDomainDetailsRequest struct {
 
 func (x *UpdateDomainDetailsRequest) Reset() {
 	*x = UpdateDomainDetailsRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[15]
+	mi := &file_service_domain_admin_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -965,7 +1069,7 @@ func (x *UpdateDomainDetailsRequest) String() string {
 func (*UpdateDomainDetailsRequest) ProtoMessage() {}
 
 func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[15]
+	mi := &file_service_domain_admin_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -978,7 +1082,7 @@ func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDomainDetailsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDomainDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{15}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *UpdateDomainDetailsRequest) GetName() string {
@@ -1031,7 +1135,7 @@ type DomainDetails struct {
 
 func (x *DomainDetails) Reset() {
 	*x = DomainDetails{}
-	mi := &file_service_domain_admin_proto_msgTypes[16]
+	mi := &file_service_domain_admin_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1043,7 +1147,7 @@ func (x *DomainDetails) String() string {
 func (*DomainDetails) ProtoMessage() {}
 
 func (x *DomainDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[16]
+	mi := &file_service_domain_admin_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1056,7 +1160,7 @@ func (x *DomainDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DomainDetails.ProtoReflect.Descriptor instead.
 func (*DomainDetails) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{16}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DomainDetails) GetDomain() string {
@@ -1127,18 +1231,24 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\atimeout\x18\x04 \x01(\x03R\atimeout\x12\x1d\n" +
 	"\n" +
 	"return_url\x18\x05 \x01(\tR\treturnUrl\x12:\n" +
-	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xb1\x01\n" +
+	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xcb\x01\n" +
 	"\rAddKeyRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
 	"\atimeout\x18\x04 \x01(\x03R\atimeout\x12\x1d\n" +
 	"\n" +
 	"return_url\x18\x05 \x01(\tR\treturnUrl\x12:\n" +
-	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"C\n" +
-	"\x11DisableKeyRequest\x12\x17\n" +
+	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x18\n" +
+	"\apending\x18\a \x01(\bR\apending\"B\n" +
+	"\x10RevokeKeyRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x15\n" +
-	"\x06key_id\x18\x03 \x01(\tR\x05keyId\".\n" +
-	"\x12DisableKeyResponse\x12\x18\n" +
+	"\x06key_id\x18\x03 \x01(\fR\x05keyId\"-\n" +
+	"\x11RevokeKeyResponse\x12\x18\n" +
+	"\asuccess\x18\x01 \x01(\bR\asuccess\"D\n" +
+	"\x12ActivateKeyRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x15\n" +
+	"\x06key_id\x18\x02 \x01(\fR\x05keyId\"/\n" +
+	"\x13ActivateKeyResponse\x12\x18\n" +
 	"\asuccess\x18\x01 \x01(\bR\asuccess\",\n" +
 	"\x11DeleteUserRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\"u\n" +
@@ -1200,7 +1310,7 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12+\n" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
-	"\tsign_path\x18\a \x01(\tR\bsignPath2\xc0\b\n" +
+	"\tsign_path\x18\a \x01(\tR\bsignPath2\x9f\t\n" +
 	"\x12DomainAdminService\x12]\n" +
 	"\n" +
 	"CreateUser\x12&.se.mantra.api.admin.CreateUserRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12T\n" +
@@ -1208,9 +1318,9 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\tListUsers\x12\x16.google.protobuf.Empty\x1a&.se.mantra.api.admin.ListUsersResponse\x12L\n" +
 	"\n" +
 	"DeleteUser\x12&.se.mantra.api.admin.DeleteUserRequest\x1a\x16.google.protobuf.Empty\x12U\n" +
-	"\x06AddKey\x12\".se.mantra.api.admin.AddKeyRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12]\n" +
-	"\n" +
-	"DisableKey\x12&.se.mantra.api.admin.DisableKeyRequest\x1a'.se.mantra.api.admin.DisableKeyResponse\x12]\n" +
+	"\x06AddKey\x12\".se.mantra.api.admin.AddKeyRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12Z\n" +
+	"\tRevokeKey\x12%.se.mantra.api.admin.RevokeKeyRequest\x1a&.se.mantra.api.admin.RevokeKeyResponse\x12`\n" +
+	"\vActivateKey\x12'.se.mantra.api.admin.ActivateKeyRequest\x1a(.se.mantra.api.admin.ActivateKeyResponse\x12]\n" +
 	"\x10CollectChallenge\x12#.se.mantra.api.admin.CollectRequest\x1a$.se.mantra.api.admin.CollectResponse\x12c\n" +
 	"\fCreateClient\x12(.se.mantra.api.admin.CreateClientRequest\x1a).se.mantra.api.admin.CreateClientResponse\x12P\n" +
 	"\fDeleteClient\x12(.se.mantra.api.admin.DeleteClientRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
@@ -1230,69 +1340,73 @@ func file_service_domain_admin_proto_rawDescGZIP() []byte {
 	return file_service_domain_admin_proto_rawDescData
 }
 
-var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_service_domain_admin_proto_goTypes = []any{
 	(*GetUserRequest)(nil),             // 0: se.mantra.api.admin.GetUserRequest
 	(*GetUserResponse)(nil),            // 1: se.mantra.api.admin.GetUserResponse
 	(*CreateUserRequest)(nil),          // 2: se.mantra.api.admin.CreateUserRequest
 	(*AddKeyRequest)(nil),              // 3: se.mantra.api.admin.AddKeyRequest
-	(*DisableKeyRequest)(nil),          // 4: se.mantra.api.admin.DisableKeyRequest
-	(*DisableKeyResponse)(nil),         // 5: se.mantra.api.admin.DisableKeyResponse
-	(*DeleteUserRequest)(nil),          // 6: se.mantra.api.admin.DeleteUserRequest
-	(*CreateClientRequest)(nil),        // 7: se.mantra.api.admin.CreateClientRequest
-	(*CreateClientResponse)(nil),       // 8: se.mantra.api.admin.CreateClientResponse
-	(*DeleteClientRequest)(nil),        // 9: se.mantra.api.admin.DeleteClientRequest
-	(*CollectRequest)(nil),             // 10: se.mantra.api.admin.CollectRequest
-	(*CollectResponse)(nil),            // 11: se.mantra.api.admin.CollectResponse
-	(*ListUsersResponse)(nil),          // 12: se.mantra.api.admin.ListUsersResponse
-	(*ListClientsRequest)(nil),         // 13: se.mantra.api.admin.ListClientsRequest
-	(*ListClientsResponse)(nil),        // 14: se.mantra.api.admin.ListClientsResponse
-	(*UpdateDomainDetailsRequest)(nil), // 15: se.mantra.api.admin.UpdateDomainDetailsRequest
-	(*DomainDetails)(nil),              // 16: se.mantra.api.admin.DomainDetails
-	(*timestamppb.Timestamp)(nil),      // 17: google.protobuf.Timestamp
-	(*common.Key)(nil),                 // 18: se.mantra.api.common.Key
-	(*common.Location)(nil),            // 19: se.mantra.api.common.Location
-	(common.Status)(0),                 // 20: se.mantra.api.common.Status
-	(*common.ClientMeta)(nil),          // 21: se.mantra.api.common.ClientMeta
-	(*emptypb.Empty)(nil),              // 22: google.protobuf.Empty
-	(*common.ChallengeResponse)(nil),   // 23: se.mantra.api.common.ChallengeResponse
+	(*RevokeKeyRequest)(nil),           // 4: se.mantra.api.admin.RevokeKeyRequest
+	(*RevokeKeyResponse)(nil),          // 5: se.mantra.api.admin.RevokeKeyResponse
+	(*ActivateKeyRequest)(nil),         // 6: se.mantra.api.admin.ActivateKeyRequest
+	(*ActivateKeyResponse)(nil),        // 7: se.mantra.api.admin.ActivateKeyResponse
+	(*DeleteUserRequest)(nil),          // 8: se.mantra.api.admin.DeleteUserRequest
+	(*CreateClientRequest)(nil),        // 9: se.mantra.api.admin.CreateClientRequest
+	(*CreateClientResponse)(nil),       // 10: se.mantra.api.admin.CreateClientResponse
+	(*DeleteClientRequest)(nil),        // 11: se.mantra.api.admin.DeleteClientRequest
+	(*CollectRequest)(nil),             // 12: se.mantra.api.admin.CollectRequest
+	(*CollectResponse)(nil),            // 13: se.mantra.api.admin.CollectResponse
+	(*ListUsersResponse)(nil),          // 14: se.mantra.api.admin.ListUsersResponse
+	(*ListClientsRequest)(nil),         // 15: se.mantra.api.admin.ListClientsRequest
+	(*ListClientsResponse)(nil),        // 16: se.mantra.api.admin.ListClientsResponse
+	(*UpdateDomainDetailsRequest)(nil), // 17: se.mantra.api.admin.UpdateDomainDetailsRequest
+	(*DomainDetails)(nil),              // 18: se.mantra.api.admin.DomainDetails
+	(*timestamppb.Timestamp)(nil),      // 19: google.protobuf.Timestamp
+	(*common.Key)(nil),                 // 20: se.mantra.api.common.Key
+	(*common.Location)(nil),            // 21: se.mantra.api.common.Location
+	(common.Status)(0),                 // 22: se.mantra.api.common.Status
+	(*common.ClientMeta)(nil),          // 23: se.mantra.api.common.ClientMeta
+	(*emptypb.Empty)(nil),              // 24: google.protobuf.Empty
+	(*common.ChallengeResponse)(nil),   // 25: se.mantra.api.common.ChallengeResponse
 }
 var file_service_domain_admin_proto_depIdxs = []int32{
-	17, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
-	18, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
-	19, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
-	19, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
-	20, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
-	17, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
-	19, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
-	21, // 7: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
-	17, // 8: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
+	19, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
+	20, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
+	21, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
+	21, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
+	22, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
+	19, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
+	21, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
+	23, // 7: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
+	19, // 8: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
 	2,  // 9: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
 	0,  // 10: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
-	22, // 11: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
-	6,  // 12: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
+	24, // 11: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
+	8,  // 12: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
 	3,  // 13: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
-	4,  // 14: se.mantra.api.admin.DomainAdminService.DisableKey:input_type -> se.mantra.api.admin.DisableKeyRequest
-	10, // 15: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
-	7,  // 16: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
-	9,  // 17: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
-	13, // 18: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
-	15, // 19: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
-	22, // 20: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
-	23, // 21: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
-	1,  // 22: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
-	12, // 23: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
-	22, // 24: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
-	23, // 25: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
-	5,  // 26: se.mantra.api.admin.DomainAdminService.DisableKey:output_type -> se.mantra.api.admin.DisableKeyResponse
-	11, // 27: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
-	8,  // 28: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
-	22, // 29: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
-	14, // 30: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
-	16, // 31: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
-	16, // 32: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
-	21, // [21:33] is the sub-list for method output_type
-	9,  // [9:21] is the sub-list for method input_type
+	4,  // 14: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
+	6,  // 15: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
+	12, // 16: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
+	9,  // 17: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
+	11, // 18: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
+	15, // 19: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
+	17, // 20: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
+	24, // 21: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
+	25, // 22: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
+	1,  // 23: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
+	14, // 24: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
+	24, // 25: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
+	25, // 26: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
+	5,  // 27: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
+	7,  // 28: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
+	13, // 29: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
+	10, // 30: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
+	24, // 31: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
+	16, // 32: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
+	18, // 33: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
+	18, // 34: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
+	22, // [22:35] is the sub-list for method output_type
+	9,  // [9:22] is the sub-list for method input_type
 	9,  // [9:9] is the sub-list for extension type_name
 	9,  // [9:9] is the sub-list for extension extendee
 	0,  // [0:9] is the sub-list for field type_name
@@ -1309,7 +1423,7 @@ func file_service_domain_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_domain_admin_proto_rawDesc), len(file_service_domain_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   17,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
