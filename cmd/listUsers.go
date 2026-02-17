@@ -37,8 +37,8 @@ var listUsersCmd = &cobra.Command{
 			if len(resp.Keys) > 0 {
 				fmt.Printf("\nKeys:\n")
 				out := tabwriter.NewWriter(os.Stdout, 10, 5, 1, ' ', 0)
-				_, _ = fmt.Fprintf(out, "  NAME\tDISABLED\tATTACHMENT\tTRANSPORTS\tCREATED\tLAST USED\n")
-				_, _ = fmt.Fprintf(out, "  ----\t--------\t----------\t----------\t-------\t---------\n")
+				_, _ = fmt.Fprintf(out, "  NAME\tSTATUS\tATTACHMENT\tTRANSPORTS\tCREATED\tLAST USED\n")
+				_, _ = fmt.Fprintf(out, "  ----\t------\t----------\t----------\t-------\t---------\n")
 				for _, key := range resp.Keys {
 					created := ""
 					if key.CreatedAt != nil {
@@ -52,9 +52,15 @@ var listUsersCmd = &cobra.Command{
 					if name == "" {
 						name = base64.RawURLEncoding.EncodeToString(key.KeyId)
 					}
-					_, _ = fmt.Fprintf(out, "  %s\t%v\t%s\t%s\t%s\t%s\n",
+					status := "-"
+					if key.Revoked {
+						status = "revoked"
+					} else if key.Pending {
+						status = "pending"
+					}
+					_, _ = fmt.Fprintf(out, "  %s\t%s\t%s\t%s\t%s\t%s\n",
 						name,
-						key.Disabled,
+						status,
 						key.Attachment,
 						strings.Join(key.Transports, ","),
 						created,
