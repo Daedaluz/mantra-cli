@@ -117,6 +117,8 @@ message UpdateDomainDetailsRequest {
   repeated int64 algorithms = 3;
   string registration_path = 4;
   string sign_path = 5;
+  bool require_device_binding = 6;
+  int32 token_max_age = 7;
 }
 
 message DomainDetails {
@@ -127,6 +129,8 @@ message DomainDetails {
   google.protobuf.Timestamp created_at = 5;
   string registration_path = 6;
   string sign_path = 7;
+  bool require_device_binding = 8;
+  int32 token_max_age = 9;
 }
 
 service DomainAdminService {

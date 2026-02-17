@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 package se.mantra.api.common;
-
 option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/common";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";

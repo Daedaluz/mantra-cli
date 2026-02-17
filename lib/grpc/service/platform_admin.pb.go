@@ -25,15 +25,17 @@ const (
 )
 
 type CreateDomainRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Domain           string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Algorithms       []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
-	RegistrationPath string                 `protobuf:"bytes,5,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
-	SignPath         string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Name                 string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Algorithms           []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
+	RegistrationPath     string                 `protobuf:"bytes,5,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
+	SignPath             string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
+	RequireDeviceBinding bool                   `protobuf:"varint,7,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
+	TokenMaxAge          int32                  `protobuf:"varint,8,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *CreateDomainRequest) Reset() {
@@ -106,6 +108,20 @@ func (x *CreateDomainRequest) GetSignPath() string {
 		return x.SignPath
 	}
 	return ""
+}
+
+func (x *CreateDomainRequest) GetRequireDeviceBinding() bool {
+	if x != nil {
+		return x.RequireDeviceBinding
+	}
+	return false
+}
+
+func (x *CreateDomainRequest) GetTokenMaxAge() int32 {
+	if x != nil {
+		return x.TokenMaxAge
+	}
+	return 0
 }
 
 type CreateDomainResponse struct {
@@ -205,16 +221,18 @@ func (x *DeleteDomainRequest) GetDomain() string {
 }
 
 type Domain struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Domain           string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Algorithms       []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
-	CreatedAt        *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	RegistrationPath string                 `protobuf:"bytes,6,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
-	SignPath         string                 `protobuf:"bytes,7,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Name                 string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Algorithms           []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
+	CreatedAt            *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	RegistrationPath     string                 `protobuf:"bytes,6,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
+	SignPath             string                 `protobuf:"bytes,7,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
+	RequireDeviceBinding bool                   `protobuf:"varint,8,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
+	TokenMaxAge          int32                  `protobuf:"varint,9,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *Domain) Reset() {
@@ -294,6 +312,20 @@ func (x *Domain) GetSignPath() string {
 		return x.SignPath
 	}
 	return ""
+}
+
+func (x *Domain) GetRequireDeviceBinding() bool {
+	if x != nil {
+		return x.RequireDeviceBinding
+	}
+	return false
+}
+
+func (x *Domain) GetTokenMaxAge() int32 {
+	if x != nil {
+		return x.TokenMaxAge
+	}
+	return 0
 }
 
 type ListDomainsRequest struct {
@@ -430,15 +462,17 @@ func (x *GetDomainRequest) GetDomain() string {
 }
 
 type UpdateDomainRequest struct {
-	state            protoimpl.MessageState `protogen:"open.v1"`
-	Domain           string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
-	Name             string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Description      string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
-	Algorithms       []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
-	RegistrationPath string                 `protobuf:"bytes,5,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
-	SignPath         string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
+	state                protoimpl.MessageState `protogen:"open.v1"`
+	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	Name                 string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description          string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	Algorithms           []int64                `protobuf:"varint,4,rep,packed,name=algorithms,proto3" json:"algorithms,omitempty"`
+	RegistrationPath     string                 `protobuf:"bytes,5,opt,name=registration_path,json=registrationPath,proto3" json:"registration_path,omitempty"`
+	SignPath             string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
+	RequireDeviceBinding bool                   `protobuf:"varint,7,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
+	TokenMaxAge          int32                  `protobuf:"varint,8,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *UpdateDomainRequest) Reset() {
@@ -511,6 +545,20 @@ func (x *UpdateDomainRequest) GetSignPath() string {
 		return x.SignPath
 	}
 	return ""
+}
+
+func (x *UpdateDomainRequest) GetRequireDeviceBinding() bool {
+	if x != nil {
+		return x.RequireDeviceBinding
+	}
+	return false
+}
+
+func (x *UpdateDomainRequest) GetTokenMaxAge() int32 {
+	if x != nil {
+		return x.TokenMaxAge
+	}
+	return 0
 }
 
 type ListAdminClientsRequest struct {
@@ -605,7 +653,7 @@ var File_service_platform_admin_proto protoreflect.FileDescriptor
 
 const file_service_platform_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\"\xcd\x01\n" +
+	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\"\xa7\x02\n" +
 	"\x13CreateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -614,12 +662,14 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"algorithms\x18\x04 \x03(\x03R\n" +
 	"algorithms\x12+\n" +
 	"\x11registration_path\x18\x05 \x01(\tR\x10registrationPath\x12\x1b\n" +
-	"\tsign_path\x18\x06 \x01(\tR\bsignPath\"K\n" +
+	"\tsign_path\x18\x06 \x01(\tR\bsignPath\x124\n" +
+	"\x16require_device_binding\x18\a \x01(\bR\x14requireDeviceBinding\x12\"\n" +
+	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\"K\n" +
 	"\x14CreateDomainResponse\x12\x1b\n" +
 	"\tclient_id\x18\x05 \x01(\tR\bclientId\x12\x16\n" +
 	"\x06secret\x18\x06 \x01(\tR\x06secret\"-\n" +
 	"\x13DeleteDomainRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xfb\x01\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xd5\x02\n" +
 	"\x06Domain\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -630,13 +680,15 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12+\n" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
-	"\tsign_path\x18\a \x01(\tR\bsignPath\".\n" +
+	"\tsign_path\x18\a \x01(\tR\bsignPath\x124\n" +
+	"\x16require_device_binding\x18\b \x01(\bR\x14requireDeviceBinding\x12\"\n" +
+	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge\".\n" +
 	"\x12ListDomainsRequest\x12\x18\n" +
 	"\adomains\x18\x01 \x03(\tR\adomains\"L\n" +
 	"\x13ListDomainsResponse\x125\n" +
 	"\adomains\x18\x01 \x03(\v2\x1b.se.mantra.api.admin.DomainR\adomains\"*\n" +
 	"\x10GetDomainRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xcd\x01\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xa7\x02\n" +
 	"\x13UpdateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -645,7 +697,9 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"algorithms\x18\x04 \x03(\x03R\n" +
 	"algorithms\x12+\n" +
 	"\x11registration_path\x18\x05 \x01(\tR\x10registrationPath\x12\x1b\n" +
-	"\tsign_path\x18\x06 \x01(\tR\bsignPath\"1\n" +
+	"\tsign_path\x18\x06 \x01(\tR\bsignPath\x124\n" +
+	"\x16require_device_binding\x18\a \x01(\bR\x14requireDeviceBinding\x12\"\n" +
+	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\"1\n" +
 	"\x17ListAdminClientsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"V\n" +
 	"\x18ListAdminClientsResponse\x12:\n" +
