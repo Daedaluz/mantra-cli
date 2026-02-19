@@ -32,6 +32,8 @@ message ChallengeResponse {
   // Location where the signature request was initiated.
   // Frontend can use this to warn user about potential malicious activity.
   common.Location location = 13;
+  google.protobuf.Timestamp created_at = 14;
+  google.protobuf.Timestamp signed_at = 15;
 }
 
 message SignRequest {

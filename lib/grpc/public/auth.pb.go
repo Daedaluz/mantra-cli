@@ -136,7 +136,9 @@ type ChallengeResponse struct {
 	ExpiresAt          *timestamppb.Timestamp `protobuf:"bytes,11,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	// Location where the signature request was initiated.
 	// Frontend can use this to warn user about potential malicious activity.
-	Location      *common.Location `protobuf:"bytes,13,opt,name=location,proto3" json:"location,omitempty"`
+	Location      *common.Location       `protobuf:"bytes,13,opt,name=location,proto3" json:"location,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	SignedAt      *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=signed_at,json=signedAt,proto3" json:"signed_at,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -258,6 +260,20 @@ func (x *ChallengeResponse) GetExpiresAt() *timestamppb.Timestamp {
 func (x *ChallengeResponse) GetLocation() *common.Location {
 	if x != nil {
 		return x.Location
+	}
+	return nil
+}
+
+func (x *ChallengeResponse) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *ChallengeResponse) GetSignedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SignedAt
 	}
 	return nil
 }
@@ -417,7 +433,7 @@ const file_public_auth_proto_rawDesc = "" +
 	"transports\x18\x03 \x03(\tR\n" +
 	"transports\"+\n" +
 	"\x13GetChallengeRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\x97\x04\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\"\x8b\x05\n" +
 	"\x11ChallengeResponse\x128\n" +
 	"\x06client\x18\x01 \x01(\v2 .se.mantra.api.common.ClientMetaR\x06client\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -433,7 +449,10 @@ const file_public_auth_proto_rawDesc = "" +
 	" \x01(\tR\tmediation\x129\n" +
 	"\n" +
 	"expires_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12:\n" +
-	"\blocation\x18\r \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xe5\x02\n" +
+	"\blocation\x18\r \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x129\n" +
+	"\n" +
+	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
+	"\tsigned_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\bsignedAt\"\xe5\x02\n" +
 	"\vSignRequest\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x129\n" +
 	"\x18authenticator_attachment\x18\x02 \x01(\tR\x17authenticatorAttachment\x12\x0e\n" +
@@ -475,22 +494,24 @@ var file_public_auth_proto_goTypes = []any{
 	(*common.Location)(nil),       // 7: se.mantra.api.common.Location
 }
 var file_public_auth_proto_depIdxs = []int32{
-	5, // 0: se.mantra.api.public.ChallengeResponse.client:type_name -> se.mantra.api.common.ClientMeta
-	0, // 1: se.mantra.api.public.ChallengeResponse.allowed_credentials:type_name -> se.mantra.api.public.AllowedCredential
-	6, // 2: se.mantra.api.public.ChallengeResponse.expires_at:type_name -> google.protobuf.Timestamp
-	7, // 3: se.mantra.api.public.ChallengeResponse.location:type_name -> se.mantra.api.common.Location
-	7, // 4: se.mantra.api.public.SignRequest.location:type_name -> se.mantra.api.common.Location
-	1, // 5: se.mantra.api.public.AuthService.Get:input_type -> se.mantra.api.public.GetChallengeRequest
-	3, // 6: se.mantra.api.public.AuthService.Sign:input_type -> se.mantra.api.public.SignRequest
-	3, // 7: se.mantra.api.public.AuthService.Reject:input_type -> se.mantra.api.public.SignRequest
-	2, // 8: se.mantra.api.public.AuthService.Get:output_type -> se.mantra.api.public.ChallengeResponse
-	4, // 9: se.mantra.api.public.AuthService.Sign:output_type -> se.mantra.api.public.SignResponse
-	4, // 10: se.mantra.api.public.AuthService.Reject:output_type -> se.mantra.api.public.SignResponse
-	8, // [8:11] is the sub-list for method output_type
-	5, // [5:8] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5,  // 0: se.mantra.api.public.ChallengeResponse.client:type_name -> se.mantra.api.common.ClientMeta
+	0,  // 1: se.mantra.api.public.ChallengeResponse.allowed_credentials:type_name -> se.mantra.api.public.AllowedCredential
+	6,  // 2: se.mantra.api.public.ChallengeResponse.expires_at:type_name -> google.protobuf.Timestamp
+	7,  // 3: se.mantra.api.public.ChallengeResponse.location:type_name -> se.mantra.api.common.Location
+	6,  // 4: se.mantra.api.public.ChallengeResponse.created_at:type_name -> google.protobuf.Timestamp
+	6,  // 5: se.mantra.api.public.ChallengeResponse.signed_at:type_name -> google.protobuf.Timestamp
+	7,  // 6: se.mantra.api.public.SignRequest.location:type_name -> se.mantra.api.common.Location
+	1,  // 7: se.mantra.api.public.AuthService.Get:input_type -> se.mantra.api.public.GetChallengeRequest
+	3,  // 8: se.mantra.api.public.AuthService.Sign:input_type -> se.mantra.api.public.SignRequest
+	3,  // 9: se.mantra.api.public.AuthService.Reject:input_type -> se.mantra.api.public.SignRequest
+	2,  // 10: se.mantra.api.public.AuthService.Get:output_type -> se.mantra.api.public.ChallengeResponse
+	4,  // 11: se.mantra.api.public.AuthService.Sign:output_type -> se.mantra.api.public.SignResponse
+	4,  // 12: se.mantra.api.public.AuthService.Reject:output_type -> se.mantra.api.public.SignResponse
+	10, // [10:13] is the sub-list for method output_type
+	7,  // [7:10] is the sub-list for method input_type
+	7,  // [7:7] is the sub-list for extension type_name
+	7,  // [7:7] is the sub-list for extension extendee
+	0,  // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_public_auth_proto_init() }
