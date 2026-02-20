@@ -236,6 +236,7 @@ type CollectResponse struct {
 	Location                *common.Location       `protobuf:"bytes,12,opt,name=location,proto3" json:"location,omitempty"`
 	PublicKey               []byte                 `protobuf:"bytes,13,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
 	Algorithm               int64                  `protobuf:"varint,14,opt,name=algorithm,proto3" json:"algorithm,omitempty"`
+	DeviceId                string                 `protobuf:"bytes,15,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -368,6 +369,13 @@ func (x *CollectResponse) GetAlgorithm() int64 {
 	return 0
 }
 
+func (x *CollectResponse) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 var File_client_client_proto protoreflect.FileDescriptor
 
 const file_client_client_proto_rawDesc = "" +
@@ -387,7 +395,7 @@ const file_client_client_proto_rawDesc = "" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\"^\n" +
 	"\x0eCollectRequest\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x12)\n" +
-	"\x10challenge_secret\x18\x02 \x01(\tR\x0fchallengeSecret\"\xa3\x04\n" +
+	"\x10challenge_secret\x18\x02 \x01(\tR\x0fchallengeSecret\"\xc0\x04\n" +
 	"\x0fCollectResponse\x124\n" +
 	"\x06status\x18\x01 \x01(\x0e2\x1c.se.mantra.api.common.StatusR\x06status\x127\n" +
 	"\tsigned_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bsignedAt\x12\x17\n" +
@@ -404,7 +412,8 @@ const file_client_client_proto_rawDesc = "" +
 	"\blocation\x18\f \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x1d\n" +
 	"\n" +
 	"public_key\x18\r \x01(\fR\tpublicKey\x12\x1c\n" +
-	"\talgorithm\x18\x0e \x01(\x03R\talgorithm2\x82\x02\n" +
+	"\talgorithm\x18\x0e \x01(\x03R\talgorithm\x12\x1b\n" +
+	"\tdevice_id\x18\x0f \x01(\tR\bdeviceId2\x82\x02\n" +
 	"\rClientService\x12R\n" +
 	"\x04Sign\x12!.se.mantra.api.client.SignRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12E\n" +
 	"\x06Cancel\x12#.se.mantra.api.client.CancelRequest\x1a\x16.google.protobuf.Empty\x12V\n" +

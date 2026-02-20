@@ -143,6 +143,7 @@ func (x *RegistrationChallenge) GetUserVerification() string {
 type GetChallenge struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -180,6 +181,13 @@ func (*GetChallenge) Descriptor() ([]byte, []int) {
 func (x *GetChallenge) GetToken() string {
 	if x != nil {
 		return x.Token
+	}
+	return ""
+}
+
+func (x *GetChallenge) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
 	}
 	return ""
 }
@@ -282,6 +290,7 @@ type RegisterRequest struct {
 	PublicKeyAlgorithm int64                  `protobuf:"varint,10,opt,name=public_key_algorithm,json=publicKeyAlgorithm,proto3" json:"public_key_algorithm,omitempty"`
 	Transports         []string               `protobuf:"bytes,9,rep,name=transports,proto3" json:"transports,omitempty"`
 	Location           *common.Location       `protobuf:"bytes,11,opt,name=location,proto3" json:"location,omitempty"`
+	DeviceId           string                 `protobuf:"bytes,12,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -386,8 +395,16 @@ func (x *RegisterRequest) GetLocation() *common.Location {
 	return nil
 }
 
+func (x *RegisterRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 type RegisterResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -422,6 +439,13 @@ func (*RegisterResponse) Descriptor() ([]byte, []int) {
 	return file_public_register_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *RegisterResponse) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 var File_public_register_proto protoreflect.FileDescriptor
 
 const file_public_register_proto_rawDesc = "" +
@@ -440,9 +464,10 @@ const file_public_register_proto_rawDesc = "" +
 	"\fresident_key\x18\b \x01(\tR\vresidentKey\x12)\n" +
 	"\x10require_resident\x18\t \x01(\bR\x0frequireResident\x12+\n" +
 	"\x11user_verification\x18\n" +
-	" \x01(\tR\x10userVerification\"$\n" +
+	" \x01(\tR\x10userVerification\"A\n" +
 	"\fGetChallenge\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\xe7\x02\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\"\xe7\x02\n" +
 	"\vGetResponse\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x129\n" +
 	"\n" +
@@ -451,7 +476,7 @@ const file_public_register_proto_rawDesc = "" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x128\n" +
 	"\x06client\x18\x04 \x01(\v2 .se.mantra.api.common.ClientMetaR\x06client\x12I\n" +
 	"\tchallenge\x18\x05 \x01(\v2+.se.mantra.api.public.RegistrationChallengeR\tchallenge\x12:\n" +
-	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xf5\x02\n" +
+	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\x92\x03\n" +
 	"\x0fRegisterRequest\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x12\x0e\n" +
 	"\x02id\x18\x02 \x01(\tR\x02id\x12\x14\n" +
@@ -467,8 +492,10 @@ const file_public_register_proto_rawDesc = "" +
 	"\n" +
 	"transports\x18\t \x03(\tR\n" +
 	"transports\x12:\n" +
-	"\blocation\x18\v \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\x12\n" +
-	"\x10RegisterResponse2\xba\x01\n" +
+	"\blocation\x18\v \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x1b\n" +
+	"\tdevice_id\x18\f \x01(\tR\bdeviceId\"/\n" +
+	"\x10RegisterResponse\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId2\xba\x01\n" +
 	"\x0fRegisterService\x12L\n" +
 	"\x03Get\x12\".se.mantra.api.public.GetChallenge\x1a!.se.mantra.api.public.GetResponse\x12Y\n" +
 	"\bRegister\x12%.se.mantra.api.public.RegisterRequest\x1a&.se.mantra.api.public.RegisterResponseB0Z.github.com/daedaluz/mantra-cli/lib/grpc/publicb\x06proto3"

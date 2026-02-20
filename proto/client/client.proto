@@ -47,6 +47,7 @@ message CollectResponse {
   common.Location location = 12;
   bytes public_key = 13;
   int64 algorithm = 14;
+  string device_id = 15;
 }
 
 service ClientService {

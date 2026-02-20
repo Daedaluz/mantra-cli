@@ -26,6 +26,7 @@ message RegistrationChallenge {
 
 message GetChallenge {
   string token = 1;
+  string device_id = 2;
 }
 
 message GetResponse {
@@ -52,9 +53,11 @@ message RegisterRequest {
   int64 public_key_algorithm = 10;
   repeated string transports = 9;
   common.Location location = 11;
+  string device_id = 12;
 }
 
 message RegisterResponse {
+  string device_id = 1;
 }
 
 service RegisterService {

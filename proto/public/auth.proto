@@ -13,6 +13,7 @@ message AllowedCredential {
 
 message GetChallengeRequest {
   string token = 1;
+  string device_id = 2;
 }
 
 message ChallengeResponse {
@@ -47,9 +48,11 @@ message SignRequest {
   bytes signature = 7;
   bytes user_handle = 8;
   common.Location location = 9;
+  string device_id = 10;
 }
 
 message SignResponse {
+  string device_id = 1;
 }
 
 service AuthService {

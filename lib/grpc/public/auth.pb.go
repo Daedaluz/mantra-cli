@@ -79,6 +79,7 @@ func (x *AllowedCredential) GetTransports() []string {
 type GetChallengeRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -116,6 +117,13 @@ func (*GetChallengeRequest) Descriptor() ([]byte, []int) {
 func (x *GetChallengeRequest) GetToken() string {
 	if x != nil {
 		return x.Token
+	}
+	return ""
+}
+
+func (x *GetChallengeRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
 	}
 	return ""
 }
@@ -289,6 +297,7 @@ type SignRequest struct {
 	Signature               []byte                 `protobuf:"bytes,7,opt,name=signature,proto3" json:"signature,omitempty"`
 	UserHandle              []byte                 `protobuf:"bytes,8,opt,name=user_handle,json=userHandle,proto3" json:"user_handle,omitempty"`
 	Location                *common.Location       `protobuf:"bytes,9,opt,name=location,proto3" json:"location,omitempty"`
+	DeviceId                string                 `protobuf:"bytes,10,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -386,8 +395,16 @@ func (x *SignRequest) GetLocation() *common.Location {
 	return nil
 }
 
+func (x *SignRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 type SignResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -422,6 +439,13 @@ func (*SignResponse) Descriptor() ([]byte, []int) {
 	return file_public_auth_proto_rawDescGZIP(), []int{4}
 }
 
+func (x *SignResponse) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 var File_public_auth_proto protoreflect.FileDescriptor
 
 const file_public_auth_proto_rawDesc = "" +
@@ -431,9 +455,10 @@ const file_public_auth_proto_rawDesc = "" +
 	"\x02id\x18\x01 \x01(\fR\x02id\x12\x1e\n" +
 	"\n" +
 	"transports\x18\x03 \x03(\tR\n" +
-	"transports\"+\n" +
+	"transports\"H\n" +
 	"\x13GetChallengeRequest\x12\x14\n" +
-	"\x05token\x18\x01 \x01(\tR\x05token\"\x8b\x05\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\"\x8b\x05\n" +
 	"\x11ChallengeResponse\x128\n" +
 	"\x06client\x18\x01 \x01(\v2 .se.mantra.api.common.ClientMetaR\x06client\x12\x14\n" +
 	"\x05title\x18\x02 \x01(\tR\x05title\x12\x12\n" +
@@ -452,7 +477,7 @@ const file_public_auth_proto_rawDesc = "" +
 	"\blocation\x18\r \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x129\n" +
 	"\n" +
 	"created_at\x18\x0e \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
-	"\tsigned_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\bsignedAt\"\xe5\x02\n" +
+	"\tsigned_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\bsignedAt\"\x82\x03\n" +
 	"\vSignRequest\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x129\n" +
 	"\x18authenticator_attachment\x18\x02 \x01(\tR\x17authenticatorAttachment\x12\x0e\n" +
@@ -463,8 +488,11 @@ const file_public_auth_proto_rawDesc = "" +
 	"\tsignature\x18\a \x01(\fR\tsignature\x12\x1f\n" +
 	"\vuser_handle\x18\b \x01(\fR\n" +
 	"userHandle\x12:\n" +
-	"\blocation\x18\t \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\x0e\n" +
-	"\fSignResponse2\x88\x02\n" +
+	"\blocation\x18\t \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x1b\n" +
+	"\tdevice_id\x18\n" +
+	" \x01(\tR\bdeviceId\"+\n" +
+	"\fSignResponse\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId2\x88\x02\n" +
 	"\vAuthService\x12Y\n" +
 	"\x03Get\x12).se.mantra.api.public.GetChallengeRequest\x1a'.se.mantra.api.public.ChallengeResponse\x12M\n" +
 	"\x04Sign\x12!.se.mantra.api.public.SignRequest\x1a\".se.mantra.api.public.SignResponse\x12O\n" +
