@@ -7,6 +7,7 @@ option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/admin";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
 import "common/common.proto";
+import "service/platform_admin.proto";
 
 message GetUserRequest {
   string user_id = 2;
@@ -137,6 +138,16 @@ message ListClientsResponse {
   repeated common.ClientMeta clients = 1;
 }
 
+message DomainAuditUserRequest {
+  string                    user_id = 1;
+  google.protobuf.Timestamp from    = 2;
+  google.protobuf.Timestamp to      = 3;
+}
+
+message DomainAuditChallengeRequest {
+  string challenge_id = 1;
+}
+
 message UpdateDomainDetailsRequest {
   string name = 1;
   string description = 2;
@@ -181,4 +192,7 @@ service DomainAdminService {
   rpc ListDevices(ListDevicesRequest) returns (ListDevicesResponse);
   rpc UpdateDevice(UpdateDeviceRequest) returns (google.protobuf.Empty);
   rpc RemoveDevice(RemoveDeviceRequest) returns (google.protobuf.Empty);
+
+  rpc AuditUser(DomainAuditUserRequest) returns (AuditUserResponse);
+  rpc AuditChallenge(DomainAuditChallengeRequest) returns (AuditEntry);
 }

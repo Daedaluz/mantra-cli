@@ -37,6 +37,8 @@ const (
 	DomainAdminService_ListDevices_FullMethodName      = "/se.mantra.api.admin.DomainAdminService/ListDevices"
 	DomainAdminService_UpdateDevice_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/UpdateDevice"
 	DomainAdminService_RemoveDevice_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/RemoveDevice"
+	DomainAdminService_AuditUser_FullMethodName        = "/se.mantra.api.admin.DomainAdminService/AuditUser"
+	DomainAdminService_AuditChallenge_FullMethodName   = "/se.mantra.api.admin.DomainAdminService/AuditChallenge"
 )
 
 // DomainAdminServiceClient is the client API for DomainAdminService service.
@@ -59,6 +61,8 @@ type DomainAdminServiceClient interface {
 	ListDevices(ctx context.Context, in *ListDevicesRequest, opts ...grpc.CallOption) (*ListDevicesResponse, error)
 	UpdateDevice(ctx context.Context, in *UpdateDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AuditUser(ctx context.Context, in *DomainAuditUserRequest, opts ...grpc.CallOption) (*AuditUserResponse, error)
+	AuditChallenge(ctx context.Context, in *DomainAuditChallengeRequest, opts ...grpc.CallOption) (*AuditEntry, error)
 }
 
 type domainAdminServiceClient struct {
@@ -229,6 +233,26 @@ func (c *domainAdminServiceClient) RemoveDevice(ctx context.Context, in *RemoveD
 	return out, nil
 }
 
+func (c *domainAdminServiceClient) AuditUser(ctx context.Context, in *DomainAuditUserRequest, opts ...grpc.CallOption) (*AuditUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuditUserResponse)
+	err := c.cc.Invoke(ctx, DomainAdminService_AuditUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) AuditChallenge(ctx context.Context, in *DomainAuditChallengeRequest, opts ...grpc.CallOption) (*AuditEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuditEntry)
+	err := c.cc.Invoke(ctx, DomainAdminService_AuditChallenge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DomainAdminServiceServer is the server API for DomainAdminService service.
 // All implementations should embed UnimplementedDomainAdminServiceServer
 // for forward compatibility.
@@ -249,6 +273,8 @@ type DomainAdminServiceServer interface {
 	ListDevices(context.Context, *ListDevicesRequest) (*ListDevicesResponse, error)
 	UpdateDevice(context.Context, *UpdateDeviceRequest) (*emptypb.Empty, error)
 	RemoveDevice(context.Context, *RemoveDeviceRequest) (*emptypb.Empty, error)
+	AuditUser(context.Context, *DomainAuditUserRequest) (*AuditUserResponse, error)
+	AuditChallenge(context.Context, *DomainAuditChallengeRequest) (*AuditEntry, error)
 }
 
 // UnimplementedDomainAdminServiceServer should be embedded to have
@@ -305,6 +331,12 @@ func (UnimplementedDomainAdminServiceServer) UpdateDevice(context.Context, *Upda
 }
 func (UnimplementedDomainAdminServiceServer) RemoveDevice(context.Context, *RemoveDeviceRequest) (*emptypb.Empty, error) {
 	return nil, status.Error(codes.Unimplemented, "method RemoveDevice not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) AuditUser(context.Context, *DomainAuditUserRequest) (*AuditUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AuditUser not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) AuditChallenge(context.Context, *DomainAuditChallengeRequest) (*AuditEntry, error) {
+	return nil, status.Error(codes.Unimplemented, "method AuditChallenge not implemented")
 }
 func (UnimplementedDomainAdminServiceServer) testEmbeddedByValue() {}
 
@@ -614,6 +646,42 @@ func _DomainAdminService_RemoveDevice_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DomainAdminService_AuditUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DomainAuditUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).AuditUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_AuditUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).AuditUser(ctx, req.(*DomainAuditUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_AuditChallenge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DomainAuditChallengeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).AuditChallenge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_AuditChallenge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).AuditChallenge(ctx, req.(*DomainAuditChallengeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DomainAdminService_ServiceDesc is the grpc.ServiceDesc for DomainAdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -684,6 +752,14 @@ var DomainAdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RemoveDevice",
 			Handler:    _DomainAdminService_RemoveDevice_Handler,
+		},
+		{
+			MethodName: "AuditUser",
+			Handler:    _DomainAdminService_AuditUser_Handler,
+		},
+		{
+			MethodName: "AuditChallenge",
+			Handler:    _DomainAdminService_AuditChallenge_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

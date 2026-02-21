@@ -26,6 +26,8 @@ const (
 	PlatformAdminService_GetDomain_FullMethodName        = "/se.mantra.api.admin.PlatformAdminService/GetDomain"
 	PlatformAdminService_UpdateDomain_FullMethodName     = "/se.mantra.api.admin.PlatformAdminService/UpdateDomain"
 	PlatformAdminService_ListAdminClients_FullMethodName = "/se.mantra.api.admin.PlatformAdminService/ListAdminClients"
+	PlatformAdminService_AuditUser_FullMethodName        = "/se.mantra.api.admin.PlatformAdminService/AuditUser"
+	PlatformAdminService_AuditChallenge_FullMethodName   = "/se.mantra.api.admin.PlatformAdminService/AuditChallenge"
 )
 
 // PlatformAdminServiceClient is the client API for PlatformAdminService service.
@@ -38,6 +40,8 @@ type PlatformAdminServiceClient interface {
 	GetDomain(ctx context.Context, in *GetDomainRequest, opts ...grpc.CallOption) (*Domain, error)
 	UpdateDomain(ctx context.Context, in *UpdateDomainRequest, opts ...grpc.CallOption) (*Domain, error)
 	ListAdminClients(ctx context.Context, in *ListAdminClientsRequest, opts ...grpc.CallOption) (*ListAdminClientsResponse, error)
+	AuditUser(ctx context.Context, in *AuditUserRequest, opts ...grpc.CallOption) (*AuditUserResponse, error)
+	AuditChallenge(ctx context.Context, in *AuditChallengeRequest, opts ...grpc.CallOption) (*AuditEntry, error)
 }
 
 type platformAdminServiceClient struct {
@@ -108,6 +112,26 @@ func (c *platformAdminServiceClient) ListAdminClients(ctx context.Context, in *L
 	return out, nil
 }
 
+func (c *platformAdminServiceClient) AuditUser(ctx context.Context, in *AuditUserRequest, opts ...grpc.CallOption) (*AuditUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuditUserResponse)
+	err := c.cc.Invoke(ctx, PlatformAdminService_AuditUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *platformAdminServiceClient) AuditChallenge(ctx context.Context, in *AuditChallengeRequest, opts ...grpc.CallOption) (*AuditEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuditEntry)
+	err := c.cc.Invoke(ctx, PlatformAdminService_AuditChallenge_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PlatformAdminServiceServer is the server API for PlatformAdminService service.
 // All implementations should embed UnimplementedPlatformAdminServiceServer
 // for forward compatibility.
@@ -118,6 +142,8 @@ type PlatformAdminServiceServer interface {
 	GetDomain(context.Context, *GetDomainRequest) (*Domain, error)
 	UpdateDomain(context.Context, *UpdateDomainRequest) (*Domain, error)
 	ListAdminClients(context.Context, *ListAdminClientsRequest) (*ListAdminClientsResponse, error)
+	AuditUser(context.Context, *AuditUserRequest) (*AuditUserResponse, error)
+	AuditChallenge(context.Context, *AuditChallengeRequest) (*AuditEntry, error)
 }
 
 // UnimplementedPlatformAdminServiceServer should be embedded to have
@@ -144,6 +170,12 @@ func (UnimplementedPlatformAdminServiceServer) UpdateDomain(context.Context, *Up
 }
 func (UnimplementedPlatformAdminServiceServer) ListAdminClients(context.Context, *ListAdminClientsRequest) (*ListAdminClientsResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method ListAdminClients not implemented")
+}
+func (UnimplementedPlatformAdminServiceServer) AuditUser(context.Context, *AuditUserRequest) (*AuditUserResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method AuditUser not implemented")
+}
+func (UnimplementedPlatformAdminServiceServer) AuditChallenge(context.Context, *AuditChallengeRequest) (*AuditEntry, error) {
+	return nil, status.Error(codes.Unimplemented, "method AuditChallenge not implemented")
 }
 func (UnimplementedPlatformAdminServiceServer) testEmbeddedByValue() {}
 
@@ -273,6 +305,42 @@ func _PlatformAdminService_ListAdminClients_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _PlatformAdminService_AuditUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuditUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformAdminServiceServer).AuditUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformAdminService_AuditUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformAdminServiceServer).AuditUser(ctx, req.(*AuditUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _PlatformAdminService_AuditChallenge_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuditChallengeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PlatformAdminServiceServer).AuditChallenge(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: PlatformAdminService_AuditChallenge_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PlatformAdminServiceServer).AuditChallenge(ctx, req.(*AuditChallengeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // PlatformAdminService_ServiceDesc is the grpc.ServiceDesc for PlatformAdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -303,6 +371,14 @@ var PlatformAdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAdminClients",
 			Handler:    _PlatformAdminService_ListAdminClients_Handler,
+		},
+		{
+			MethodName: "AuditUser",
+			Handler:    _PlatformAdminService_AuditUser_Handler,
+		},
+		{
+			MethodName: "AuditChallenge",
+			Handler:    _PlatformAdminService_AuditChallenge_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

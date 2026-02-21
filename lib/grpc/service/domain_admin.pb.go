@@ -1312,6 +1312,110 @@ func (x *ListClientsResponse) GetClients() []*common.ClientMeta {
 	return nil
 }
 
+type DomainAuditUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	From          *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=from,proto3" json:"from,omitempty"`
+	To            *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=to,proto3" json:"to,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DomainAuditUserRequest) Reset() {
+	*x = DomainAuditUserRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DomainAuditUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DomainAuditUserRequest) ProtoMessage() {}
+
+func (x *DomainAuditUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DomainAuditUserRequest.ProtoReflect.Descriptor instead.
+func (*DomainAuditUserRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *DomainAuditUserRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *DomainAuditUserRequest) GetFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.From
+	}
+	return nil
+}
+
+func (x *DomainAuditUserRequest) GetTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.To
+	}
+	return nil
+}
+
+type DomainAuditChallengeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ChallengeId   string                 `protobuf:"bytes,1,opt,name=challenge_id,json=challengeId,proto3" json:"challenge_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DomainAuditChallengeRequest) Reset() {
+	*x = DomainAuditChallengeRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[23]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DomainAuditChallengeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DomainAuditChallengeRequest) ProtoMessage() {}
+
+func (x *DomainAuditChallengeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[23]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DomainAuditChallengeRequest.ProtoReflect.Descriptor instead.
+func (*DomainAuditChallengeRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{23}
+}
+
+func (x *DomainAuditChallengeRequest) GetChallengeId() string {
+	if x != nil {
+		return x.ChallengeId
+	}
+	return ""
+}
+
 type UpdateDomainDetailsRequest struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Name                 string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -1327,7 +1431,7 @@ type UpdateDomainDetailsRequest struct {
 
 func (x *UpdateDomainDetailsRequest) Reset() {
 	*x = UpdateDomainDetailsRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[22]
+	mi := &file_service_domain_admin_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1339,7 +1443,7 @@ func (x *UpdateDomainDetailsRequest) String() string {
 func (*UpdateDomainDetailsRequest) ProtoMessage() {}
 
 func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[22]
+	mi := &file_service_domain_admin_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1352,7 +1456,7 @@ func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDomainDetailsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDomainDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{22}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *UpdateDomainDetailsRequest) GetName() string {
@@ -1421,7 +1525,7 @@ type DomainDetails struct {
 
 func (x *DomainDetails) Reset() {
 	*x = DomainDetails{}
-	mi := &file_service_domain_admin_proto_msgTypes[23]
+	mi := &file_service_domain_admin_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1433,7 +1537,7 @@ func (x *DomainDetails) String() string {
 func (*DomainDetails) ProtoMessage() {}
 
 func (x *DomainDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[23]
+	mi := &file_service_domain_admin_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1446,7 +1550,7 @@ func (x *DomainDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DomainDetails.ProtoReflect.Descriptor instead.
 func (*DomainDetails) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{23}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *DomainDetails) GetDomain() string {
@@ -1516,7 +1620,7 @@ var File_service_domain_admin_proto protoreflect.FileDescriptor
 
 const file_service_domain_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x1aservice/domain_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\")\n" +
+	"\x1aservice/domain_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\x1a\x1cservice/platform_admin.proto\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\"\xac\x01\n" +
 	"\x0fGetUserResponse\x12\x16\n" +
@@ -1608,7 +1712,13 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\n" +
 	"admin_only\x18\x01 \x01(\bR\tadminOnly\"Q\n" +
 	"\x13ListClientsResponse\x12:\n" +
-	"\aclients\x18\x01 \x03(\v2 .se.mantra.api.common.ClientMetaR\aclients\"\x96\x02\n" +
+	"\aclients\x18\x01 \x03(\v2 .se.mantra.api.common.ClientMetaR\aclients\"\x8d\x01\n" +
+	"\x16DomainAuditUserRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12.\n" +
+	"\x04from\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
+	"\x02to\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\"@\n" +
+	"\x1bDomainAuditChallengeRequest\x12!\n" +
+	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\"\x96\x02\n" +
 	"\x1aUpdateDomainDetailsRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1e\n" +
@@ -1631,7 +1741,7 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\a \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\b \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge2\xa5\v\n" +
+	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge2\xec\f\n" +
 	"\x12DomainAdminService\x12]\n" +
 	"\n" +
 	"CreateUser\x12&.se.mantra.api.admin.CreateUserRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12T\n" +
@@ -1650,7 +1760,9 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\tGetDomain\x12\x16.google.protobuf.Empty\x1a\".se.mantra.api.admin.DomainDetails\x12`\n" +
 	"\vListDevices\x12'.se.mantra.api.admin.ListDevicesRequest\x1a(.se.mantra.api.admin.ListDevicesResponse\x12P\n" +
 	"\fUpdateDevice\x12(.se.mantra.api.admin.UpdateDeviceRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
-	"\fRemoveDevice\x12(.se.mantra.api.admin.RemoveDeviceRequest\x1a\x16.google.protobuf.EmptyB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
+	"\fRemoveDevice\x12(.se.mantra.api.admin.RemoveDeviceRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
+	"\tAuditUser\x12+.se.mantra.api.admin.DomainAuditUserRequest\x1a&.se.mantra.api.admin.AuditUserResponse\x12c\n" +
+	"\x0eAuditChallenge\x120.se.mantra.api.admin.DomainAuditChallengeRequest\x1a\x1f.se.mantra.api.admin.AuditEntryB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
 
 var (
 	file_service_domain_admin_proto_rawDescOnce sync.Once
@@ -1664,90 +1776,100 @@ func file_service_domain_admin_proto_rawDescGZIP() []byte {
 	return file_service_domain_admin_proto_rawDescData
 }
 
-var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
+var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_service_domain_admin_proto_goTypes = []any{
-	(*GetUserRequest)(nil),             // 0: se.mantra.api.admin.GetUserRequest
-	(*GetUserResponse)(nil),            // 1: se.mantra.api.admin.GetUserResponse
-	(*CreateUserRequest)(nil),          // 2: se.mantra.api.admin.CreateUserRequest
-	(*AddKeyRequest)(nil),              // 3: se.mantra.api.admin.AddKeyRequest
-	(*RevokeKeyRequest)(nil),           // 4: se.mantra.api.admin.RevokeKeyRequest
-	(*RevokeKeyResponse)(nil),          // 5: se.mantra.api.admin.RevokeKeyResponse
-	(*ActivateKeyRequest)(nil),         // 6: se.mantra.api.admin.ActivateKeyRequest
-	(*ActivateKeyResponse)(nil),        // 7: se.mantra.api.admin.ActivateKeyResponse
-	(*DeleteUserRequest)(nil),          // 8: se.mantra.api.admin.DeleteUserRequest
-	(*CreateClientRequest)(nil),        // 9: se.mantra.api.admin.CreateClientRequest
-	(*CreateClientResponse)(nil),       // 10: se.mantra.api.admin.CreateClientResponse
-	(*DeleteClientRequest)(nil),        // 11: se.mantra.api.admin.DeleteClientRequest
-	(*CollectRequest)(nil),             // 12: se.mantra.api.admin.CollectRequest
-	(*CollectResponse)(nil),            // 13: se.mantra.api.admin.CollectResponse
-	(*ListUsersResponse)(nil),          // 14: se.mantra.api.admin.ListUsersResponse
-	(*DeviceBinding)(nil),              // 15: se.mantra.api.admin.DeviceBinding
-	(*ListDevicesRequest)(nil),         // 16: se.mantra.api.admin.ListDevicesRequest
-	(*ListDevicesResponse)(nil),        // 17: se.mantra.api.admin.ListDevicesResponse
-	(*UpdateDeviceRequest)(nil),        // 18: se.mantra.api.admin.UpdateDeviceRequest
-	(*RemoveDeviceRequest)(nil),        // 19: se.mantra.api.admin.RemoveDeviceRequest
-	(*ListClientsRequest)(nil),         // 20: se.mantra.api.admin.ListClientsRequest
-	(*ListClientsResponse)(nil),        // 21: se.mantra.api.admin.ListClientsResponse
-	(*UpdateDomainDetailsRequest)(nil), // 22: se.mantra.api.admin.UpdateDomainDetailsRequest
-	(*DomainDetails)(nil),              // 23: se.mantra.api.admin.DomainDetails
-	(*timestamppb.Timestamp)(nil),      // 24: google.protobuf.Timestamp
-	(*common.Key)(nil),                 // 25: se.mantra.api.common.Key
-	(*common.Location)(nil),            // 26: se.mantra.api.common.Location
-	(common.Status)(0),                 // 27: se.mantra.api.common.Status
-	(*common.ClientMeta)(nil),          // 28: se.mantra.api.common.ClientMeta
-	(*emptypb.Empty)(nil),              // 29: google.protobuf.Empty
-	(*common.ChallengeResponse)(nil),   // 30: se.mantra.api.common.ChallengeResponse
+	(*GetUserRequest)(nil),              // 0: se.mantra.api.admin.GetUserRequest
+	(*GetUserResponse)(nil),             // 1: se.mantra.api.admin.GetUserResponse
+	(*CreateUserRequest)(nil),           // 2: se.mantra.api.admin.CreateUserRequest
+	(*AddKeyRequest)(nil),               // 3: se.mantra.api.admin.AddKeyRequest
+	(*RevokeKeyRequest)(nil),            // 4: se.mantra.api.admin.RevokeKeyRequest
+	(*RevokeKeyResponse)(nil),           // 5: se.mantra.api.admin.RevokeKeyResponse
+	(*ActivateKeyRequest)(nil),          // 6: se.mantra.api.admin.ActivateKeyRequest
+	(*ActivateKeyResponse)(nil),         // 7: se.mantra.api.admin.ActivateKeyResponse
+	(*DeleteUserRequest)(nil),           // 8: se.mantra.api.admin.DeleteUserRequest
+	(*CreateClientRequest)(nil),         // 9: se.mantra.api.admin.CreateClientRequest
+	(*CreateClientResponse)(nil),        // 10: se.mantra.api.admin.CreateClientResponse
+	(*DeleteClientRequest)(nil),         // 11: se.mantra.api.admin.DeleteClientRequest
+	(*CollectRequest)(nil),              // 12: se.mantra.api.admin.CollectRequest
+	(*CollectResponse)(nil),             // 13: se.mantra.api.admin.CollectResponse
+	(*ListUsersResponse)(nil),           // 14: se.mantra.api.admin.ListUsersResponse
+	(*DeviceBinding)(nil),               // 15: se.mantra.api.admin.DeviceBinding
+	(*ListDevicesRequest)(nil),          // 16: se.mantra.api.admin.ListDevicesRequest
+	(*ListDevicesResponse)(nil),         // 17: se.mantra.api.admin.ListDevicesResponse
+	(*UpdateDeviceRequest)(nil),         // 18: se.mantra.api.admin.UpdateDeviceRequest
+	(*RemoveDeviceRequest)(nil),         // 19: se.mantra.api.admin.RemoveDeviceRequest
+	(*ListClientsRequest)(nil),          // 20: se.mantra.api.admin.ListClientsRequest
+	(*ListClientsResponse)(nil),         // 21: se.mantra.api.admin.ListClientsResponse
+	(*DomainAuditUserRequest)(nil),      // 22: se.mantra.api.admin.DomainAuditUserRequest
+	(*DomainAuditChallengeRequest)(nil), // 23: se.mantra.api.admin.DomainAuditChallengeRequest
+	(*UpdateDomainDetailsRequest)(nil),  // 24: se.mantra.api.admin.UpdateDomainDetailsRequest
+	(*DomainDetails)(nil),               // 25: se.mantra.api.admin.DomainDetails
+	(*timestamppb.Timestamp)(nil),       // 26: google.protobuf.Timestamp
+	(*common.Key)(nil),                  // 27: se.mantra.api.common.Key
+	(*common.Location)(nil),             // 28: se.mantra.api.common.Location
+	(common.Status)(0),                  // 29: se.mantra.api.common.Status
+	(*common.ClientMeta)(nil),           // 30: se.mantra.api.common.ClientMeta
+	(*emptypb.Empty)(nil),               // 31: google.protobuf.Empty
+	(*common.ChallengeResponse)(nil),    // 32: se.mantra.api.common.ChallengeResponse
+	(*AuditUserResponse)(nil),           // 33: se.mantra.api.admin.AuditUserResponse
+	(*AuditEntry)(nil),                  // 34: se.mantra.api.admin.AuditEntry
 }
 var file_service_domain_admin_proto_depIdxs = []int32{
-	24, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
-	25, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
-	26, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
-	26, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
-	27, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
-	24, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
-	26, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
-	24, // 7: se.mantra.api.admin.DeviceBinding.first_used_at:type_name -> google.protobuf.Timestamp
-	24, // 8: se.mantra.api.admin.DeviceBinding.last_used_at:type_name -> google.protobuf.Timestamp
+	26, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
+	27, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
+	28, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
+	28, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
+	29, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
+	26, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
+	28, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
+	26, // 7: se.mantra.api.admin.DeviceBinding.first_used_at:type_name -> google.protobuf.Timestamp
+	26, // 8: se.mantra.api.admin.DeviceBinding.last_used_at:type_name -> google.protobuf.Timestamp
 	15, // 9: se.mantra.api.admin.ListDevicesResponse.devices:type_name -> se.mantra.api.admin.DeviceBinding
-	28, // 10: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
-	24, // 11: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 12: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
-	0,  // 13: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
-	29, // 14: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
-	8,  // 15: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
-	3,  // 16: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
-	4,  // 17: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
-	6,  // 18: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
-	12, // 19: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
-	9,  // 20: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
-	11, // 21: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
-	20, // 22: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
-	22, // 23: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
-	29, // 24: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
-	16, // 25: se.mantra.api.admin.DomainAdminService.ListDevices:input_type -> se.mantra.api.admin.ListDevicesRequest
-	18, // 26: se.mantra.api.admin.DomainAdminService.UpdateDevice:input_type -> se.mantra.api.admin.UpdateDeviceRequest
-	19, // 27: se.mantra.api.admin.DomainAdminService.RemoveDevice:input_type -> se.mantra.api.admin.RemoveDeviceRequest
-	30, // 28: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
-	1,  // 29: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
-	14, // 30: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
-	29, // 31: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
-	30, // 32: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
-	5,  // 33: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
-	7,  // 34: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
-	13, // 35: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
-	10, // 36: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
-	29, // 37: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
-	21, // 38: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
-	23, // 39: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
-	23, // 40: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
-	17, // 41: se.mantra.api.admin.DomainAdminService.ListDevices:output_type -> se.mantra.api.admin.ListDevicesResponse
-	29, // 42: se.mantra.api.admin.DomainAdminService.UpdateDevice:output_type -> google.protobuf.Empty
-	29, // 43: se.mantra.api.admin.DomainAdminService.RemoveDevice:output_type -> google.protobuf.Empty
-	28, // [28:44] is the sub-list for method output_type
-	12, // [12:28] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	30, // 10: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
+	26, // 11: se.mantra.api.admin.DomainAuditUserRequest.from:type_name -> google.protobuf.Timestamp
+	26, // 12: se.mantra.api.admin.DomainAuditUserRequest.to:type_name -> google.protobuf.Timestamp
+	26, // 13: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 14: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
+	0,  // 15: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
+	31, // 16: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
+	8,  // 17: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
+	3,  // 18: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
+	4,  // 19: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
+	6,  // 20: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
+	12, // 21: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
+	9,  // 22: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
+	11, // 23: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
+	20, // 24: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
+	24, // 25: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
+	31, // 26: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
+	16, // 27: se.mantra.api.admin.DomainAdminService.ListDevices:input_type -> se.mantra.api.admin.ListDevicesRequest
+	18, // 28: se.mantra.api.admin.DomainAdminService.UpdateDevice:input_type -> se.mantra.api.admin.UpdateDeviceRequest
+	19, // 29: se.mantra.api.admin.DomainAdminService.RemoveDevice:input_type -> se.mantra.api.admin.RemoveDeviceRequest
+	22, // 30: se.mantra.api.admin.DomainAdminService.AuditUser:input_type -> se.mantra.api.admin.DomainAuditUserRequest
+	23, // 31: se.mantra.api.admin.DomainAdminService.AuditChallenge:input_type -> se.mantra.api.admin.DomainAuditChallengeRequest
+	32, // 32: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
+	1,  // 33: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
+	14, // 34: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
+	31, // 35: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
+	32, // 36: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
+	5,  // 37: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
+	7,  // 38: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
+	13, // 39: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
+	10, // 40: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
+	31, // 41: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
+	21, // 42: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
+	25, // 43: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
+	25, // 44: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
+	17, // 45: se.mantra.api.admin.DomainAdminService.ListDevices:output_type -> se.mantra.api.admin.ListDevicesResponse
+	31, // 46: se.mantra.api.admin.DomainAdminService.UpdateDevice:output_type -> google.protobuf.Empty
+	31, // 47: se.mantra.api.admin.DomainAdminService.RemoveDevice:output_type -> google.protobuf.Empty
+	33, // 48: se.mantra.api.admin.DomainAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
+	34, // 49: se.mantra.api.admin.DomainAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
+	32, // [32:50] is the sub-list for method output_type
+	14, // [14:32] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_service_domain_admin_proto_init() }
@@ -1755,13 +1877,14 @@ func file_service_domain_admin_proto_init() {
 	if File_service_domain_admin_proto != nil {
 		return
 	}
+	file_service_platform_admin_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_domain_admin_proto_rawDesc), len(file_service_domain_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   24,
+			NumMessages:   26,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

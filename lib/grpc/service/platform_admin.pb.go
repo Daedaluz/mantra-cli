@@ -649,6 +649,498 @@ func (x *ListAdminClientsResponse) GetClients() []*common.ClientMeta {
 	return nil
 }
 
+type AuditUserRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	From          *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=from,proto3" json:"from,omitempty"`
+	To            *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=to,proto3" json:"to,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditUserRequest) Reset() {
+	*x = AuditUserRequest{}
+	mi := &file_service_platform_admin_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditUserRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditUserRequest) ProtoMessage() {}
+
+func (x *AuditUserRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditUserRequest.ProtoReflect.Descriptor instead.
+func (*AuditUserRequest) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AuditUserRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *AuditUserRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *AuditUserRequest) GetFrom() *timestamppb.Timestamp {
+	if x != nil {
+		return x.From
+	}
+	return nil
+}
+
+func (x *AuditUserRequest) GetTo() *timestamppb.Timestamp {
+	if x != nil {
+		return x.To
+	}
+	return nil
+}
+
+type AuditChallengeRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Domain        string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
+	ChallengeId   string                 `protobuf:"bytes,2,opt,name=challenge_id,json=challengeId,proto3" json:"challenge_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditChallengeRequest) Reset() {
+	*x = AuditChallengeRequest{}
+	mi := &file_service_platform_admin_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditChallengeRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditChallengeRequest) ProtoMessage() {}
+
+func (x *AuditChallengeRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditChallengeRequest.ProtoReflect.Descriptor instead.
+func (*AuditChallengeRequest) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *AuditChallengeRequest) GetDomain() string {
+	if x != nil {
+		return x.Domain
+	}
+	return ""
+}
+
+func (x *AuditChallengeRequest) GetChallengeId() string {
+	if x != nil {
+		return x.ChallengeId
+	}
+	return ""
+}
+
+type AuditKeyInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	KeyId         []byte                 `protobuf:"bytes,1,opt,name=key_id,json=keyId,proto3" json:"key_id,omitempty"`
+	Algorithm     int64                  `protobuf:"varint,2,opt,name=algorithm,proto3" json:"algorithm,omitempty"`
+	Revoked       bool                   `protobuf:"varint,3,opt,name=revoked,proto3" json:"revoked,omitempty"`
+	Name          string                 `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditKeyInfo) Reset() {
+	*x = AuditKeyInfo{}
+	mi := &file_service_platform_admin_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditKeyInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditKeyInfo) ProtoMessage() {}
+
+func (x *AuditKeyInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditKeyInfo.ProtoReflect.Descriptor instead.
+func (*AuditKeyInfo) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *AuditKeyInfo) GetKeyId() []byte {
+	if x != nil {
+		return x.KeyId
+	}
+	return nil
+}
+
+func (x *AuditKeyInfo) GetAlgorithm() int64 {
+	if x != nil {
+		return x.Algorithm
+	}
+	return 0
+}
+
+func (x *AuditKeyInfo) GetRevoked() bool {
+	if x != nil {
+		return x.Revoked
+	}
+	return false
+}
+
+func (x *AuditKeyInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type AuditDeviceInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditDeviceInfo) Reset() {
+	*x = AuditDeviceInfo{}
+	mi := &file_service_platform_admin_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditDeviceInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditDeviceInfo) ProtoMessage() {}
+
+func (x *AuditDeviceInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditDeviceInfo.ProtoReflect.Descriptor instead.
+func (*AuditDeviceInfo) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *AuditDeviceInfo) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *AuditDeviceInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type AuditClientInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ClientId      string                 `protobuf:"bytes,1,opt,name=client_id,json=clientId,proto3" json:"client_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Admin         bool                   `protobuf:"varint,3,opt,name=admin,proto3" json:"admin,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditClientInfo) Reset() {
+	*x = AuditClientInfo{}
+	mi := &file_service_platform_admin_proto_msgTypes[14]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditClientInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditClientInfo) ProtoMessage() {}
+
+func (x *AuditClientInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[14]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditClientInfo.ProtoReflect.Descriptor instead.
+func (*AuditClientInfo) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *AuditClientInfo) GetClientId() string {
+	if x != nil {
+		return x.ClientId
+	}
+	return ""
+}
+
+func (x *AuditClientInfo) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *AuditClientInfo) GetAdmin() bool {
+	if x != nil {
+		return x.Admin
+	}
+	return false
+}
+
+type AuditEntry struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	ChallengeId       string                 `protobuf:"bytes,1,opt,name=challenge_id,json=challengeId,proto3" json:"challenge_id,omitempty"`
+	Title             string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Message           string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Status            common.Status          `protobuf:"varint,4,opt,name=status,proto3,enum=se.mantra.api.common.Status" json:"status,omitempty"`
+	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	SignedAt          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=signed_at,json=signedAt,proto3" json:"signed_at,omitempty"`
+	Key               *AuditKeyInfo          `protobuf:"bytes,7,opt,name=key,proto3" json:"key,omitempty"`
+	Client            *AuditClientInfo       `protobuf:"bytes,8,opt,name=client,proto3" json:"client,omitempty"`
+	Device            *AuditDeviceInfo       `protobuf:"bytes,9,opt,name=device,proto3" json:"device,omitempty"`
+	Verified          bool                   `protobuf:"varint,10,opt,name=verified,proto3" json:"verified,omitempty"`
+	SignatureLocation *common.Location       `protobuf:"bytes,11,opt,name=signature_location,json=signatureLocation,proto3" json:"signature_location,omitempty"`
+	AuthenticatorData []byte                 `protobuf:"bytes,12,opt,name=authenticator_data,json=authenticatorData,proto3" json:"authenticator_data,omitempty"`
+	ClientDataJson    []byte                 `protobuf:"bytes,13,opt,name=client_data_json,json=clientDataJson,proto3" json:"client_data_json,omitempty"`
+	Signature         []byte                 `protobuf:"bytes,14,opt,name=signature,proto3" json:"signature,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *AuditEntry) Reset() {
+	*x = AuditEntry{}
+	mi := &file_service_platform_admin_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditEntry) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditEntry) ProtoMessage() {}
+
+func (x *AuditEntry) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditEntry.ProtoReflect.Descriptor instead.
+func (*AuditEntry) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *AuditEntry) GetChallengeId() string {
+	if x != nil {
+		return x.ChallengeId
+	}
+	return ""
+}
+
+func (x *AuditEntry) GetTitle() string {
+	if x != nil {
+		return x.Title
+	}
+	return ""
+}
+
+func (x *AuditEntry) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
+func (x *AuditEntry) GetStatus() common.Status {
+	if x != nil {
+		return x.Status
+	}
+	return common.Status(0)
+}
+
+func (x *AuditEntry) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetSignedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.SignedAt
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetKey() *AuditKeyInfo {
+	if x != nil {
+		return x.Key
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetClient() *AuditClientInfo {
+	if x != nil {
+		return x.Client
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetDevice() *AuditDeviceInfo {
+	if x != nil {
+		return x.Device
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetVerified() bool {
+	if x != nil {
+		return x.Verified
+	}
+	return false
+}
+
+func (x *AuditEntry) GetSignatureLocation() *common.Location {
+	if x != nil {
+		return x.SignatureLocation
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetAuthenticatorData() []byte {
+	if x != nil {
+		return x.AuthenticatorData
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetClientDataJson() []byte {
+	if x != nil {
+		return x.ClientDataJson
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetSignature() []byte {
+	if x != nil {
+		return x.Signature
+	}
+	return nil
+}
+
+type AuditUserResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Entries       []*AuditEntry          `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuditUserResponse) Reset() {
+	*x = AuditUserResponse{}
+	mi := &file_service_platform_admin_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuditUserResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuditUserResponse) ProtoMessage() {}
+
+func (x *AuditUserResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_platform_admin_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuditUserResponse.ProtoReflect.Descriptor instead.
+func (*AuditUserResponse) Descriptor() ([]byte, []int) {
+	return file_service_platform_admin_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *AuditUserResponse) GetEntries() []*AuditEntry {
+	if x != nil {
+		return x.Entries
+	}
+	return nil
+}
+
 var File_service_platform_admin_proto protoreflect.FileDescriptor
 
 const file_service_platform_admin_proto_rawDesc = "" +
@@ -703,14 +1195,56 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x17ListAdminClientsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"V\n" +
 	"\x18ListAdminClientsResponse\x12:\n" +
-	"\aclients\x18\x01 \x03(\v2 .se.mantra.api.common.ClientMetaR\aclients2\xc8\x04\n" +
+	"\aclients\x18\x01 \x03(\v2 .se.mantra.api.common.ClientMetaR\aclients\"\x9f\x01\n" +
+	"\x10AuditUserRequest\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x17\n" +
+	"\auser_id\x18\x02 \x01(\tR\x06userId\x12.\n" +
+	"\x04from\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
+	"\x02to\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\"R\n" +
+	"\x15AuditChallengeRequest\x12\x16\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\x12!\n" +
+	"\fchallenge_id\x18\x02 \x01(\tR\vchallengeId\"q\n" +
+	"\fAuditKeyInfo\x12\x15\n" +
+	"\x06key_id\x18\x01 \x01(\fR\x05keyId\x12\x1c\n" +
+	"\talgorithm\x18\x02 \x01(\x03R\talgorithm\x12\x18\n" +
+	"\arevoked\x18\x03 \x01(\bR\arevoked\x12\x12\n" +
+	"\x04name\x18\x04 \x01(\tR\x04name\"B\n" +
+	"\x0fAuditDeviceInfo\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\"X\n" +
+	"\x0fAuditClientInfo\x12\x1b\n" +
+	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
+	"\x05admin\x18\x03 \x01(\bR\x05admin\"\x9c\x05\n" +
+	"\n" +
+	"AuditEntry\x12!\n" +
+	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x12\x14\n" +
+	"\x05title\x18\x02 \x01(\tR\x05title\x12\x18\n" +
+	"\amessage\x18\x03 \x01(\tR\amessage\x124\n" +
+	"\x06status\x18\x04 \x01(\x0e2\x1c.se.mantra.api.common.StatusR\x06status\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
+	"\tsigned_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\bsignedAt\x123\n" +
+	"\x03key\x18\a \x01(\v2!.se.mantra.api.admin.AuditKeyInfoR\x03key\x12<\n" +
+	"\x06client\x18\b \x01(\v2$.se.mantra.api.admin.AuditClientInfoR\x06client\x12<\n" +
+	"\x06device\x18\t \x01(\v2$.se.mantra.api.admin.AuditDeviceInfoR\x06device\x12\x1a\n" +
+	"\bverified\x18\n" +
+	" \x01(\bR\bverified\x12M\n" +
+	"\x12signature_location\x18\v \x01(\v2\x1e.se.mantra.api.common.LocationR\x11signatureLocation\x12-\n" +
+	"\x12authenticator_data\x18\f \x01(\fR\x11authenticatorData\x12(\n" +
+	"\x10client_data_json\x18\r \x01(\fR\x0eclientDataJson\x12\x1c\n" +
+	"\tsignature\x18\x0e \x01(\fR\tsignature\"N\n" +
+	"\x11AuditUserResponse\x129\n" +
+	"\aentries\x18\x01 \x03(\v2\x1f.se.mantra.api.admin.AuditEntryR\aentries2\x83\x06\n" +
 	"\x14PlatformAdminService\x12c\n" +
 	"\fCreateDomain\x12(.se.mantra.api.admin.CreateDomainRequest\x1a).se.mantra.api.admin.CreateDomainResponse\x12P\n" +
 	"\fDeleteDomain\x12(.se.mantra.api.admin.DeleteDomainRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
 	"\vListDomains\x12'.se.mantra.api.admin.ListDomainsRequest\x1a(.se.mantra.api.admin.ListDomainsResponse\x12O\n" +
 	"\tGetDomain\x12%.se.mantra.api.admin.GetDomainRequest\x1a\x1b.se.mantra.api.admin.Domain\x12U\n" +
 	"\fUpdateDomain\x12(.se.mantra.api.admin.UpdateDomainRequest\x1a\x1b.se.mantra.api.admin.Domain\x12o\n" +
-	"\x10ListAdminClients\x12,.se.mantra.api.admin.ListAdminClientsRequest\x1a-.se.mantra.api.admin.ListAdminClientsResponseB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
+	"\x10ListAdminClients\x12,.se.mantra.api.admin.ListAdminClientsRequest\x1a-.se.mantra.api.admin.ListAdminClientsResponse\x12Z\n" +
+	"\tAuditUser\x12%.se.mantra.api.admin.AuditUserRequest\x1a&.se.mantra.api.admin.AuditUserResponse\x12]\n" +
+	"\x0eAuditChallenge\x12*.se.mantra.api.admin.AuditChallengeRequest\x1a\x1f.se.mantra.api.admin.AuditEntryB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
 
 var (
 	file_service_platform_admin_proto_rawDescOnce sync.Once
@@ -724,7 +1258,7 @@ func file_service_platform_admin_proto_rawDescGZIP() []byte {
 	return file_service_platform_admin_proto_rawDescData
 }
 
-var file_service_platform_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_service_platform_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
 var file_service_platform_admin_proto_goTypes = []any{
 	(*CreateDomainRequest)(nil),      // 0: se.mantra.api.admin.CreateDomainRequest
 	(*CreateDomainResponse)(nil),     // 1: se.mantra.api.admin.CreateDomainResponse
@@ -736,31 +1270,54 @@ var file_service_platform_admin_proto_goTypes = []any{
 	(*UpdateDomainRequest)(nil),      // 7: se.mantra.api.admin.UpdateDomainRequest
 	(*ListAdminClientsRequest)(nil),  // 8: se.mantra.api.admin.ListAdminClientsRequest
 	(*ListAdminClientsResponse)(nil), // 9: se.mantra.api.admin.ListAdminClientsResponse
-	(*timestamppb.Timestamp)(nil),    // 10: google.protobuf.Timestamp
-	(*common.ClientMeta)(nil),        // 11: se.mantra.api.common.ClientMeta
-	(*emptypb.Empty)(nil),            // 12: google.protobuf.Empty
+	(*AuditUserRequest)(nil),         // 10: se.mantra.api.admin.AuditUserRequest
+	(*AuditChallengeRequest)(nil),    // 11: se.mantra.api.admin.AuditChallengeRequest
+	(*AuditKeyInfo)(nil),             // 12: se.mantra.api.admin.AuditKeyInfo
+	(*AuditDeviceInfo)(nil),          // 13: se.mantra.api.admin.AuditDeviceInfo
+	(*AuditClientInfo)(nil),          // 14: se.mantra.api.admin.AuditClientInfo
+	(*AuditEntry)(nil),               // 15: se.mantra.api.admin.AuditEntry
+	(*AuditUserResponse)(nil),        // 16: se.mantra.api.admin.AuditUserResponse
+	(*timestamppb.Timestamp)(nil),    // 17: google.protobuf.Timestamp
+	(*common.ClientMeta)(nil),        // 18: se.mantra.api.common.ClientMeta
+	(common.Status)(0),               // 19: se.mantra.api.common.Status
+	(*common.Location)(nil),          // 20: se.mantra.api.common.Location
+	(*emptypb.Empty)(nil),            // 21: google.protobuf.Empty
 }
 var file_service_platform_admin_proto_depIdxs = []int32{
-	10, // 0: se.mantra.api.admin.Domain.created_at:type_name -> google.protobuf.Timestamp
+	17, // 0: se.mantra.api.admin.Domain.created_at:type_name -> google.protobuf.Timestamp
 	3,  // 1: se.mantra.api.admin.ListDomainsResponse.domains:type_name -> se.mantra.api.admin.Domain
-	11, // 2: se.mantra.api.admin.ListAdminClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
-	0,  // 3: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
-	2,  // 4: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
-	4,  // 5: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
-	6,  // 6: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
-	7,  // 7: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
-	8,  // 8: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
-	1,  // 9: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
-	12, // 10: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
-	5,  // 11: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
-	3,  // 12: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
-	3,  // 13: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
-	9,  // 14: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
-	9,  // [9:15] is the sub-list for method output_type
-	3,  // [3:9] is the sub-list for method input_type
-	3,  // [3:3] is the sub-list for extension type_name
-	3,  // [3:3] is the sub-list for extension extendee
-	0,  // [0:3] is the sub-list for field type_name
+	18, // 2: se.mantra.api.admin.ListAdminClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
+	17, // 3: se.mantra.api.admin.AuditUserRequest.from:type_name -> google.protobuf.Timestamp
+	17, // 4: se.mantra.api.admin.AuditUserRequest.to:type_name -> google.protobuf.Timestamp
+	19, // 5: se.mantra.api.admin.AuditEntry.status:type_name -> se.mantra.api.common.Status
+	17, // 6: se.mantra.api.admin.AuditEntry.created_at:type_name -> google.protobuf.Timestamp
+	17, // 7: se.mantra.api.admin.AuditEntry.signed_at:type_name -> google.protobuf.Timestamp
+	12, // 8: se.mantra.api.admin.AuditEntry.key:type_name -> se.mantra.api.admin.AuditKeyInfo
+	14, // 9: se.mantra.api.admin.AuditEntry.client:type_name -> se.mantra.api.admin.AuditClientInfo
+	13, // 10: se.mantra.api.admin.AuditEntry.device:type_name -> se.mantra.api.admin.AuditDeviceInfo
+	20, // 11: se.mantra.api.admin.AuditEntry.signature_location:type_name -> se.mantra.api.common.Location
+	15, // 12: se.mantra.api.admin.AuditUserResponse.entries:type_name -> se.mantra.api.admin.AuditEntry
+	0,  // 13: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
+	2,  // 14: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
+	4,  // 15: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
+	6,  // 16: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
+	7,  // 17: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
+	8,  // 18: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
+	10, // 19: se.mantra.api.admin.PlatformAdminService.AuditUser:input_type -> se.mantra.api.admin.AuditUserRequest
+	11, // 20: se.mantra.api.admin.PlatformAdminService.AuditChallenge:input_type -> se.mantra.api.admin.AuditChallengeRequest
+	1,  // 21: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
+	21, // 22: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
+	5,  // 23: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
+	3,  // 24: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
+	3,  // 25: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
+	9,  // 26: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
+	16, // 27: se.mantra.api.admin.PlatformAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
+	15, // 28: se.mantra.api.admin.PlatformAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
+	21, // [21:29] is the sub-list for method output_type
+	13, // [13:21] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_service_platform_admin_proto_init() }
@@ -774,7 +1331,7 @@ func file_service_platform_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_platform_admin_proto_rawDesc), len(file_service_platform_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   17,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

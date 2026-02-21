@@ -72,6 +72,57 @@ message ListAdminClientsResponse {
   repeated common.ClientMeta clients = 1;
 }
 
+message AuditUserRequest {
+  string                    domain  = 1;
+  string                    user_id = 2;
+  google.protobuf.Timestamp from    = 3;
+  google.protobuf.Timestamp to      = 4;
+}
+
+message AuditChallengeRequest {
+  string domain       = 1;
+  string challenge_id = 2;
+}
+
+message AuditKeyInfo {
+  bytes  key_id    = 1;
+  int64  algorithm = 2;
+  bool   revoked   = 3;
+  string name      = 4;
+}
+
+message AuditDeviceInfo {
+  string device_id = 1;
+  string name      = 2;
+}
+
+message AuditClientInfo {
+  string client_id = 1;
+  string name      = 2;
+  bool   admin     = 3;
+}
+
+message AuditEntry {
+  string                    challenge_id        = 1;
+  string                    title               = 2;
+  string                    message             = 3;
+  common.Status             status              = 4;
+  google.protobuf.Timestamp created_at          = 5;
+  google.protobuf.Timestamp signed_at           = 6;
+  AuditKeyInfo              key                 = 7;
+  AuditClientInfo           client              = 8;
+  AuditDeviceInfo           device              = 9;
+  bool                      verified            = 10;
+  common.Location           signature_location  = 11;
+  bytes                     authenticator_data  = 12;
+  bytes                     client_data_json    = 13;
+  bytes                     signature           = 14;
+}
+
+message AuditUserResponse {
+  repeated AuditEntry entries = 1;
+}
+
 service PlatformAdminService {
   rpc CreateDomain(CreateDomainRequest) returns (CreateDomainResponse);
   rpc DeleteDomain(DeleteDomainRequest) returns (google.protobuf.Empty);
@@ -79,4 +130,6 @@ service PlatformAdminService {
   rpc GetDomain(GetDomainRequest) returns (Domain);
   rpc UpdateDomain(UpdateDomainRequest) returns (Domain);
   rpc ListAdminClients(ListAdminClientsRequest) returns (ListAdminClientsResponse);
+  rpc AuditUser(AuditUserRequest) returns (AuditUserResponse);
+  rpc AuditChallenge(AuditChallengeRequest) returns (AuditEntry);
 }
