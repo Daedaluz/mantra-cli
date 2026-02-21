@@ -102,6 +102,32 @@ message ListUsersResponse {
   repeated string users = 1;
 }
 
+message DeviceBinding {
+  string device_id = 1;
+  string name = 2;
+  google.protobuf.Timestamp first_used_at = 3;
+  google.protobuf.Timestamp last_used_at = 4;
+}
+
+message ListDevicesRequest {
+  string user_id = 1;
+}
+
+message ListDevicesResponse {
+  repeated DeviceBinding devices = 1;
+}
+
+message UpdateDeviceRequest {
+  string user_id = 1;
+  string device_id = 2;
+  string name = 3;
+}
+
+message RemoveDeviceRequest {
+  string user_id = 1;
+  string device_id = 2;
+}
+
 
 message ListClientsRequest {
   bool admin_only = 1;
@@ -151,4 +177,8 @@ service DomainAdminService {
 
   rpc UpdateDomain(UpdateDomainDetailsRequest) returns (DomainDetails);
   rpc GetDomain(google.protobuf.Empty) returns (DomainDetails);
+
+  rpc ListDevices(ListDevicesRequest) returns (ListDevicesResponse);
+  rpc UpdateDevice(UpdateDeviceRequest) returns (google.protobuf.Empty);
+  rpc RemoveDevice(RemoveDeviceRequest) returns (google.protobuf.Empty);
 }

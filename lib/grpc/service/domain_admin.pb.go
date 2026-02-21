@@ -956,6 +956,274 @@ func (x *ListUsersResponse) GetUsers() []string {
 	return nil
 }
 
+type DeviceBinding struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DeviceId      string                 `protobuf:"bytes,1,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	FirstUsedAt   *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=first_used_at,json=firstUsedAt,proto3" json:"first_used_at,omitempty"`
+	LastUsedAt    *timestamppb.Timestamp `protobuf:"bytes,4,opt,name=last_used_at,json=lastUsedAt,proto3" json:"last_used_at,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeviceBinding) Reset() {
+	*x = DeviceBinding{}
+	mi := &file_service_domain_admin_proto_msgTypes[15]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeviceBinding) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeviceBinding) ProtoMessage() {}
+
+func (x *DeviceBinding) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[15]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeviceBinding.ProtoReflect.Descriptor instead.
+func (*DeviceBinding) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *DeviceBinding) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *DeviceBinding) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *DeviceBinding) GetFirstUsedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.FirstUsedAt
+	}
+	return nil
+}
+
+func (x *DeviceBinding) GetLastUsedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.LastUsedAt
+	}
+	return nil
+}
+
+type ListDevicesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDevicesRequest) Reset() {
+	*x = ListDevicesRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDevicesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDevicesRequest) ProtoMessage() {}
+
+func (x *ListDevicesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDevicesRequest.ProtoReflect.Descriptor instead.
+func (*ListDevicesRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListDevicesRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type ListDevicesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Devices       []*DeviceBinding       `protobuf:"bytes,1,rep,name=devices,proto3" json:"devices,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListDevicesResponse) Reset() {
+	*x = ListDevicesResponse{}
+	mi := &file_service_domain_admin_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListDevicesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListDevicesResponse) ProtoMessage() {}
+
+func (x *ListDevicesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListDevicesResponse.ProtoReflect.Descriptor instead.
+func (*ListDevicesResponse) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListDevicesResponse) GetDevices() []*DeviceBinding {
+	if x != nil {
+		return x.Devices
+	}
+	return nil
+}
+
+type UpdateDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateDeviceRequest) Reset() {
+	*x = UpdateDeviceRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateDeviceRequest) ProtoMessage() {}
+
+func (x *UpdateDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateDeviceRequest.ProtoReflect.Descriptor instead.
+func (*UpdateDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{18}
+}
+
+func (x *UpdateDeviceRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *UpdateDeviceRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
+func (x *UpdateDeviceRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type RemoveDeviceRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	UserId        string                 `protobuf:"bytes,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	DeviceId      string                 `protobuf:"bytes,2,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RemoveDeviceRequest) Reset() {
+	*x = RemoveDeviceRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RemoveDeviceRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RemoveDeviceRequest) ProtoMessage() {}
+
+func (x *RemoveDeviceRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RemoveDeviceRequest.ProtoReflect.Descriptor instead.
+func (*RemoveDeviceRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{19}
+}
+
+func (x *RemoveDeviceRequest) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+func (x *RemoveDeviceRequest) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 type ListClientsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	AdminOnly     bool                   `protobuf:"varint,1,opt,name=admin_only,json=adminOnly,proto3" json:"admin_only,omitempty"`
@@ -965,7 +1233,7 @@ type ListClientsRequest struct {
 
 func (x *ListClientsRequest) Reset() {
 	*x = ListClientsRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[15]
+	mi := &file_service_domain_admin_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -977,7 +1245,7 @@ func (x *ListClientsRequest) String() string {
 func (*ListClientsRequest) ProtoMessage() {}
 
 func (x *ListClientsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[15]
+	mi := &file_service_domain_admin_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -990,7 +1258,7 @@ func (x *ListClientsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClientsRequest.ProtoReflect.Descriptor instead.
 func (*ListClientsRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{15}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *ListClientsRequest) GetAdminOnly() bool {
@@ -1009,7 +1277,7 @@ type ListClientsResponse struct {
 
 func (x *ListClientsResponse) Reset() {
 	*x = ListClientsResponse{}
-	mi := &file_service_domain_admin_proto_msgTypes[16]
+	mi := &file_service_domain_admin_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1021,7 +1289,7 @@ func (x *ListClientsResponse) String() string {
 func (*ListClientsResponse) ProtoMessage() {}
 
 func (x *ListClientsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[16]
+	mi := &file_service_domain_admin_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1034,7 +1302,7 @@ func (x *ListClientsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListClientsResponse.ProtoReflect.Descriptor instead.
 func (*ListClientsResponse) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{16}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *ListClientsResponse) GetClients() []*common.ClientMeta {
@@ -1059,7 +1327,7 @@ type UpdateDomainDetailsRequest struct {
 
 func (x *UpdateDomainDetailsRequest) Reset() {
 	*x = UpdateDomainDetailsRequest{}
-	mi := &file_service_domain_admin_proto_msgTypes[17]
+	mi := &file_service_domain_admin_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1071,7 +1339,7 @@ func (x *UpdateDomainDetailsRequest) String() string {
 func (*UpdateDomainDetailsRequest) ProtoMessage() {}
 
 func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[17]
+	mi := &file_service_domain_admin_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1084,7 +1352,7 @@ func (x *UpdateDomainDetailsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateDomainDetailsRequest.ProtoReflect.Descriptor instead.
 func (*UpdateDomainDetailsRequest) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{17}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *UpdateDomainDetailsRequest) GetName() string {
@@ -1153,7 +1421,7 @@ type DomainDetails struct {
 
 func (x *DomainDetails) Reset() {
 	*x = DomainDetails{}
-	mi := &file_service_domain_admin_proto_msgTypes[18]
+	mi := &file_service_domain_admin_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1165,7 +1433,7 @@ func (x *DomainDetails) String() string {
 func (*DomainDetails) ProtoMessage() {}
 
 func (x *DomainDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_service_domain_admin_proto_msgTypes[18]
+	mi := &file_service_domain_admin_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1178,7 +1446,7 @@ func (x *DomainDetails) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DomainDetails.ProtoReflect.Descriptor instead.
 func (*DomainDetails) Descriptor() ([]byte, []int) {
-	return file_service_domain_admin_proto_rawDescGZIP(), []int{18}
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *DomainDetails) GetDomain() string {
@@ -1318,7 +1586,24 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12:\n" +
 	"\blocation\x18\f \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\")\n" +
 	"\x11ListUsersResponse\x12\x14\n" +
-	"\x05users\x18\x01 \x03(\tR\x05users\"3\n" +
+	"\x05users\x18\x01 \x03(\tR\x05users\"\xbe\x01\n" +
+	"\rDeviceBinding\x12\x1b\n" +
+	"\tdevice_id\x18\x01 \x01(\tR\bdeviceId\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12>\n" +
+	"\rfirst_used_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\vfirstUsedAt\x12<\n" +
+	"\flast_used_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
+	"lastUsedAt\"-\n" +
+	"\x12ListDevicesRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"S\n" +
+	"\x13ListDevicesResponse\x12<\n" +
+	"\adevices\x18\x01 \x03(\v2\".se.mantra.api.admin.DeviceBindingR\adevices\"_\n" +
+	"\x13UpdateDeviceRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\x12\x12\n" +
+	"\x04name\x18\x03 \x01(\tR\x04name\"K\n" +
+	"\x13RemoveDeviceRequest\x12\x17\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x1b\n" +
+	"\tdevice_id\x18\x02 \x01(\tR\bdeviceId\"3\n" +
 	"\x12ListClientsRequest\x12\x1d\n" +
 	"\n" +
 	"admin_only\x18\x01 \x01(\bR\tadminOnly\"Q\n" +
@@ -1346,7 +1631,7 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\a \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\b \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge2\x9f\t\n" +
+	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge2\xa5\v\n" +
 	"\x12DomainAdminService\x12]\n" +
 	"\n" +
 	"CreateUser\x12&.se.mantra.api.admin.CreateUserRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12T\n" +
@@ -1362,7 +1647,10 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\fDeleteClient\x12(.se.mantra.api.admin.DeleteClientRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
 	"\vListClients\x12'.se.mantra.api.admin.ListClientsRequest\x1a(.se.mantra.api.admin.ListClientsResponse\x12c\n" +
 	"\fUpdateDomain\x12/.se.mantra.api.admin.UpdateDomainDetailsRequest\x1a\".se.mantra.api.admin.DomainDetails\x12G\n" +
-	"\tGetDomain\x12\x16.google.protobuf.Empty\x1a\".se.mantra.api.admin.DomainDetailsB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
+	"\tGetDomain\x12\x16.google.protobuf.Empty\x1a\".se.mantra.api.admin.DomainDetails\x12`\n" +
+	"\vListDevices\x12'.se.mantra.api.admin.ListDevicesRequest\x1a(.se.mantra.api.admin.ListDevicesResponse\x12P\n" +
+	"\fUpdateDevice\x12(.se.mantra.api.admin.UpdateDeviceRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
+	"\fRemoveDevice\x12(.se.mantra.api.admin.RemoveDeviceRequest\x1a\x16.google.protobuf.EmptyB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
 
 var (
 	file_service_domain_admin_proto_rawDescOnce sync.Once
@@ -1376,7 +1664,7 @@ func file_service_domain_admin_proto_rawDescGZIP() []byte {
 	return file_service_domain_admin_proto_rawDescData
 }
 
-var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
+var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_service_domain_admin_proto_goTypes = []any{
 	(*GetUserRequest)(nil),             // 0: se.mantra.api.admin.GetUserRequest
 	(*GetUserResponse)(nil),            // 1: se.mantra.api.admin.GetUserResponse
@@ -1393,59 +1681,73 @@ var file_service_domain_admin_proto_goTypes = []any{
 	(*CollectRequest)(nil),             // 12: se.mantra.api.admin.CollectRequest
 	(*CollectResponse)(nil),            // 13: se.mantra.api.admin.CollectResponse
 	(*ListUsersResponse)(nil),          // 14: se.mantra.api.admin.ListUsersResponse
-	(*ListClientsRequest)(nil),         // 15: se.mantra.api.admin.ListClientsRequest
-	(*ListClientsResponse)(nil),        // 16: se.mantra.api.admin.ListClientsResponse
-	(*UpdateDomainDetailsRequest)(nil), // 17: se.mantra.api.admin.UpdateDomainDetailsRequest
-	(*DomainDetails)(nil),              // 18: se.mantra.api.admin.DomainDetails
-	(*timestamppb.Timestamp)(nil),      // 19: google.protobuf.Timestamp
-	(*common.Key)(nil),                 // 20: se.mantra.api.common.Key
-	(*common.Location)(nil),            // 21: se.mantra.api.common.Location
-	(common.Status)(0),                 // 22: se.mantra.api.common.Status
-	(*common.ClientMeta)(nil),          // 23: se.mantra.api.common.ClientMeta
-	(*emptypb.Empty)(nil),              // 24: google.protobuf.Empty
-	(*common.ChallengeResponse)(nil),   // 25: se.mantra.api.common.ChallengeResponse
+	(*DeviceBinding)(nil),              // 15: se.mantra.api.admin.DeviceBinding
+	(*ListDevicesRequest)(nil),         // 16: se.mantra.api.admin.ListDevicesRequest
+	(*ListDevicesResponse)(nil),        // 17: se.mantra.api.admin.ListDevicesResponse
+	(*UpdateDeviceRequest)(nil),        // 18: se.mantra.api.admin.UpdateDeviceRequest
+	(*RemoveDeviceRequest)(nil),        // 19: se.mantra.api.admin.RemoveDeviceRequest
+	(*ListClientsRequest)(nil),         // 20: se.mantra.api.admin.ListClientsRequest
+	(*ListClientsResponse)(nil),        // 21: se.mantra.api.admin.ListClientsResponse
+	(*UpdateDomainDetailsRequest)(nil), // 22: se.mantra.api.admin.UpdateDomainDetailsRequest
+	(*DomainDetails)(nil),              // 23: se.mantra.api.admin.DomainDetails
+	(*timestamppb.Timestamp)(nil),      // 24: google.protobuf.Timestamp
+	(*common.Key)(nil),                 // 25: se.mantra.api.common.Key
+	(*common.Location)(nil),            // 26: se.mantra.api.common.Location
+	(common.Status)(0),                 // 27: se.mantra.api.common.Status
+	(*common.ClientMeta)(nil),          // 28: se.mantra.api.common.ClientMeta
+	(*emptypb.Empty)(nil),              // 29: google.protobuf.Empty
+	(*common.ChallengeResponse)(nil),   // 30: se.mantra.api.common.ChallengeResponse
 }
 var file_service_domain_admin_proto_depIdxs = []int32{
-	19, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
-	20, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
-	21, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
-	21, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
-	22, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
-	19, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
-	21, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
-	23, // 7: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
-	19, // 8: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 9: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
-	0,  // 10: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
-	24, // 11: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
-	8,  // 12: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
-	3,  // 13: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
-	4,  // 14: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
-	6,  // 15: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
-	12, // 16: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
-	9,  // 17: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
-	11, // 18: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
-	15, // 19: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
-	17, // 20: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
-	24, // 21: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
-	25, // 22: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
-	1,  // 23: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
-	14, // 24: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
-	24, // 25: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
-	25, // 26: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
-	5,  // 27: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
-	7,  // 28: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
-	13, // 29: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
-	10, // 30: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
-	24, // 31: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
-	16, // 32: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
-	18, // 33: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
-	18, // 34: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
-	22, // [22:35] is the sub-list for method output_type
-	9,  // [9:22] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	24, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
+	25, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
+	26, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
+	26, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
+	27, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
+	24, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
+	26, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
+	24, // 7: se.mantra.api.admin.DeviceBinding.first_used_at:type_name -> google.protobuf.Timestamp
+	24, // 8: se.mantra.api.admin.DeviceBinding.last_used_at:type_name -> google.protobuf.Timestamp
+	15, // 9: se.mantra.api.admin.ListDevicesResponse.devices:type_name -> se.mantra.api.admin.DeviceBinding
+	28, // 10: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
+	24, // 11: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
+	2,  // 12: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
+	0,  // 13: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
+	29, // 14: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
+	8,  // 15: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
+	3,  // 16: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
+	4,  // 17: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
+	6,  // 18: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
+	12, // 19: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
+	9,  // 20: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
+	11, // 21: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
+	20, // 22: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
+	22, // 23: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
+	29, // 24: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
+	16, // 25: se.mantra.api.admin.DomainAdminService.ListDevices:input_type -> se.mantra.api.admin.ListDevicesRequest
+	18, // 26: se.mantra.api.admin.DomainAdminService.UpdateDevice:input_type -> se.mantra.api.admin.UpdateDeviceRequest
+	19, // 27: se.mantra.api.admin.DomainAdminService.RemoveDevice:input_type -> se.mantra.api.admin.RemoveDeviceRequest
+	30, // 28: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
+	1,  // 29: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
+	14, // 30: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
+	29, // 31: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
+	30, // 32: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
+	5,  // 33: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
+	7,  // 34: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
+	13, // 35: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
+	10, // 36: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
+	29, // 37: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
+	21, // 38: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
+	23, // 39: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
+	23, // 40: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
+	17, // 41: se.mantra.api.admin.DomainAdminService.ListDevices:output_type -> se.mantra.api.admin.ListDevicesResponse
+	29, // 42: se.mantra.api.admin.DomainAdminService.UpdateDevice:output_type -> google.protobuf.Empty
+	29, // 43: se.mantra.api.admin.DomainAdminService.RemoveDevice:output_type -> google.protobuf.Empty
+	28, // [28:44] is the sub-list for method output_type
+	12, // [12:28] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_service_domain_admin_proto_init() }
@@ -1459,7 +1761,7 @@ func file_service_domain_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_domain_admin_proto_rawDesc), len(file_service_domain_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   19,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

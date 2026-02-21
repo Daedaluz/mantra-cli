@@ -34,6 +34,9 @@ const (
 	DomainAdminService_ListClients_FullMethodName      = "/se.mantra.api.admin.DomainAdminService/ListClients"
 	DomainAdminService_UpdateDomain_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/UpdateDomain"
 	DomainAdminService_GetDomain_FullMethodName        = "/se.mantra.api.admin.DomainAdminService/GetDomain"
+	DomainAdminService_ListDevices_FullMethodName      = "/se.mantra.api.admin.DomainAdminService/ListDevices"
+	DomainAdminService_UpdateDevice_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/UpdateDevice"
+	DomainAdminService_RemoveDevice_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/RemoveDevice"
 )
 
 // DomainAdminServiceClient is the client API for DomainAdminService service.
@@ -53,6 +56,9 @@ type DomainAdminServiceClient interface {
 	ListClients(ctx context.Context, in *ListClientsRequest, opts ...grpc.CallOption) (*ListClientsResponse, error)
 	UpdateDomain(ctx context.Context, in *UpdateDomainDetailsRequest, opts ...grpc.CallOption) (*DomainDetails, error)
 	GetDomain(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*DomainDetails, error)
+	ListDevices(ctx context.Context, in *ListDevicesRequest, opts ...grpc.CallOption) (*ListDevicesResponse, error)
+	UpdateDevice(ctx context.Context, in *UpdateDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type domainAdminServiceClient struct {
@@ -193,6 +199,36 @@ func (c *domainAdminServiceClient) GetDomain(ctx context.Context, in *emptypb.Em
 	return out, nil
 }
 
+func (c *domainAdminServiceClient) ListDevices(ctx context.Context, in *ListDevicesRequest, opts ...grpc.CallOption) (*ListDevicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDevicesResponse)
+	err := c.cc.Invoke(ctx, DomainAdminService_ListDevices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) UpdateDevice(ctx context.Context, in *UpdateDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DomainAdminService_UpdateDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DomainAdminService_RemoveDevice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DomainAdminServiceServer is the server API for DomainAdminService service.
 // All implementations should embed UnimplementedDomainAdminServiceServer
 // for forward compatibility.
@@ -210,6 +246,9 @@ type DomainAdminServiceServer interface {
 	ListClients(context.Context, *ListClientsRequest) (*ListClientsResponse, error)
 	UpdateDomain(context.Context, *UpdateDomainDetailsRequest) (*DomainDetails, error)
 	GetDomain(context.Context, *emptypb.Empty) (*DomainDetails, error)
+	ListDevices(context.Context, *ListDevicesRequest) (*ListDevicesResponse, error)
+	UpdateDevice(context.Context, *UpdateDeviceRequest) (*emptypb.Empty, error)
+	RemoveDevice(context.Context, *RemoveDeviceRequest) (*emptypb.Empty, error)
 }
 
 // UnimplementedDomainAdminServiceServer should be embedded to have
@@ -257,6 +296,15 @@ func (UnimplementedDomainAdminServiceServer) UpdateDomain(context.Context, *Upda
 }
 func (UnimplementedDomainAdminServiceServer) GetDomain(context.Context, *emptypb.Empty) (*DomainDetails, error) {
 	return nil, status.Error(codes.Unimplemented, "method GetDomain not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) ListDevices(context.Context, *ListDevicesRequest) (*ListDevicesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListDevices not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) UpdateDevice(context.Context, *UpdateDeviceRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateDevice not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) RemoveDevice(context.Context, *RemoveDeviceRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method RemoveDevice not implemented")
 }
 func (UnimplementedDomainAdminServiceServer) testEmbeddedByValue() {}
 
@@ -512,6 +560,60 @@ func _DomainAdminService_GetDomain_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DomainAdminService_ListDevices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDevicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).ListDevices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_ListDevices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).ListDevices(ctx, req.(*ListDevicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_UpdateDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).UpdateDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_UpdateDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).UpdateDevice(ctx, req.(*UpdateDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_RemoveDevice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveDeviceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).RemoveDevice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_RemoveDevice_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).RemoveDevice(ctx, req.(*RemoveDeviceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DomainAdminService_ServiceDesc is the grpc.ServiceDesc for DomainAdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -570,6 +672,18 @@ var DomainAdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDomain",
 			Handler:    _DomainAdminService_GetDomain_Handler,
+		},
+		{
+			MethodName: "ListDevices",
+			Handler:    _DomainAdminService_ListDevices_Handler,
+		},
+		{
+			MethodName: "UpdateDevice",
+			Handler:    _DomainAdminService_UpdateDevice_Handler,
+		},
+		{
+			MethodName: "RemoveDevice",
+			Handler:    _DomainAdminService_RemoveDevice_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
