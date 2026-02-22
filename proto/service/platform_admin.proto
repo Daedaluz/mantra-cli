@@ -5,6 +5,7 @@ option go_package = "github.com/daedaluz/mantra-cli/lib/grpc/admin";
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
 import "common/common.proto";
 
 
@@ -118,6 +119,9 @@ message AuditEntry {
   bytes                     client_data_json    = 13;
   bytes                     signature           = 14;
   google.protobuf.Timestamp expires_at          = 15;
+  common.Location           challenge_location  = 16;
+  bool                      location_required   = 17;
+  google.protobuf.DoubleValue distance_meters    = 18;
 }
 
 message AuditUserResponse {

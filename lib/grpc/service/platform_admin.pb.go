@@ -12,6 +12,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -950,22 +951,25 @@ func (x *AuditClientInfo) GetAdmin() bool {
 }
 
 type AuditEntry struct {
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	ChallengeId       string                 `protobuf:"bytes,1,opt,name=challenge_id,json=challengeId,proto3" json:"challenge_id,omitempty"`
-	Title             string                 `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Message           string                 `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
-	Status            common.Status          `protobuf:"varint,4,opt,name=status,proto3,enum=se.mantra.api.common.Status" json:"status,omitempty"`
-	CreatedAt         *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	SignedAt          *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=signed_at,json=signedAt,proto3" json:"signed_at,omitempty"`
-	Key               *AuditKeyInfo          `protobuf:"bytes,7,opt,name=key,proto3" json:"key,omitempty"`
-	Client            *AuditClientInfo       `protobuf:"bytes,8,opt,name=client,proto3" json:"client,omitempty"`
-	Device            *AuditDeviceInfo       `protobuf:"bytes,9,opt,name=device,proto3" json:"device,omitempty"`
-	Verified          bool                   `protobuf:"varint,10,opt,name=verified,proto3" json:"verified,omitempty"`
-	SignatureLocation *common.Location       `protobuf:"bytes,11,opt,name=signature_location,json=signatureLocation,proto3" json:"signature_location,omitempty"`
-	AuthenticatorData []byte                 `protobuf:"bytes,12,opt,name=authenticator_data,json=authenticatorData,proto3" json:"authenticator_data,omitempty"`
-	ClientDataJson    []byte                 `protobuf:"bytes,13,opt,name=client_data_json,json=clientDataJson,proto3" json:"client_data_json,omitempty"`
-	Signature         []byte                 `protobuf:"bytes,14,opt,name=signature,proto3" json:"signature,omitempty"`
-	ExpiresAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	state             protoimpl.MessageState  `protogen:"open.v1"`
+	ChallengeId       string                  `protobuf:"bytes,1,opt,name=challenge_id,json=challengeId,proto3" json:"challenge_id,omitempty"`
+	Title             string                  `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Message           string                  `protobuf:"bytes,3,opt,name=message,proto3" json:"message,omitempty"`
+	Status            common.Status           `protobuf:"varint,4,opt,name=status,proto3,enum=se.mantra.api.common.Status" json:"status,omitempty"`
+	CreatedAt         *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	SignedAt          *timestamppb.Timestamp  `protobuf:"bytes,6,opt,name=signed_at,json=signedAt,proto3" json:"signed_at,omitempty"`
+	Key               *AuditKeyInfo           `protobuf:"bytes,7,opt,name=key,proto3" json:"key,omitempty"`
+	Client            *AuditClientInfo        `protobuf:"bytes,8,opt,name=client,proto3" json:"client,omitempty"`
+	Device            *AuditDeviceInfo        `protobuf:"bytes,9,opt,name=device,proto3" json:"device,omitempty"`
+	Verified          bool                    `protobuf:"varint,10,opt,name=verified,proto3" json:"verified,omitempty"`
+	SignatureLocation *common.Location        `protobuf:"bytes,11,opt,name=signature_location,json=signatureLocation,proto3" json:"signature_location,omitempty"`
+	AuthenticatorData []byte                  `protobuf:"bytes,12,opt,name=authenticator_data,json=authenticatorData,proto3" json:"authenticator_data,omitempty"`
+	ClientDataJson    []byte                  `protobuf:"bytes,13,opt,name=client_data_json,json=clientDataJson,proto3" json:"client_data_json,omitempty"`
+	Signature         []byte                  `protobuf:"bytes,14,opt,name=signature,proto3" json:"signature,omitempty"`
+	ExpiresAt         *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
+	ChallengeLocation *common.Location        `protobuf:"bytes,16,opt,name=challenge_location,json=challengeLocation,proto3" json:"challenge_location,omitempty"`
+	LocationRequired  bool                    `protobuf:"varint,17,opt,name=location_required,json=locationRequired,proto3" json:"location_required,omitempty"`
+	DistanceMeters    *wrapperspb.DoubleValue `protobuf:"bytes,18,opt,name=distance_meters,json=distanceMeters,proto3" json:"distance_meters,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1105,6 +1109,27 @@ func (x *AuditEntry) GetExpiresAt() *timestamppb.Timestamp {
 	return nil
 }
 
+func (x *AuditEntry) GetChallengeLocation() *common.Location {
+	if x != nil {
+		return x.ChallengeLocation
+	}
+	return nil
+}
+
+func (x *AuditEntry) GetLocationRequired() bool {
+	if x != nil {
+		return x.LocationRequired
+	}
+	return false
+}
+
+func (x *AuditEntry) GetDistanceMeters() *wrapperspb.DoubleValue {
+	if x != nil {
+		return x.DistanceMeters
+	}
+	return nil
+}
+
 type AuditUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Entries       []*AuditEntry          `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
@@ -1153,7 +1178,7 @@ var File_service_platform_admin_proto protoreflect.FileDescriptor
 
 const file_service_platform_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\"\xa7\x02\n" +
+	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x13common/common.proto\"\xa7\x02\n" +
 	"\x13CreateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1223,7 +1248,7 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x0fAuditClientInfo\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05admin\x18\x03 \x01(\bR\x05admin\"\xd7\x05\n" +
+	"\x05admin\x18\x03 \x01(\bR\x05admin\"\x9a\a\n" +
 	"\n" +
 	"AuditEntry\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x12\x14\n" +
@@ -1243,7 +1268,10 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x10client_data_json\x18\r \x01(\fR\x0eclientDataJson\x12\x1c\n" +
 	"\tsignature\x18\x0e \x01(\fR\tsignature\x129\n" +
 	"\n" +
-	"expires_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"N\n" +
+	"expires_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12M\n" +
+	"\x12challenge_location\x18\x10 \x01(\v2\x1e.se.mantra.api.common.LocationR\x11challengeLocation\x12+\n" +
+	"\x11location_required\x18\x11 \x01(\bR\x10locationRequired\x12E\n" +
+	"\x0fdistance_meters\x18\x12 \x01(\v2\x1c.google.protobuf.DoubleValueR\x0edistanceMeters\"N\n" +
 	"\x11AuditUserResponse\x129\n" +
 	"\aentries\x18\x01 \x03(\v2\x1f.se.mantra.api.admin.AuditEntryR\aentries2\x83\x06\n" +
 	"\x14PlatformAdminService\x12c\n" +
@@ -1291,7 +1319,8 @@ var file_service_platform_admin_proto_goTypes = []any{
 	(*common.ClientMeta)(nil),        // 18: se.mantra.api.common.ClientMeta
 	(common.Status)(0),               // 19: se.mantra.api.common.Status
 	(*common.Location)(nil),          // 20: se.mantra.api.common.Location
-	(*emptypb.Empty)(nil),            // 21: google.protobuf.Empty
+	(*wrapperspb.DoubleValue)(nil),   // 21: google.protobuf.DoubleValue
+	(*emptypb.Empty)(nil),            // 22: google.protobuf.Empty
 }
 var file_service_platform_admin_proto_depIdxs = []int32{
 	17, // 0: se.mantra.api.admin.Domain.created_at:type_name -> google.protobuf.Timestamp
@@ -1307,28 +1336,30 @@ var file_service_platform_admin_proto_depIdxs = []int32{
 	13, // 10: se.mantra.api.admin.AuditEntry.device:type_name -> se.mantra.api.admin.AuditDeviceInfo
 	20, // 11: se.mantra.api.admin.AuditEntry.signature_location:type_name -> se.mantra.api.common.Location
 	17, // 12: se.mantra.api.admin.AuditEntry.expires_at:type_name -> google.protobuf.Timestamp
-	15, // 13: se.mantra.api.admin.AuditUserResponse.entries:type_name -> se.mantra.api.admin.AuditEntry
-	0,  // 14: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
-	2,  // 15: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
-	4,  // 16: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
-	6,  // 17: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
-	7,  // 18: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
-	8,  // 19: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
-	10, // 20: se.mantra.api.admin.PlatformAdminService.AuditUser:input_type -> se.mantra.api.admin.AuditUserRequest
-	11, // 21: se.mantra.api.admin.PlatformAdminService.AuditChallenge:input_type -> se.mantra.api.admin.AuditChallengeRequest
-	1,  // 22: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
-	21, // 23: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
-	5,  // 24: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
-	3,  // 25: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
-	3,  // 26: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
-	9,  // 27: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
-	16, // 28: se.mantra.api.admin.PlatformAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
-	15, // 29: se.mantra.api.admin.PlatformAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
-	22, // [22:30] is the sub-list for method output_type
-	14, // [14:22] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	20, // 13: se.mantra.api.admin.AuditEntry.challenge_location:type_name -> se.mantra.api.common.Location
+	21, // 14: se.mantra.api.admin.AuditEntry.distance_meters:type_name -> google.protobuf.DoubleValue
+	15, // 15: se.mantra.api.admin.AuditUserResponse.entries:type_name -> se.mantra.api.admin.AuditEntry
+	0,  // 16: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
+	2,  // 17: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
+	4,  // 18: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
+	6,  // 19: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
+	7,  // 20: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
+	8,  // 21: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
+	10, // 22: se.mantra.api.admin.PlatformAdminService.AuditUser:input_type -> se.mantra.api.admin.AuditUserRequest
+	11, // 23: se.mantra.api.admin.PlatformAdminService.AuditChallenge:input_type -> se.mantra.api.admin.AuditChallengeRequest
+	1,  // 24: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
+	22, // 25: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
+	5,  // 26: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
+	3,  // 27: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
+	3,  // 28: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
+	9,  // 29: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
+	16, // 30: se.mantra.api.admin.PlatformAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
+	15, // 31: se.mantra.api.admin.PlatformAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
+	24, // [24:32] is the sub-list for method output_type
+	16, // [16:24] is the sub-list for method input_type
+	16, // [16:16] is the sub-list for extension type_name
+	16, // [16:16] is the sub-list for extension extendee
+	0,  // [0:16] is the sub-list for field type_name
 }
 
 func init() { file_service_platform_admin_proto_init() }
