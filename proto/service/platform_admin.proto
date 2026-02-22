@@ -117,6 +117,7 @@ message AuditEntry {
   bytes                     authenticator_data  = 12;
   bytes                     client_data_json    = 13;
   bytes                     signature           = 14;
+  google.protobuf.Timestamp expires_at          = 15;
 }
 
 message AuditUserResponse {

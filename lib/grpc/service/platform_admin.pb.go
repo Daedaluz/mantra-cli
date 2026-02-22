@@ -965,6 +965,7 @@ type AuditEntry struct {
 	AuthenticatorData []byte                 `protobuf:"bytes,12,opt,name=authenticator_data,json=authenticatorData,proto3" json:"authenticator_data,omitempty"`
 	ClientDataJson    []byte                 `protobuf:"bytes,13,opt,name=client_data_json,json=clientDataJson,proto3" json:"client_data_json,omitempty"`
 	Signature         []byte                 `protobuf:"bytes,14,opt,name=signature,proto3" json:"signature,omitempty"`
+	ExpiresAt         *timestamppb.Timestamp `protobuf:"bytes,15,opt,name=expires_at,json=expiresAt,proto3" json:"expires_at,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -1097,6 +1098,13 @@ func (x *AuditEntry) GetSignature() []byte {
 	return nil
 }
 
+func (x *AuditEntry) GetExpiresAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.ExpiresAt
+	}
+	return nil
+}
+
 type AuditUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Entries       []*AuditEntry          `protobuf:"bytes,1,rep,name=entries,proto3" json:"entries,omitempty"`
@@ -1215,7 +1223,7 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x0fAuditClientInfo\x12\x1b\n" +
 	"\tclient_id\x18\x01 \x01(\tR\bclientId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
-	"\x05admin\x18\x03 \x01(\bR\x05admin\"\x9c\x05\n" +
+	"\x05admin\x18\x03 \x01(\bR\x05admin\"\xd7\x05\n" +
 	"\n" +
 	"AuditEntry\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\x12\x14\n" +
@@ -1233,7 +1241,9 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x12signature_location\x18\v \x01(\v2\x1e.se.mantra.api.common.LocationR\x11signatureLocation\x12-\n" +
 	"\x12authenticator_data\x18\f \x01(\fR\x11authenticatorData\x12(\n" +
 	"\x10client_data_json\x18\r \x01(\fR\x0eclientDataJson\x12\x1c\n" +
-	"\tsignature\x18\x0e \x01(\fR\tsignature\"N\n" +
+	"\tsignature\x18\x0e \x01(\fR\tsignature\x129\n" +
+	"\n" +
+	"expires_at\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\"N\n" +
 	"\x11AuditUserResponse\x129\n" +
 	"\aentries\x18\x01 \x03(\v2\x1f.se.mantra.api.admin.AuditEntryR\aentries2\x83\x06\n" +
 	"\x14PlatformAdminService\x12c\n" +
@@ -1296,28 +1306,29 @@ var file_service_platform_admin_proto_depIdxs = []int32{
 	14, // 9: se.mantra.api.admin.AuditEntry.client:type_name -> se.mantra.api.admin.AuditClientInfo
 	13, // 10: se.mantra.api.admin.AuditEntry.device:type_name -> se.mantra.api.admin.AuditDeviceInfo
 	20, // 11: se.mantra.api.admin.AuditEntry.signature_location:type_name -> se.mantra.api.common.Location
-	15, // 12: se.mantra.api.admin.AuditUserResponse.entries:type_name -> se.mantra.api.admin.AuditEntry
-	0,  // 13: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
-	2,  // 14: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
-	4,  // 15: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
-	6,  // 16: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
-	7,  // 17: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
-	8,  // 18: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
-	10, // 19: se.mantra.api.admin.PlatformAdminService.AuditUser:input_type -> se.mantra.api.admin.AuditUserRequest
-	11, // 20: se.mantra.api.admin.PlatformAdminService.AuditChallenge:input_type -> se.mantra.api.admin.AuditChallengeRequest
-	1,  // 21: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
-	21, // 22: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
-	5,  // 23: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
-	3,  // 24: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
-	3,  // 25: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
-	9,  // 26: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
-	16, // 27: se.mantra.api.admin.PlatformAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
-	15, // 28: se.mantra.api.admin.PlatformAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
-	21, // [21:29] is the sub-list for method output_type
-	13, // [13:21] is the sub-list for method input_type
-	13, // [13:13] is the sub-list for extension type_name
-	13, // [13:13] is the sub-list for extension extendee
-	0,  // [0:13] is the sub-list for field type_name
+	17, // 12: se.mantra.api.admin.AuditEntry.expires_at:type_name -> google.protobuf.Timestamp
+	15, // 13: se.mantra.api.admin.AuditUserResponse.entries:type_name -> se.mantra.api.admin.AuditEntry
+	0,  // 14: se.mantra.api.admin.PlatformAdminService.CreateDomain:input_type -> se.mantra.api.admin.CreateDomainRequest
+	2,  // 15: se.mantra.api.admin.PlatformAdminService.DeleteDomain:input_type -> se.mantra.api.admin.DeleteDomainRequest
+	4,  // 16: se.mantra.api.admin.PlatformAdminService.ListDomains:input_type -> se.mantra.api.admin.ListDomainsRequest
+	6,  // 17: se.mantra.api.admin.PlatformAdminService.GetDomain:input_type -> se.mantra.api.admin.GetDomainRequest
+	7,  // 18: se.mantra.api.admin.PlatformAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainRequest
+	8,  // 19: se.mantra.api.admin.PlatformAdminService.ListAdminClients:input_type -> se.mantra.api.admin.ListAdminClientsRequest
+	10, // 20: se.mantra.api.admin.PlatformAdminService.AuditUser:input_type -> se.mantra.api.admin.AuditUserRequest
+	11, // 21: se.mantra.api.admin.PlatformAdminService.AuditChallenge:input_type -> se.mantra.api.admin.AuditChallengeRequest
+	1,  // 22: se.mantra.api.admin.PlatformAdminService.CreateDomain:output_type -> se.mantra.api.admin.CreateDomainResponse
+	21, // 23: se.mantra.api.admin.PlatformAdminService.DeleteDomain:output_type -> google.protobuf.Empty
+	5,  // 24: se.mantra.api.admin.PlatformAdminService.ListDomains:output_type -> se.mantra.api.admin.ListDomainsResponse
+	3,  // 25: se.mantra.api.admin.PlatformAdminService.GetDomain:output_type -> se.mantra.api.admin.Domain
+	3,  // 26: se.mantra.api.admin.PlatformAdminService.UpdateDomain:output_type -> se.mantra.api.admin.Domain
+	9,  // 27: se.mantra.api.admin.PlatformAdminService.ListAdminClients:output_type -> se.mantra.api.admin.ListAdminClientsResponse
+	16, // 28: se.mantra.api.admin.PlatformAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
+	15, // 29: se.mantra.api.admin.PlatformAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
+	22, // [22:30] is the sub-list for method output_type
+	14, // [14:22] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_service_platform_admin_proto_init() }
