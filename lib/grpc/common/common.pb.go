@@ -183,6 +183,7 @@ type Key struct {
 	UserPresent     bool                   `protobuf:"varint,14,opt,name=user_present,json=userPresent,proto3" json:"user_present,omitempty"`
 	BackupEligible  bool                   `protobuf:"varint,15,opt,name=backup_eligible,json=backupEligible,proto3" json:"backup_eligible,omitempty"`
 	BackedUp        bool                   `protobuf:"varint,16,opt,name=backed_up,json=backedUp,proto3" json:"backed_up,omitempty"`
+	MdsVerified     bool                   `protobuf:"varint,19,opt,name=mds_verified,json=mdsVerified,proto3" json:"mds_verified,omitempty"`
 	Transports      []string               `protobuf:"bytes,17,rep,name=transports,proto3" json:"transports,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
@@ -333,6 +334,13 @@ func (x *Key) GetBackupEligible() bool {
 func (x *Key) GetBackedUp() bool {
 	if x != nil {
 		return x.BackedUp
+	}
+	return false
+}
+
+func (x *Key) GetMdsVerified() bool {
+	if x != nil {
+		return x.MdsVerified
 	}
 	return false
 }
@@ -577,7 +585,7 @@ const file_common_common_proto_rawDesc = "" +
 	"\x10challenge_secret\x18\x03 \x01(\tR\x0fchallengeSecret\x129\n" +
 	"\n" +
 	"expires_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\texpiresAt\x12:\n" +
-	"\blocation\x18\x05 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xea\x04\n" +
+	"\blocation\x18\x05 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\x8d\x05\n" +
 	"\x03Key\x129\n" +
 	"\n" +
 	"created_at\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x127\n" +
@@ -601,7 +609,8 @@ const file_common_common_proto_rawDesc = "" +
 	"\ruser_verified\x18\r \x01(\bR\fuserVerified\x12!\n" +
 	"\fuser_present\x18\x0e \x01(\bR\vuserPresent\x12'\n" +
 	"\x0fbackup_eligible\x18\x0f \x01(\bR\x0ebackupEligible\x12\x1b\n" +
-	"\tbacked_up\x18\x10 \x01(\bR\bbackedUp\x12\x1e\n" +
+	"\tbacked_up\x18\x10 \x01(\bR\bbackedUp\x12!\n" +
+	"\fmds_verified\x18\x13 \x01(\bR\vmdsVerified\x12\x1e\n" +
 	"\n" +
 	"transports\x18\x11 \x03(\tR\n" +
 	"transports\"\xe9\x01\n" +

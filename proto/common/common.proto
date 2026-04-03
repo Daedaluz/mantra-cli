@@ -44,6 +44,7 @@ message Key {
   bool user_present = 14;
   bool backup_eligible = 15;
   bool backed_up = 16;
+  bool mds_verified = 19;
   repeated string transports = 17;
 }
 

@@ -48,6 +48,8 @@ message CollectResponse {
   bytes public_key = 13;
   int64 algorithm = 14;
   string device_id = 15;
+  bool backed_up = 17;
+  bool mds_verified = 18;
 }
 
 service ClientService {
