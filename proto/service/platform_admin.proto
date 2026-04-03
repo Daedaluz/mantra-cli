@@ -18,6 +18,7 @@ message CreateDomainRequest {
   string sign_path = 6;
   bool require_device_binding = 7;
   int32 token_max_age = 8;
+  string default_key_profile = 9;
 }
 
 message CreateDomainResponse {
@@ -39,6 +40,7 @@ message Domain {
   string sign_path = 7;
   bool require_device_binding = 8;
   int32 token_max_age = 9;
+  string default_key_profile = 10;
 }
 
 message ListDomainsRequest {
@@ -63,6 +65,7 @@ message UpdateDomainRequest {
   string sign_path = 6;
   bool require_device_binding = 7;
   int32 token_max_age = 8;
+  string default_key_profile = 9;
 }
 
 message ListAdminClientsRequest {

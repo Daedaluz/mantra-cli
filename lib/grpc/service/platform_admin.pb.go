@@ -35,6 +35,7 @@ type CreateDomainRequest struct {
 	SignPath             string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
 	RequireDeviceBinding bool                   `protobuf:"varint,7,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
 	TokenMaxAge          int32                  `protobuf:"varint,8,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	DefaultKeyProfile    string                 `protobuf:"bytes,9,opt,name=default_key_profile,json=defaultKeyProfile,proto3" json:"default_key_profile,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -123,6 +124,13 @@ func (x *CreateDomainRequest) GetTokenMaxAge() int32 {
 		return x.TokenMaxAge
 	}
 	return 0
+}
+
+func (x *CreateDomainRequest) GetDefaultKeyProfile() string {
+	if x != nil {
+		return x.DefaultKeyProfile
+	}
+	return ""
 }
 
 type CreateDomainResponse struct {
@@ -232,6 +240,7 @@ type Domain struct {
 	SignPath             string                 `protobuf:"bytes,7,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
 	RequireDeviceBinding bool                   `protobuf:"varint,8,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
 	TokenMaxAge          int32                  `protobuf:"varint,9,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	DefaultKeyProfile    string                 `protobuf:"bytes,10,opt,name=default_key_profile,json=defaultKeyProfile,proto3" json:"default_key_profile,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -327,6 +336,13 @@ func (x *Domain) GetTokenMaxAge() int32 {
 		return x.TokenMaxAge
 	}
 	return 0
+}
+
+func (x *Domain) GetDefaultKeyProfile() string {
+	if x != nil {
+		return x.DefaultKeyProfile
+	}
+	return ""
 }
 
 type ListDomainsRequest struct {
@@ -472,6 +488,7 @@ type UpdateDomainRequest struct {
 	SignPath             string                 `protobuf:"bytes,6,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
 	RequireDeviceBinding bool                   `protobuf:"varint,7,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
 	TokenMaxAge          int32                  `protobuf:"varint,8,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	DefaultKeyProfile    string                 `protobuf:"bytes,9,opt,name=default_key_profile,json=defaultKeyProfile,proto3" json:"default_key_profile,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -560,6 +577,13 @@ func (x *UpdateDomainRequest) GetTokenMaxAge() int32 {
 		return x.TokenMaxAge
 	}
 	return 0
+}
+
+func (x *UpdateDomainRequest) GetDefaultKeyProfile() string {
+	if x != nil {
+		return x.DefaultKeyProfile
+	}
+	return ""
 }
 
 type ListAdminClientsRequest struct {
@@ -1178,7 +1202,7 @@ var File_service_platform_admin_proto protoreflect.FileDescriptor
 
 const file_service_platform_admin_proto_rawDesc = "" +
 	"\n" +
-	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x13common/common.proto\"\xa7\x02\n" +
+	"\x1cservice/platform_admin.proto\x12\x13se.mantra.api.admin\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x13common/common.proto\"\xd7\x02\n" +
 	"\x13CreateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1189,12 +1213,13 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x05 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\x06 \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\a \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\"K\n" +
+	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\x12.\n" +
+	"\x13default_key_profile\x18\t \x01(\tR\x11defaultKeyProfile\"K\n" +
 	"\x14CreateDomainResponse\x12\x1b\n" +
 	"\tclient_id\x18\x05 \x01(\tR\bclientId\x12\x16\n" +
 	"\x06secret\x18\x06 \x01(\tR\x06secret\"-\n" +
 	"\x13DeleteDomainRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xd5\x02\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"\x85\x03\n" +
 	"\x06Domain\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1207,13 +1232,15 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\a \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\b \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge\".\n" +
+	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge\x12.\n" +
+	"\x13default_key_profile\x18\n" +
+	" \x01(\tR\x11defaultKeyProfile\".\n" +
 	"\x12ListDomainsRequest\x12\x18\n" +
 	"\adomains\x18\x01 \x03(\tR\adomains\"L\n" +
 	"\x13ListDomainsResponse\x125\n" +
 	"\adomains\x18\x01 \x03(\v2\x1b.se.mantra.api.admin.DomainR\adomains\"*\n" +
 	"\x10GetDomainRequest\x12\x16\n" +
-	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xa7\x02\n" +
+	"\x06domain\x18\x01 \x01(\tR\x06domain\"\xd7\x02\n" +
 	"\x13UpdateDomainRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1224,7 +1251,8 @@ const file_service_platform_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x05 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\x06 \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\a \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\"1\n" +
+	"\rtoken_max_age\x18\b \x01(\x05R\vtokenMaxAge\x12.\n" +
+	"\x13default_key_profile\x18\t \x01(\tR\x11defaultKeyProfile\"1\n" +
 	"\x17ListAdminClientsRequest\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\"V\n" +
 	"\x18ListAdminClientsResponse\x12:\n" +

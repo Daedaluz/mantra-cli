@@ -72,3 +72,13 @@ message Location {
   // If required is false, backend will only store the location without verification.
   bool required = 4;
 }
+
+message KeyProfile {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  bytes  wasm_binary = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  bytes  hash = 7;  // SHA-256 of wasm_binary
+}

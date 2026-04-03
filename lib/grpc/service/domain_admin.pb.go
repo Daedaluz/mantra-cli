@@ -137,14 +137,16 @@ func (x *GetUserResponse) GetKeys() []*common.Key {
 }
 
 type CreateUserRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Timeout       int64                  `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	ReturnUrl     string                 `protobuf:"bytes,5,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
-	Location      *common.Location       `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	UserId           string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Timeout          int64                  `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	ReturnUrl        string                 `protobuf:"bytes,5,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
+	Location         *common.Location       `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
+	KeyProfile       string                 `protobuf:"bytes,7,opt,name=key_profile,json=keyProfile,proto3" json:"key_profile,omitempty"`
+	KeyProfileParams []string               `protobuf:"bytes,8,rep,name=key_profile_params,json=keyProfileParams,proto3" json:"key_profile_params,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *CreateUserRequest) Reset() {
@@ -212,16 +214,32 @@ func (x *CreateUserRequest) GetLocation() *common.Location {
 	return nil
 }
 
+func (x *CreateUserRequest) GetKeyProfile() string {
+	if x != nil {
+		return x.KeyProfile
+	}
+	return ""
+}
+
+func (x *CreateUserRequest) GetKeyProfileParams() []string {
+	if x != nil {
+		return x.KeyProfileParams
+	}
+	return nil
+}
+
 type AddKeyRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name          string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Timeout       int64                  `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
-	ReturnUrl     string                 `protobuf:"bytes,5,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
-	Location      *common.Location       `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
-	Pending       bool                   `protobuf:"varint,7,opt,name=pending,proto3" json:"pending,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	UserId           string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name             string                 `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Timeout          int64                  `protobuf:"varint,4,opt,name=timeout,proto3" json:"timeout,omitempty"`
+	ReturnUrl        string                 `protobuf:"bytes,5,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
+	Location         *common.Location       `protobuf:"bytes,6,opt,name=location,proto3" json:"location,omitempty"`
+	Pending          bool                   `protobuf:"varint,7,opt,name=pending,proto3" json:"pending,omitempty"`
+	KeyProfile       string                 `protobuf:"bytes,8,opt,name=key_profile,json=keyProfile,proto3" json:"key_profile,omitempty"`
+	KeyProfileParams []string               `protobuf:"bytes,9,rep,name=key_profile_params,json=keyProfileParams,proto3" json:"key_profile_params,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *AddKeyRequest) Reset() {
@@ -294,6 +312,20 @@ func (x *AddKeyRequest) GetPending() bool {
 		return x.Pending
 	}
 	return false
+}
+
+func (x *AddKeyRequest) GetKeyProfile() string {
+	if x != nil {
+		return x.KeyProfile
+	}
+	return ""
+}
+
+func (x *AddKeyRequest) GetKeyProfileParams() []string {
+	if x != nil {
+		return x.KeyProfileParams
+	}
+	return nil
 }
 
 type RevokeKeyRequest struct {
@@ -1425,6 +1457,7 @@ type UpdateDomainDetailsRequest struct {
 	SignPath             string                 `protobuf:"bytes,5,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
 	RequireDeviceBinding bool                   `protobuf:"varint,6,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
 	TokenMaxAge          int32                  `protobuf:"varint,7,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	DefaultKeyProfile    string                 `protobuf:"bytes,8,opt,name=default_key_profile,json=defaultKeyProfile,proto3" json:"default_key_profile,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1508,6 +1541,13 @@ func (x *UpdateDomainDetailsRequest) GetTokenMaxAge() int32 {
 	return 0
 }
 
+func (x *UpdateDomainDetailsRequest) GetDefaultKeyProfile() string {
+	if x != nil {
+		return x.DefaultKeyProfile
+	}
+	return ""
+}
+
 type DomainDetails struct {
 	state                protoimpl.MessageState `protogen:"open.v1"`
 	Domain               string                 `protobuf:"bytes,1,opt,name=domain,proto3" json:"domain,omitempty"`
@@ -1519,6 +1559,7 @@ type DomainDetails struct {
 	SignPath             string                 `protobuf:"bytes,7,opt,name=sign_path,json=signPath,proto3" json:"sign_path,omitempty"`
 	RequireDeviceBinding bool                   `protobuf:"varint,8,opt,name=require_device_binding,json=requireDeviceBinding,proto3" json:"require_device_binding,omitempty"`
 	TokenMaxAge          int32                  `protobuf:"varint,9,opt,name=token_max_age,json=tokenMaxAge,proto3" json:"token_max_age,omitempty"`
+	DefaultKeyProfile    string                 `protobuf:"bytes,10,opt,name=default_key_profile,json=defaultKeyProfile,proto3" json:"default_key_profile,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -1616,6 +1657,301 @@ func (x *DomainDetails) GetTokenMaxAge() int32 {
 	return 0
 }
 
+func (x *DomainDetails) GetDefaultKeyProfile() string {
+	if x != nil {
+		return x.DefaultKeyProfile
+	}
+	return ""
+}
+
+type CreateKeyProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	WasmBinary    []byte                 `protobuf:"bytes,3,opt,name=wasm_binary,json=wasmBinary,proto3" json:"wasm_binary,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CreateKeyProfileRequest) Reset() {
+	*x = CreateKeyProfileRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CreateKeyProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CreateKeyProfileRequest) ProtoMessage() {}
+
+func (x *CreateKeyProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CreateKeyProfileRequest.ProtoReflect.Descriptor instead.
+func (*CreateKeyProfileRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *CreateKeyProfileRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *CreateKeyProfileRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *CreateKeyProfileRequest) GetWasmBinary() []byte {
+	if x != nil {
+		return x.WasmBinary
+	}
+	return nil
+}
+
+type UpdateKeyProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
+	WasmBinary    []byte                 `protobuf:"bytes,3,opt,name=wasm_binary,json=wasmBinary,proto3" json:"wasm_binary,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *UpdateKeyProfileRequest) Reset() {
+	*x = UpdateKeyProfileRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UpdateKeyProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateKeyProfileRequest) ProtoMessage() {}
+
+func (x *UpdateKeyProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateKeyProfileRequest.ProtoReflect.Descriptor instead.
+func (*UpdateKeyProfileRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *UpdateKeyProfileRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *UpdateKeyProfileRequest) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UpdateKeyProfileRequest) GetWasmBinary() []byte {
+	if x != nil {
+		return x.WasmBinary
+	}
+	return nil
+}
+
+type DeleteKeyProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteKeyProfileRequest) Reset() {
+	*x = DeleteKeyProfileRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteKeyProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteKeyProfileRequest) ProtoMessage() {}
+
+func (x *DeleteKeyProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteKeyProfileRequest.ProtoReflect.Descriptor instead.
+func (*DeleteKeyProfileRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *DeleteKeyProfileRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type ListKeyProfilesRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListKeyProfilesRequest) Reset() {
+	*x = ListKeyProfilesRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListKeyProfilesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListKeyProfilesRequest) ProtoMessage() {}
+
+func (x *ListKeyProfilesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListKeyProfilesRequest.ProtoReflect.Descriptor instead.
+func (*ListKeyProfilesRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{29}
+}
+
+type ListKeyProfilesResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Profiles      []*common.KeyProfile   `protobuf:"bytes,1,rep,name=profiles,proto3" json:"profiles,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListKeyProfilesResponse) Reset() {
+	*x = ListKeyProfilesResponse{}
+	mi := &file_service_domain_admin_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListKeyProfilesResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListKeyProfilesResponse) ProtoMessage() {}
+
+func (x *ListKeyProfilesResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListKeyProfilesResponse.ProtoReflect.Descriptor instead.
+func (*ListKeyProfilesResponse) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ListKeyProfilesResponse) GetProfiles() []*common.KeyProfile {
+	if x != nil {
+		return x.Profiles
+	}
+	return nil
+}
+
+type GetKeyProfileRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetKeyProfileRequest) Reset() {
+	*x = GetKeyProfileRequest{}
+	mi := &file_service_domain_admin_proto_msgTypes[31]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetKeyProfileRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetKeyProfileRequest) ProtoMessage() {}
+
+func (x *GetKeyProfileRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_service_domain_admin_proto_msgTypes[31]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetKeyProfileRequest.ProtoReflect.Descriptor instead.
+func (*GetKeyProfileRequest) Descriptor() ([]byte, []int) {
+	return file_service_domain_admin_proto_rawDescGZIP(), []int{31}
+}
+
+func (x *GetKeyProfileRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
 var File_service_domain_admin_proto protoreflect.FileDescriptor
 
 const file_service_domain_admin_proto_rawDesc = "" +
@@ -1628,14 +1964,17 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x129\n" +
 	"\n" +
 	"created_at\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12-\n" +
-	"\x04keys\x18\x04 \x03(\v2\x19.se.mantra.api.common.KeyR\x04keys\"\xb5\x01\n" +
+	"\x04keys\x18\x04 \x03(\v2\x19.se.mantra.api.common.KeyR\x04keys\"\x84\x02\n" +
 	"\x11CreateUserRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
 	"\atimeout\x18\x04 \x01(\x03R\atimeout\x12\x1d\n" +
 	"\n" +
 	"return_url\x18\x05 \x01(\tR\treturnUrl\x12:\n" +
-	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"\xcb\x01\n" +
+	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x1f\n" +
+	"\vkey_profile\x18\a \x01(\tR\n" +
+	"keyProfile\x12,\n" +
+	"\x12key_profile_params\x18\b \x03(\tR\x10keyProfileParams\"\x9a\x02\n" +
 	"\rAddKeyRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12\x18\n" +
@@ -1643,7 +1982,10 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\n" +
 	"return_url\x18\x05 \x01(\tR\treturnUrl\x12:\n" +
 	"\blocation\x18\x06 \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x18\n" +
-	"\apending\x18\a \x01(\bR\apending\"B\n" +
+	"\apending\x18\a \x01(\bR\apending\x12\x1f\n" +
+	"\vkey_profile\x18\b \x01(\tR\n" +
+	"keyProfile\x12,\n" +
+	"\x12key_profile_params\x18\t \x03(\tR\x10keyProfileParams\"B\n" +
 	"\x10RevokeKeyRequest\x12\x17\n" +
 	"\auser_id\x18\x02 \x01(\tR\x06userId\x12\x15\n" +
 	"\x06key_id\x18\x03 \x01(\fR\x05keyId\"-\n" +
@@ -1718,7 +2060,7 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\x04from\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
 	"\x02to\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\x02to\"@\n" +
 	"\x1bDomainAuditChallengeRequest\x12!\n" +
-	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\"\x96\x02\n" +
+	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\"\xc6\x02\n" +
 	"\x1aUpdateDomainDetailsRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1e\n" +
@@ -1728,7 +2070,8 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x04 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\x05 \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\x06 \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\a \x01(\x05R\vtokenMaxAge\"\xdc\x02\n" +
+	"\rtoken_max_age\x18\a \x01(\x05R\vtokenMaxAge\x12.\n" +
+	"\x13default_key_profile\x18\b \x01(\tR\x11defaultKeyProfile\"\x8c\x03\n" +
 	"\rDomainDetails\x12\x16\n" +
 	"\x06domain\x18\x01 \x01(\tR\x06domain\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
@@ -1741,7 +2084,26 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\x11registration_path\x18\x06 \x01(\tR\x10registrationPath\x12\x1b\n" +
 	"\tsign_path\x18\a \x01(\tR\bsignPath\x124\n" +
 	"\x16require_device_binding\x18\b \x01(\bR\x14requireDeviceBinding\x12\"\n" +
-	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge2\xec\f\n" +
+	"\rtoken_max_age\x18\t \x01(\x05R\vtokenMaxAge\x12.\n" +
+	"\x13default_key_profile\x18\n" +
+	" \x01(\tR\x11defaultKeyProfile\"p\n" +
+	"\x17CreateKeyProfileRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1f\n" +
+	"\vwasm_binary\x18\x03 \x01(\fR\n" +
+	"wasmBinary\"p\n" +
+	"\x17UpdateKeyProfileRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x02 \x01(\tR\vdescription\x12\x1f\n" +
+	"\vwasm_binary\x18\x03 \x01(\fR\n" +
+	"wasmBinary\"-\n" +
+	"\x17DeleteKeyProfileRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"\x18\n" +
+	"\x16ListKeyProfilesRequest\"W\n" +
+	"\x17ListKeyProfilesResponse\x12<\n" +
+	"\bprofiles\x18\x01 \x03(\v2 .se.mantra.api.common.KeyProfileR\bprofiles\"*\n" +
+	"\x14GetKeyProfileRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name2\xda\x10\n" +
 	"\x12DomainAdminService\x12]\n" +
 	"\n" +
 	"CreateUser\x12&.se.mantra.api.admin.CreateUserRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12T\n" +
@@ -1762,7 +2124,12 @@ const file_service_domain_admin_proto_rawDesc = "" +
 	"\fUpdateDevice\x12(.se.mantra.api.admin.UpdateDeviceRequest\x1a\x16.google.protobuf.Empty\x12P\n" +
 	"\fRemoveDevice\x12(.se.mantra.api.admin.RemoveDeviceRequest\x1a\x16.google.protobuf.Empty\x12`\n" +
 	"\tAuditUser\x12+.se.mantra.api.admin.DomainAuditUserRequest\x1a&.se.mantra.api.admin.AuditUserResponse\x12c\n" +
-	"\x0eAuditChallenge\x120.se.mantra.api.admin.DomainAuditChallengeRequest\x1a\x1f.se.mantra.api.admin.AuditEntryB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
+	"\x0eAuditChallenge\x120.se.mantra.api.admin.DomainAuditChallengeRequest\x1a\x1f.se.mantra.api.admin.AuditEntry\x12b\n" +
+	"\x10CreateKeyProfile\x12,.se.mantra.api.admin.CreateKeyProfileRequest\x1a .se.mantra.api.common.KeyProfile\x12b\n" +
+	"\x10UpdateKeyProfile\x12,.se.mantra.api.admin.UpdateKeyProfileRequest\x1a .se.mantra.api.common.KeyProfile\x12X\n" +
+	"\x10DeleteKeyProfile\x12,.se.mantra.api.admin.DeleteKeyProfileRequest\x1a\x16.google.protobuf.Empty\x12l\n" +
+	"\x0fListKeyProfiles\x12+.se.mantra.api.admin.ListKeyProfilesRequest\x1a,.se.mantra.api.admin.ListKeyProfilesResponse\x12\\\n" +
+	"\rGetKeyProfile\x12).se.mantra.api.admin.GetKeyProfileRequest\x1a .se.mantra.api.common.KeyProfileB/Z-github.com/daedaluz/mantra-cli/lib/grpc/adminb\x06proto3"
 
 var (
 	file_service_domain_admin_proto_rawDescOnce sync.Once
@@ -1776,7 +2143,7 @@ func file_service_domain_admin_proto_rawDescGZIP() []byte {
 	return file_service_domain_admin_proto_rawDescData
 }
 
-var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
+var file_service_domain_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 32)
 var file_service_domain_admin_proto_goTypes = []any{
 	(*GetUserRequest)(nil),              // 0: se.mantra.api.admin.GetUserRequest
 	(*GetUserResponse)(nil),             // 1: se.mantra.api.admin.GetUserResponse
@@ -1804,72 +2171,90 @@ var file_service_domain_admin_proto_goTypes = []any{
 	(*DomainAuditChallengeRequest)(nil), // 23: se.mantra.api.admin.DomainAuditChallengeRequest
 	(*UpdateDomainDetailsRequest)(nil),  // 24: se.mantra.api.admin.UpdateDomainDetailsRequest
 	(*DomainDetails)(nil),               // 25: se.mantra.api.admin.DomainDetails
-	(*timestamppb.Timestamp)(nil),       // 26: google.protobuf.Timestamp
-	(*common.Key)(nil),                  // 27: se.mantra.api.common.Key
-	(*common.Location)(nil),             // 28: se.mantra.api.common.Location
-	(common.Status)(0),                  // 29: se.mantra.api.common.Status
-	(*common.ClientMeta)(nil),           // 30: se.mantra.api.common.ClientMeta
-	(*emptypb.Empty)(nil),               // 31: google.protobuf.Empty
-	(*common.ChallengeResponse)(nil),    // 32: se.mantra.api.common.ChallengeResponse
-	(*AuditUserResponse)(nil),           // 33: se.mantra.api.admin.AuditUserResponse
-	(*AuditEntry)(nil),                  // 34: se.mantra.api.admin.AuditEntry
+	(*CreateKeyProfileRequest)(nil),     // 26: se.mantra.api.admin.CreateKeyProfileRequest
+	(*UpdateKeyProfileRequest)(nil),     // 27: se.mantra.api.admin.UpdateKeyProfileRequest
+	(*DeleteKeyProfileRequest)(nil),     // 28: se.mantra.api.admin.DeleteKeyProfileRequest
+	(*ListKeyProfilesRequest)(nil),      // 29: se.mantra.api.admin.ListKeyProfilesRequest
+	(*ListKeyProfilesResponse)(nil),     // 30: se.mantra.api.admin.ListKeyProfilesResponse
+	(*GetKeyProfileRequest)(nil),        // 31: se.mantra.api.admin.GetKeyProfileRequest
+	(*timestamppb.Timestamp)(nil),       // 32: google.protobuf.Timestamp
+	(*common.Key)(nil),                  // 33: se.mantra.api.common.Key
+	(*common.Location)(nil),             // 34: se.mantra.api.common.Location
+	(common.Status)(0),                  // 35: se.mantra.api.common.Status
+	(*common.ClientMeta)(nil),           // 36: se.mantra.api.common.ClientMeta
+	(*common.KeyProfile)(nil),           // 37: se.mantra.api.common.KeyProfile
+	(*emptypb.Empty)(nil),               // 38: google.protobuf.Empty
+	(*common.ChallengeResponse)(nil),    // 39: se.mantra.api.common.ChallengeResponse
+	(*AuditUserResponse)(nil),           // 40: se.mantra.api.admin.AuditUserResponse
+	(*AuditEntry)(nil),                  // 41: se.mantra.api.admin.AuditEntry
 }
 var file_service_domain_admin_proto_depIdxs = []int32{
-	26, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
-	27, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
-	28, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
-	28, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
-	29, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
-	26, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
-	28, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
-	26, // 7: se.mantra.api.admin.DeviceBinding.first_used_at:type_name -> google.protobuf.Timestamp
-	26, // 8: se.mantra.api.admin.DeviceBinding.last_used_at:type_name -> google.protobuf.Timestamp
+	32, // 0: se.mantra.api.admin.GetUserResponse.created_at:type_name -> google.protobuf.Timestamp
+	33, // 1: se.mantra.api.admin.GetUserResponse.keys:type_name -> se.mantra.api.common.Key
+	34, // 2: se.mantra.api.admin.CreateUserRequest.location:type_name -> se.mantra.api.common.Location
+	34, // 3: se.mantra.api.admin.AddKeyRequest.location:type_name -> se.mantra.api.common.Location
+	35, // 4: se.mantra.api.admin.CollectResponse.status:type_name -> se.mantra.api.common.Status
+	32, // 5: se.mantra.api.admin.CollectResponse.created_at:type_name -> google.protobuf.Timestamp
+	34, // 6: se.mantra.api.admin.CollectResponse.location:type_name -> se.mantra.api.common.Location
+	32, // 7: se.mantra.api.admin.DeviceBinding.first_used_at:type_name -> google.protobuf.Timestamp
+	32, // 8: se.mantra.api.admin.DeviceBinding.last_used_at:type_name -> google.protobuf.Timestamp
 	15, // 9: se.mantra.api.admin.ListDevicesResponse.devices:type_name -> se.mantra.api.admin.DeviceBinding
-	30, // 10: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
-	26, // 11: se.mantra.api.admin.DomainAuditUserRequest.from:type_name -> google.protobuf.Timestamp
-	26, // 12: se.mantra.api.admin.DomainAuditUserRequest.to:type_name -> google.protobuf.Timestamp
-	26, // 13: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
-	2,  // 14: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
-	0,  // 15: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
-	31, // 16: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
-	8,  // 17: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
-	3,  // 18: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
-	4,  // 19: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
-	6,  // 20: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
-	12, // 21: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
-	9,  // 22: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
-	11, // 23: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
-	20, // 24: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
-	24, // 25: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
-	31, // 26: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
-	16, // 27: se.mantra.api.admin.DomainAdminService.ListDevices:input_type -> se.mantra.api.admin.ListDevicesRequest
-	18, // 28: se.mantra.api.admin.DomainAdminService.UpdateDevice:input_type -> se.mantra.api.admin.UpdateDeviceRequest
-	19, // 29: se.mantra.api.admin.DomainAdminService.RemoveDevice:input_type -> se.mantra.api.admin.RemoveDeviceRequest
-	22, // 30: se.mantra.api.admin.DomainAdminService.AuditUser:input_type -> se.mantra.api.admin.DomainAuditUserRequest
-	23, // 31: se.mantra.api.admin.DomainAdminService.AuditChallenge:input_type -> se.mantra.api.admin.DomainAuditChallengeRequest
-	32, // 32: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
-	1,  // 33: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
-	14, // 34: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
-	31, // 35: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
-	32, // 36: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
-	5,  // 37: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
-	7,  // 38: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
-	13, // 39: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
-	10, // 40: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
-	31, // 41: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
-	21, // 42: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
-	25, // 43: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
-	25, // 44: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
-	17, // 45: se.mantra.api.admin.DomainAdminService.ListDevices:output_type -> se.mantra.api.admin.ListDevicesResponse
-	31, // 46: se.mantra.api.admin.DomainAdminService.UpdateDevice:output_type -> google.protobuf.Empty
-	31, // 47: se.mantra.api.admin.DomainAdminService.RemoveDevice:output_type -> google.protobuf.Empty
-	33, // 48: se.mantra.api.admin.DomainAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
-	34, // 49: se.mantra.api.admin.DomainAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
-	32, // [32:50] is the sub-list for method output_type
-	14, // [14:32] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	36, // 10: se.mantra.api.admin.ListClientsResponse.clients:type_name -> se.mantra.api.common.ClientMeta
+	32, // 11: se.mantra.api.admin.DomainAuditUserRequest.from:type_name -> google.protobuf.Timestamp
+	32, // 12: se.mantra.api.admin.DomainAuditUserRequest.to:type_name -> google.protobuf.Timestamp
+	32, // 13: se.mantra.api.admin.DomainDetails.created_at:type_name -> google.protobuf.Timestamp
+	37, // 14: se.mantra.api.admin.ListKeyProfilesResponse.profiles:type_name -> se.mantra.api.common.KeyProfile
+	2,  // 15: se.mantra.api.admin.DomainAdminService.CreateUser:input_type -> se.mantra.api.admin.CreateUserRequest
+	0,  // 16: se.mantra.api.admin.DomainAdminService.GetUser:input_type -> se.mantra.api.admin.GetUserRequest
+	38, // 17: se.mantra.api.admin.DomainAdminService.ListUsers:input_type -> google.protobuf.Empty
+	8,  // 18: se.mantra.api.admin.DomainAdminService.DeleteUser:input_type -> se.mantra.api.admin.DeleteUserRequest
+	3,  // 19: se.mantra.api.admin.DomainAdminService.AddKey:input_type -> se.mantra.api.admin.AddKeyRequest
+	4,  // 20: se.mantra.api.admin.DomainAdminService.RevokeKey:input_type -> se.mantra.api.admin.RevokeKeyRequest
+	6,  // 21: se.mantra.api.admin.DomainAdminService.ActivateKey:input_type -> se.mantra.api.admin.ActivateKeyRequest
+	12, // 22: se.mantra.api.admin.DomainAdminService.CollectChallenge:input_type -> se.mantra.api.admin.CollectRequest
+	9,  // 23: se.mantra.api.admin.DomainAdminService.CreateClient:input_type -> se.mantra.api.admin.CreateClientRequest
+	11, // 24: se.mantra.api.admin.DomainAdminService.DeleteClient:input_type -> se.mantra.api.admin.DeleteClientRequest
+	20, // 25: se.mantra.api.admin.DomainAdminService.ListClients:input_type -> se.mantra.api.admin.ListClientsRequest
+	24, // 26: se.mantra.api.admin.DomainAdminService.UpdateDomain:input_type -> se.mantra.api.admin.UpdateDomainDetailsRequest
+	38, // 27: se.mantra.api.admin.DomainAdminService.GetDomain:input_type -> google.protobuf.Empty
+	16, // 28: se.mantra.api.admin.DomainAdminService.ListDevices:input_type -> se.mantra.api.admin.ListDevicesRequest
+	18, // 29: se.mantra.api.admin.DomainAdminService.UpdateDevice:input_type -> se.mantra.api.admin.UpdateDeviceRequest
+	19, // 30: se.mantra.api.admin.DomainAdminService.RemoveDevice:input_type -> se.mantra.api.admin.RemoveDeviceRequest
+	22, // 31: se.mantra.api.admin.DomainAdminService.AuditUser:input_type -> se.mantra.api.admin.DomainAuditUserRequest
+	23, // 32: se.mantra.api.admin.DomainAdminService.AuditChallenge:input_type -> se.mantra.api.admin.DomainAuditChallengeRequest
+	26, // 33: se.mantra.api.admin.DomainAdminService.CreateKeyProfile:input_type -> se.mantra.api.admin.CreateKeyProfileRequest
+	27, // 34: se.mantra.api.admin.DomainAdminService.UpdateKeyProfile:input_type -> se.mantra.api.admin.UpdateKeyProfileRequest
+	28, // 35: se.mantra.api.admin.DomainAdminService.DeleteKeyProfile:input_type -> se.mantra.api.admin.DeleteKeyProfileRequest
+	29, // 36: se.mantra.api.admin.DomainAdminService.ListKeyProfiles:input_type -> se.mantra.api.admin.ListKeyProfilesRequest
+	31, // 37: se.mantra.api.admin.DomainAdminService.GetKeyProfile:input_type -> se.mantra.api.admin.GetKeyProfileRequest
+	39, // 38: se.mantra.api.admin.DomainAdminService.CreateUser:output_type -> se.mantra.api.common.ChallengeResponse
+	1,  // 39: se.mantra.api.admin.DomainAdminService.GetUser:output_type -> se.mantra.api.admin.GetUserResponse
+	14, // 40: se.mantra.api.admin.DomainAdminService.ListUsers:output_type -> se.mantra.api.admin.ListUsersResponse
+	38, // 41: se.mantra.api.admin.DomainAdminService.DeleteUser:output_type -> google.protobuf.Empty
+	39, // 42: se.mantra.api.admin.DomainAdminService.AddKey:output_type -> se.mantra.api.common.ChallengeResponse
+	5,  // 43: se.mantra.api.admin.DomainAdminService.RevokeKey:output_type -> se.mantra.api.admin.RevokeKeyResponse
+	7,  // 44: se.mantra.api.admin.DomainAdminService.ActivateKey:output_type -> se.mantra.api.admin.ActivateKeyResponse
+	13, // 45: se.mantra.api.admin.DomainAdminService.CollectChallenge:output_type -> se.mantra.api.admin.CollectResponse
+	10, // 46: se.mantra.api.admin.DomainAdminService.CreateClient:output_type -> se.mantra.api.admin.CreateClientResponse
+	38, // 47: se.mantra.api.admin.DomainAdminService.DeleteClient:output_type -> google.protobuf.Empty
+	21, // 48: se.mantra.api.admin.DomainAdminService.ListClients:output_type -> se.mantra.api.admin.ListClientsResponse
+	25, // 49: se.mantra.api.admin.DomainAdminService.UpdateDomain:output_type -> se.mantra.api.admin.DomainDetails
+	25, // 50: se.mantra.api.admin.DomainAdminService.GetDomain:output_type -> se.mantra.api.admin.DomainDetails
+	17, // 51: se.mantra.api.admin.DomainAdminService.ListDevices:output_type -> se.mantra.api.admin.ListDevicesResponse
+	38, // 52: se.mantra.api.admin.DomainAdminService.UpdateDevice:output_type -> google.protobuf.Empty
+	38, // 53: se.mantra.api.admin.DomainAdminService.RemoveDevice:output_type -> google.protobuf.Empty
+	40, // 54: se.mantra.api.admin.DomainAdminService.AuditUser:output_type -> se.mantra.api.admin.AuditUserResponse
+	41, // 55: se.mantra.api.admin.DomainAdminService.AuditChallenge:output_type -> se.mantra.api.admin.AuditEntry
+	37, // 56: se.mantra.api.admin.DomainAdminService.CreateKeyProfile:output_type -> se.mantra.api.common.KeyProfile
+	37, // 57: se.mantra.api.admin.DomainAdminService.UpdateKeyProfile:output_type -> se.mantra.api.common.KeyProfile
+	38, // 58: se.mantra.api.admin.DomainAdminService.DeleteKeyProfile:output_type -> google.protobuf.Empty
+	30, // 59: se.mantra.api.admin.DomainAdminService.ListKeyProfiles:output_type -> se.mantra.api.admin.ListKeyProfilesResponse
+	37, // 60: se.mantra.api.admin.DomainAdminService.GetKeyProfile:output_type -> se.mantra.api.common.KeyProfile
+	38, // [38:61] is the sub-list for method output_type
+	15, // [15:38] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_service_domain_admin_proto_init() }
@@ -1884,7 +2269,7 @@ func file_service_domain_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_service_domain_admin_proto_rawDesc), len(file_service_domain_admin_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   26,
+			NumMessages:   32,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

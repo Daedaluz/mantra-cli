@@ -34,6 +34,8 @@ type SignRequest struct {
 	Data             []byte                 `protobuf:"bytes,7,opt,name=data,proto3" json:"data,omitempty"`
 	ReturnUrl        string                 `protobuf:"bytes,8,opt,name=return_url,json=returnUrl,proto3" json:"return_url,omitempty"`
 	Location         *common.Location       `protobuf:"bytes,9,opt,name=location,proto3" json:"location,omitempty"`
+	KeyProfile       string                 `protobuf:"bytes,10,opt,name=key_profile,json=keyProfile,proto3" json:"key_profile,omitempty"`
+	KeyProfileParams []string               `protobuf:"bytes,11,rep,name=key_profile_params,json=keyProfileParams,proto3" json:"key_profile_params,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -120,6 +122,20 @@ func (x *SignRequest) GetReturnUrl() string {
 func (x *SignRequest) GetLocation() *common.Location {
 	if x != nil {
 		return x.Location
+	}
+	return nil
+}
+
+func (x *SignRequest) GetKeyProfile() string {
+	if x != nil {
+		return x.KeyProfile
+	}
+	return ""
+}
+
+func (x *SignRequest) GetKeyProfileParams() []string {
+	if x != nil {
+		return x.KeyProfileParams
 	}
 	return nil
 }
@@ -236,9 +252,9 @@ type CollectResponse struct {
 	Location                *common.Location       `protobuf:"bytes,12,opt,name=location,proto3" json:"location,omitempty"`
 	PublicKey               []byte                 `protobuf:"bytes,13,opt,name=public_key,json=publicKey,proto3" json:"public_key,omitempty"`
 	Algorithm               int64                  `protobuf:"varint,14,opt,name=algorithm,proto3" json:"algorithm,omitempty"`
-	DeviceId                string                 `protobuf:"bytes,15,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	BackedUp                bool                   `protobuf:"varint,17,opt,name=backed_up,json=backedUp,proto3" json:"backed_up,omitempty"`
 	MdsVerified             bool                   `protobuf:"varint,18,opt,name=mds_verified,json=mdsVerified,proto3" json:"mds_verified,omitempty"`
+	DeviceId                string                 `protobuf:"bytes,15,opt,name=device_id,json=deviceId,proto3" json:"device_id,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -371,13 +387,6 @@ func (x *CollectResponse) GetAlgorithm() int64 {
 	return 0
 }
 
-func (x *CollectResponse) GetDeviceId() string {
-	if x != nil {
-		return x.DeviceId
-	}
-	return ""
-}
-
 func (x *CollectResponse) GetBackedUp() bool {
 	if x != nil {
 		return x.BackedUp
@@ -392,11 +401,18 @@ func (x *CollectResponse) GetMdsVerified() bool {
 	return false
 }
 
+func (x *CollectResponse) GetDeviceId() string {
+	if x != nil {
+		return x.DeviceId
+	}
+	return ""
+}
+
 var File_client_client_proto protoreflect.FileDescriptor
 
 const file_client_client_proto_rawDesc = "" +
 	"\n" +
-	"\x13client/client.proto\x12\x14se.mantra.api.client\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\"\x8f\x02\n" +
+	"\x13client/client.proto\x12\x14se.mantra.api.client\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a\x13common/common.proto\"\xde\x02\n" +
 	"\vSignRequest\x12\x12\n" +
 	"\x04user\x18\x02 \x01(\tR\x04user\x12\x18\n" +
 	"\atimeout\x18\x03 \x01(\x03R\atimeout\x12+\n" +
@@ -406,7 +422,11 @@ const file_client_client_proto_rawDesc = "" +
 	"\x04data\x18\a \x01(\fR\x04data\x12\x1d\n" +
 	"\n" +
 	"return_url\x18\b \x01(\tR\treturnUrl\x12:\n" +
-	"\blocation\x18\t \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\"2\n" +
+	"\blocation\x18\t \x01(\v2\x1e.se.mantra.api.common.LocationR\blocation\x12\x1f\n" +
+	"\vkey_profile\x18\n" +
+	" \x01(\tR\n" +
+	"keyProfile\x12,\n" +
+	"\x12key_profile_params\x18\v \x03(\tR\x10keyProfileParams\"2\n" +
 	"\rCancelRequest\x12!\n" +
 	"\fchallenge_id\x18\x01 \x01(\tR\vchallengeId\"^\n" +
 	"\x0eCollectRequest\x12!\n" +
@@ -429,9 +449,9 @@ const file_client_client_proto_rawDesc = "" +
 	"\n" +
 	"public_key\x18\r \x01(\fR\tpublicKey\x12\x1c\n" +
 	"\talgorithm\x18\x0e \x01(\x03R\talgorithm\x12\x1b\n" +
-	"\tdevice_id\x18\x0f \x01(\tR\bdeviceId\x12\x1b\n" +
 	"\tbacked_up\x18\x11 \x01(\bR\bbackedUp\x12!\n" +
-	"\fmds_verified\x18\x12 \x01(\bR\vmdsVerified2\x82\x02\n" +
+	"\fmds_verified\x18\x12 \x01(\bR\vmdsVerified\x12\x1b\n" +
+	"\tdevice_id\x18\x0f \x01(\tR\bdeviceId2\x82\x02\n" +
 	"\rClientService\x12R\n" +
 	"\x04Sign\x12!.se.mantra.api.client.SignRequest\x1a'.se.mantra.api.common.ChallengeResponse\x12E\n" +
 	"\x06Cancel\x12#.se.mantra.api.client.CancelRequest\x1a\x16.google.protobuf.Empty\x12V\n" +

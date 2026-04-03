@@ -574,6 +574,98 @@ func (x *Location) GetRequired() bool {
 	return false
 }
 
+type KeyProfile struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Description   string                 `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
+	WasmBinary    []byte                 `protobuf:"bytes,4,opt,name=wasm_binary,json=wasmBinary,proto3" json:"wasm_binary,omitempty"`
+	CreatedAt     *timestamppb.Timestamp `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt     *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Hash          []byte                 `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"` // SHA-256 of wasm_binary
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *KeyProfile) Reset() {
+	*x = KeyProfile{}
+	mi := &file_common_common_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *KeyProfile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*KeyProfile) ProtoMessage() {}
+
+func (x *KeyProfile) ProtoReflect() protoreflect.Message {
+	mi := &file_common_common_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use KeyProfile.ProtoReflect.Descriptor instead.
+func (*KeyProfile) Descriptor() ([]byte, []int) {
+	return file_common_common_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *KeyProfile) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *KeyProfile) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *KeyProfile) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *KeyProfile) GetWasmBinary() []byte {
+	if x != nil {
+		return x.WasmBinary
+	}
+	return nil
+}
+
+func (x *KeyProfile) GetCreatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.CreatedAt
+	}
+	return nil
+}
+
+func (x *KeyProfile) GetUpdatedAt() *timestamppb.Timestamp {
+	if x != nil {
+		return x.UpdatedAt
+	}
+	return nil
+}
+
+func (x *KeyProfile) GetHash() []byte {
+	if x != nil {
+		return x.Hash
+	}
+	return nil
+}
+
 var File_common_common_proto protoreflect.FileDescriptor
 
 const file_common_common_proto_rawDesc = "" +
@@ -632,7 +724,19 @@ const file_common_common_proto_rawDesc = "" +
 	"\x02ip\x18\x01 \x01(\tR\x02ip\x12\x18\n" +
 	"\ageohash\x18\x02 \x01(\tR\ageohash\x12>\n" +
 	"\bposition\x18\x03 \x01(\v2\".se.mantra.api.common.LongLatitudeR\bposition\x12\x1a\n" +
-	"\brequired\x18\x04 \x01(\bR\brequired*x\n" +
+	"\brequired\x18\x04 \x01(\bR\brequired\"\xfd\x01\n" +
+	"\n" +
+	"KeyProfile\x12\x0e\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
+	"\x04name\x18\x02 \x01(\tR\x04name\x12 \n" +
+	"\vdescription\x18\x03 \x01(\tR\vdescription\x12\x1f\n" +
+	"\vwasm_binary\x18\x04 \x01(\fR\n" +
+	"wasmBinary\x129\n" +
+	"\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
+	"\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12\x12\n" +
+	"\x04hash\x18\a \x01(\fR\x04hash*x\n" +
 	"\x06Status\x12\x0f\n" +
 	"\vUnspecified\x10\x00\x12\v\n" +
 	"\aPending\x10\x01\x12\b\n" +
@@ -656,7 +760,7 @@ func file_common_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_common_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_common_common_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_common_common_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_common_common_proto_goTypes = []any{
 	(Status)(0),                   // 0: se.mantra.api.common.Status
 	(*ChallengeResponse)(nil),     // 1: se.mantra.api.common.ChallengeResponse
@@ -664,20 +768,23 @@ var file_common_common_proto_goTypes = []any{
 	(*ClientMeta)(nil),            // 3: se.mantra.api.common.ClientMeta
 	(*LongLatitude)(nil),          // 4: se.mantra.api.common.LongLatitude
 	(*Location)(nil),              // 5: se.mantra.api.common.Location
-	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*KeyProfile)(nil),            // 6: se.mantra.api.common.KeyProfile
+	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
 }
 var file_common_common_proto_depIdxs = []int32{
-	6, // 0: se.mantra.api.common.ChallengeResponse.expires_at:type_name -> google.protobuf.Timestamp
+	7, // 0: se.mantra.api.common.ChallengeResponse.expires_at:type_name -> google.protobuf.Timestamp
 	5, // 1: se.mantra.api.common.ChallengeResponse.location:type_name -> se.mantra.api.common.Location
-	6, // 2: se.mantra.api.common.Key.created_at:type_name -> google.protobuf.Timestamp
-	6, // 3: se.mantra.api.common.Key.last_used:type_name -> google.protobuf.Timestamp
-	6, // 4: se.mantra.api.common.ClientMeta.created_at:type_name -> google.protobuf.Timestamp
+	7, // 2: se.mantra.api.common.Key.created_at:type_name -> google.protobuf.Timestamp
+	7, // 3: se.mantra.api.common.Key.last_used:type_name -> google.protobuf.Timestamp
+	7, // 4: se.mantra.api.common.ClientMeta.created_at:type_name -> google.protobuf.Timestamp
 	4, // 5: se.mantra.api.common.Location.position:type_name -> se.mantra.api.common.LongLatitude
-	6, // [6:6] is the sub-list for method output_type
-	6, // [6:6] is the sub-list for method input_type
-	6, // [6:6] is the sub-list for extension type_name
-	6, // [6:6] is the sub-list for extension extendee
-	0, // [0:6] is the sub-list for field type_name
+	7, // 6: se.mantra.api.common.KeyProfile.created_at:type_name -> google.protobuf.Timestamp
+	7, // 7: se.mantra.api.common.KeyProfile.updated_at:type_name -> google.protobuf.Timestamp
+	8, // [8:8] is the sub-list for method output_type
+	8, // [8:8] is the sub-list for method input_type
+	8, // [8:8] is the sub-list for extension type_name
+	8, // [8:8] is the sub-list for extension extendee
+	0, // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_common_common_proto_init() }
@@ -691,7 +798,7 @@ func file_common_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_common_common_proto_rawDesc), len(file_common_common_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

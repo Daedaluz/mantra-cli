@@ -26,6 +26,8 @@ message CreateUserRequest {
   int64 timeout = 4;
   string return_url = 5;
   common.Location location = 6;
+  string key_profile = 7;
+  repeated string key_profile_params = 8;
 }
 
 message AddKeyRequest {
@@ -35,6 +37,8 @@ message AddKeyRequest {
   string return_url = 5;
   common.Location location = 6;
   bool pending = 7;
+  string key_profile = 8;
+  repeated string key_profile_params = 9;
 }
 
 message RevokeKeyRequest {
@@ -156,6 +160,7 @@ message UpdateDomainDetailsRequest {
   string sign_path = 5;
   bool require_device_binding = 6;
   int32 token_max_age = 7;
+  string default_key_profile = 8;
 }
 
 message DomainDetails {
@@ -168,6 +173,33 @@ message DomainDetails {
   string sign_path = 7;
   bool require_device_binding = 8;
   int32 token_max_age = 9;
+  string default_key_profile = 10;
+}
+
+message CreateKeyProfileRequest {
+  string name = 1;
+  string description = 2;
+  bytes  wasm_binary = 3;
+}
+
+message UpdateKeyProfileRequest {
+  string name = 1;
+  string description = 2;
+  bytes  wasm_binary = 3;
+}
+
+message DeleteKeyProfileRequest {
+  string name = 1;
+}
+
+message ListKeyProfilesRequest {}
+
+message ListKeyProfilesResponse {
+  repeated common.KeyProfile profiles = 1;
+}
+
+message GetKeyProfileRequest {
+  string name = 1;
 }
 
 service DomainAdminService {
@@ -195,4 +227,10 @@ service DomainAdminService {
 
   rpc AuditUser(DomainAuditUserRequest) returns (AuditUserResponse);
   rpc AuditChallenge(DomainAuditChallengeRequest) returns (AuditEntry);
+
+  rpc CreateKeyProfile(CreateKeyProfileRequest) returns (common.KeyProfile);
+  rpc UpdateKeyProfile(UpdateKeyProfileRequest) returns (common.KeyProfile);
+  rpc DeleteKeyProfile(DeleteKeyProfileRequest) returns (google.protobuf.Empty);
+  rpc ListKeyProfiles(ListKeyProfilesRequest) returns (ListKeyProfilesResponse);
+  rpc GetKeyProfile(GetKeyProfileRequest) returns (common.KeyProfile);
 }

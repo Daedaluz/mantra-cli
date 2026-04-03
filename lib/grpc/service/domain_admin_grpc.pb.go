@@ -39,6 +39,11 @@ const (
 	DomainAdminService_RemoveDevice_FullMethodName     = "/se.mantra.api.admin.DomainAdminService/RemoveDevice"
 	DomainAdminService_AuditUser_FullMethodName        = "/se.mantra.api.admin.DomainAdminService/AuditUser"
 	DomainAdminService_AuditChallenge_FullMethodName   = "/se.mantra.api.admin.DomainAdminService/AuditChallenge"
+	DomainAdminService_CreateKeyProfile_FullMethodName = "/se.mantra.api.admin.DomainAdminService/CreateKeyProfile"
+	DomainAdminService_UpdateKeyProfile_FullMethodName = "/se.mantra.api.admin.DomainAdminService/UpdateKeyProfile"
+	DomainAdminService_DeleteKeyProfile_FullMethodName = "/se.mantra.api.admin.DomainAdminService/DeleteKeyProfile"
+	DomainAdminService_ListKeyProfiles_FullMethodName  = "/se.mantra.api.admin.DomainAdminService/ListKeyProfiles"
+	DomainAdminService_GetKeyProfile_FullMethodName    = "/se.mantra.api.admin.DomainAdminService/GetKeyProfile"
 )
 
 // DomainAdminServiceClient is the client API for DomainAdminService service.
@@ -63,6 +68,11 @@ type DomainAdminServiceClient interface {
 	RemoveDevice(ctx context.Context, in *RemoveDeviceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AuditUser(ctx context.Context, in *DomainAuditUserRequest, opts ...grpc.CallOption) (*AuditUserResponse, error)
 	AuditChallenge(ctx context.Context, in *DomainAuditChallengeRequest, opts ...grpc.CallOption) (*AuditEntry, error)
+	CreateKeyProfile(ctx context.Context, in *CreateKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error)
+	UpdateKeyProfile(ctx context.Context, in *UpdateKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error)
+	DeleteKeyProfile(ctx context.Context, in *DeleteKeyProfileRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ListKeyProfiles(ctx context.Context, in *ListKeyProfilesRequest, opts ...grpc.CallOption) (*ListKeyProfilesResponse, error)
+	GetKeyProfile(ctx context.Context, in *GetKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error)
 }
 
 type domainAdminServiceClient struct {
@@ -253,6 +263,56 @@ func (c *domainAdminServiceClient) AuditChallenge(ctx context.Context, in *Domai
 	return out, nil
 }
 
+func (c *domainAdminServiceClient) CreateKeyProfile(ctx context.Context, in *CreateKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.KeyProfile)
+	err := c.cc.Invoke(ctx, DomainAdminService_CreateKeyProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) UpdateKeyProfile(ctx context.Context, in *UpdateKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.KeyProfile)
+	err := c.cc.Invoke(ctx, DomainAdminService_UpdateKeyProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) DeleteKeyProfile(ctx context.Context, in *DeleteKeyProfileRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, DomainAdminService_DeleteKeyProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) ListKeyProfiles(ctx context.Context, in *ListKeyProfilesRequest, opts ...grpc.CallOption) (*ListKeyProfilesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListKeyProfilesResponse)
+	err := c.cc.Invoke(ctx, DomainAdminService_ListKeyProfiles_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *domainAdminServiceClient) GetKeyProfile(ctx context.Context, in *GetKeyProfileRequest, opts ...grpc.CallOption) (*common.KeyProfile, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.KeyProfile)
+	err := c.cc.Invoke(ctx, DomainAdminService_GetKeyProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DomainAdminServiceServer is the server API for DomainAdminService service.
 // All implementations should embed UnimplementedDomainAdminServiceServer
 // for forward compatibility.
@@ -275,6 +335,11 @@ type DomainAdminServiceServer interface {
 	RemoveDevice(context.Context, *RemoveDeviceRequest) (*emptypb.Empty, error)
 	AuditUser(context.Context, *DomainAuditUserRequest) (*AuditUserResponse, error)
 	AuditChallenge(context.Context, *DomainAuditChallengeRequest) (*AuditEntry, error)
+	CreateKeyProfile(context.Context, *CreateKeyProfileRequest) (*common.KeyProfile, error)
+	UpdateKeyProfile(context.Context, *UpdateKeyProfileRequest) (*common.KeyProfile, error)
+	DeleteKeyProfile(context.Context, *DeleteKeyProfileRequest) (*emptypb.Empty, error)
+	ListKeyProfiles(context.Context, *ListKeyProfilesRequest) (*ListKeyProfilesResponse, error)
+	GetKeyProfile(context.Context, *GetKeyProfileRequest) (*common.KeyProfile, error)
 }
 
 // UnimplementedDomainAdminServiceServer should be embedded to have
@@ -337,6 +402,21 @@ func (UnimplementedDomainAdminServiceServer) AuditUser(context.Context, *DomainA
 }
 func (UnimplementedDomainAdminServiceServer) AuditChallenge(context.Context, *DomainAuditChallengeRequest) (*AuditEntry, error) {
 	return nil, status.Error(codes.Unimplemented, "method AuditChallenge not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) CreateKeyProfile(context.Context, *CreateKeyProfileRequest) (*common.KeyProfile, error) {
+	return nil, status.Error(codes.Unimplemented, "method CreateKeyProfile not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) UpdateKeyProfile(context.Context, *UpdateKeyProfileRequest) (*common.KeyProfile, error) {
+	return nil, status.Error(codes.Unimplemented, "method UpdateKeyProfile not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) DeleteKeyProfile(context.Context, *DeleteKeyProfileRequest) (*emptypb.Empty, error) {
+	return nil, status.Error(codes.Unimplemented, "method DeleteKeyProfile not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) ListKeyProfiles(context.Context, *ListKeyProfilesRequest) (*ListKeyProfilesResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method ListKeyProfiles not implemented")
+}
+func (UnimplementedDomainAdminServiceServer) GetKeyProfile(context.Context, *GetKeyProfileRequest) (*common.KeyProfile, error) {
+	return nil, status.Error(codes.Unimplemented, "method GetKeyProfile not implemented")
 }
 func (UnimplementedDomainAdminServiceServer) testEmbeddedByValue() {}
 
@@ -682,6 +762,96 @@ func _DomainAdminService_AuditChallenge_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DomainAdminService_CreateKeyProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateKeyProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).CreateKeyProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_CreateKeyProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).CreateKeyProfile(ctx, req.(*CreateKeyProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_UpdateKeyProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateKeyProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).UpdateKeyProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_UpdateKeyProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).UpdateKeyProfile(ctx, req.(*UpdateKeyProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_DeleteKeyProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteKeyProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).DeleteKeyProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_DeleteKeyProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).DeleteKeyProfile(ctx, req.(*DeleteKeyProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_ListKeyProfiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListKeyProfilesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).ListKeyProfiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_ListKeyProfiles_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).ListKeyProfiles(ctx, req.(*ListKeyProfilesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DomainAdminService_GetKeyProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetKeyProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DomainAdminServiceServer).GetKeyProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DomainAdminService_GetKeyProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DomainAdminServiceServer).GetKeyProfile(ctx, req.(*GetKeyProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DomainAdminService_ServiceDesc is the grpc.ServiceDesc for DomainAdminService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -760,6 +930,26 @@ var DomainAdminService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AuditChallenge",
 			Handler:    _DomainAdminService_AuditChallenge_Handler,
+		},
+		{
+			MethodName: "CreateKeyProfile",
+			Handler:    _DomainAdminService_CreateKeyProfile_Handler,
+		},
+		{
+			MethodName: "UpdateKeyProfile",
+			Handler:    _DomainAdminService_UpdateKeyProfile_Handler,
+		},
+		{
+			MethodName: "DeleteKeyProfile",
+			Handler:    _DomainAdminService_DeleteKeyProfile_Handler,
+		},
+		{
+			MethodName: "ListKeyProfiles",
+			Handler:    _DomainAdminService_ListKeyProfiles_Handler,
+		},
+		{
+			MethodName: "GetKeyProfile",
+			Handler:    _DomainAdminService_GetKeyProfile_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
